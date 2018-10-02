@@ -1,14 +1,111 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Tailored Knits</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
 </head>
+
 <body>
-    
+    <nav>
+        <ul>
+            <li>Projects</li>
+            <li>Account</li>
+            <li><button>View Demo</button></li>
+            <li><button>Logout</button></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Tailored Knits</h1>
+        <p>Modify sweater patterns for a personalized fit easily with the help of Tailored Knits.</p>
+    </header>
+    <main>
+        <section>
+            <h2>Measurements</h2>
+            <p>Use your measurements, or those of the lucky person you are making a sweater for,
+                to make adjustments and modifications to an existing pattern for personalized fit.</p>
+        </section>
+        <section>
+            <h2>Pattern Specifications</h2>
+            <p>Tailored Knit takes the gauge, stitch pattern, ease, and shape of the sweater
+                pattern into account when making adjustments so it will fit you better and maintain
+                the overall look wihtout losing the special details. </p>
+        </section>
+        <section>
+            <h2>Modifications</h2>
+            <p>Easily add length and width to keep the intended ease even when you are between sizes.
+                Adjust ease. Add bust, waist, and hip shaping.</p>
+        </section>
+        <section>
+            <h2>Connect via Ravelry</h2>
+            <p>Use your Ravelry account to create your Tailored Knits account.</p>
+        </section>
+        <section class='forms-container'>
+            <fieldset class='login-form-container'>
+                <legend>Login</legend>
+                <form id='login-form'>
+                    <ul class='form-wrapper' role='none'>
+                        <li class='form-row'>
+                            <label for='login-username'>Username</label>
+                            <input type='text' id='login-username' name='login-username' required>
+                        </li>
+                        <li class='form-row'>
+                            <label for='login-password'>Password</label>
+                            <input type='password' id='login-password' name='login-password' required>
+                        </li>
+                        <li class='form-row hidden' id='login-error-row' hidden>
+                            <p id='login-error'></p>
+                        </li>
+                        <li class='form-row'>
+                            <button role='button' type='submit' id='login-button'>Login</button>
+                        </li>
+                    </ul>
+                </form>
+            </fieldset>
+            <fieldset class='signup-form-container'>
+                <legend>Sign Up</legend>
+                <form id='sign-up-form'>
+                    <ul class='form-wrapper' role='none'>
+                        <li class='form-row'>
+                            <label for='first-name'>First Name</label>
+                            <input type='text' id='first-name' name='first-name' required>
+                        </li>
+                        <li class='form-row'>
+                            <label for='last-name'>Last Name</label>
+                            <input type='text' id='last-name' name='last-name' required>
+                        </li>
+                        <li class='form-row'>
+                            <label for='username'>Username</label>
+                            <input type='text' id='username' name='username'
+                                required>
+                        </li>
+                        <li class='form-row'>
+                            <label for='email'>Email</label>
+                            <input type='text' id='email' name='email' required>
+                        </li>
+                        <li class='form-row'>
+                            <label for='password'>Password</label>
+                            <input type='password' id='password' name='password' required>
+                        </li>
+                        <li class='form-row hidden' id='signup-error-row' hidden>
+                            <p id='signup-error'></p>
+                        </li>
+                        <li class='form-row'>
+                            <button role='button' type='submit' id='sign-up-button'>Sign Up</button>
+                        </li>
+                    </ul>
+                </form>
+            </fieldset>
+        </section>
+    </main>
+    <footer>
+        <p>Created by Lynsey Powell</p>
+    </footer>
+
 </body>
+
 </html>
