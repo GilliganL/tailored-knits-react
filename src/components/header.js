@@ -1,13 +1,24 @@
 import React from 'react';
+import {withRouter} from 'react-router';
 
 import Nav from './nav';
 
-export default function Header(props) {
+export class Header extends React.Component {
+   
+render() {
+    let content;
+//set content based on page location. Move to Reducer?
+    if(!this.props.params) {
+    content = 
+    }
+
     return (
         <header>
             <Nav />
-            <h1>Tailored Knits</h1>
-            <p>Modify sweater patterns for a personalized fit with the help of Tailored Knits.</p>
+                {content}
         </header>
     );
 }
+}
+
+export default withRouter(Header);

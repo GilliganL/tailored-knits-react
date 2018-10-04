@@ -1,26 +1,27 @@
 import React from 'react';
-import Header from './header';
+import { BrowserRouter as Router, Route, Redirect, Switch, withRouter } from 'react-router-dom';
+
 import Landing from './landing';
-import LoginForm from './login-form';
-import SignupForm from './signup-form';
-import Footer from './footer';
+import Projects from './projects';
 
-export default class Home extends React.Component {
+export default function Home() {
 
-    render() {
+    return (
+        <Router>
+            <Switch>
+                <Route path='/' component={Landing} />
+                <Route exact path='/projects' component={Projects} />    
+                {/* <Route exact path='/projects/:projectId' component={SingleProject} />
+                <Route exact path='/account' component={Account} /> */}
 
-        return (
-            <div>
-                <Header />
-                <main role='main'>
-                    <Landing />
-                    <section className='account'>
-                        <LoginForm />
-                        <SignupForm />
-                    </section>
-                </main>
-                <Footer />
-            </div>
-        );
-    }
+                {/* if logged in <Redirect exact from='/' to='/projects' />
+                            if not logged in redirect to '/'?
+                         
+                                   */}
+            </Switch>
+           
+        </Router>
+    );
+
 }
+
