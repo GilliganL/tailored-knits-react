@@ -1,20 +1,31 @@
 import React from 'react';
+import { reduxForm, Field } from 'redux-form';
 
 import './login-form.css';
 
-export default function Login(props) {
-    return (
+export class Login extends React.Component {
+
+    onSubmit(values) {
+        console.log(values);
+        //ajax action to login
+    }
+
+    render() {
+        return (
             <fieldset className='login-form-container'>
                 <legend>Login</legend>
-                <form id='login-form'>
+                <form id='login'
+                    onSubmit={this.props.handleSubmit(values =>
+                        this.onSubmit(values)
+                    )}>
                     <ul className='form-wrapper' role='none'>
                         <li className='form-row'>
-                            <label for='login-username'>Username</label>
-                            <input type='text' id='login-username' name='login-username' required />
+                            <label htmlFor='login-username'>Username</label>
+                            <Field type='text' id='login-username' name='login-username' component='input' />
                         </li>
                         <li className='form-row'>
-                            <label for='login-password'>Password</label>
-                            <input type='password' id='login-password' name='login-password' required />
+                            <label htmlFor='login-password'>Password</label>
+                            <Field type='password' id='login-password' name='login-password' component='input' />
                         </li>
                         <li className='form-row hidden' id='login-error-row' hidden>
                             <p id='login-error'></p>
@@ -25,5 +36,10 @@ export default function Login(props) {
                     </ul>
                 </form>
             </fieldset>
-    );
+        );
+    }
 }
+
+export default reduxForm({
+    form: 'login'
+})(Login);

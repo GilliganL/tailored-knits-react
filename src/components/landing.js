@@ -2,19 +2,10 @@ import React from 'react';
 
 import LoginForm from './login-form';
 import SignupForm from './signup-form';
-import Footer from './footer';
 
 export default function Landing(props) {
     return (
         <div>
-            <header> 
-            <div>
-                <h1>Tailored Knits</h1> 
-                <p>Modify sweater patterns for a personalized fit with the help of Tailored Knits.</p>
-                {/* make a <Link? */}
-                <button>View Demo</button>
-            </div>
-            </header>
             <section>
                 <h2>Measurements</h2>
                 <p>Use your measurements, or those of the lucky person you are making a sweater for,
@@ -39,7 +30,6 @@ export default function Landing(props) {
                 <LoginForm />
                 <SignupForm />
             </section>
-            <Footer />
         </div>
     );
 }

@@ -1,30 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './nav.css';
 
-export function Nav(props) {
+export class Nav extends React.Component {
 
-    //use props to create Nav list
-    //when on home page only 'View Demo'
+    slugify(text) {
+        return text
+            .toString()
+            .toLowerCase()
+            .replace(/[\s\W-]+/g, '-');
+    }
 
-    const navItems = props.navItems.map((item, index) => 
-        <li key={index}>
-            {item}
-        </li>
-    );
+    render() {
 
-    return (
-        <nav>
-            <ul>
-                {navItems}
-            </ul>
-        </nav>
-    );
+        // How to handle logout 'link'
+
+         const navItems = this.props.navItems.map((item, index) =>
+            <li key={index} className='nav-bar-item'>
+                <Link to={`/${this.slugify(item)}`}>
+                    {item}
+                </Link>
+            </li>
+        );
+        return(
+            <nav>
+                <ul>
+                    {navItems}
+                </ul>
+            </nav >
+        );
+    }
 }
 
 const mapPropsToState = state => ({
-    navItems: state.navItems
+    navItems: state.tailoredKnits.navItems
 });
 
 export default connect(mapPropsToState)(Nav);
