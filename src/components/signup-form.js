@@ -1,17 +1,17 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 
-import {registerUser, login} from '../actions';
-// import {login} from '../actions/auth'
+import { registerUser } from '../actions/users';
+import { login } from '../actions/auth'
 
 import './signup-form.css';
 
 export class Signup extends React.Component {
 
     onSubmit(values) {
-       return this.props    
-        .dispatch(registerUser(values))
-        .then(() => this.props.dispatch(login(values.username, values.password)));
+        return this.props
+            .dispatch(registerUser(values))
+            .then(() => this.props.dispatch(login(values.username, values.password)));
     }
 
     render() {

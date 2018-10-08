@@ -1,13 +1,15 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 
+import { login } from '../actions/auth';
+
 import './login-form.css';
 
 export class Login extends React.Component {
 
     onSubmit(values) {
-        console.log(values);
-        //ajax action to login
+        return this.props
+            .dispatch(login(values.username, values.password))
     }
 
     render() {
@@ -41,5 +43,6 @@ export class Login extends React.Component {
 }
 
 export default reduxForm({
-    form: 'login'
+    form: 'login',
+
 })(Login);
