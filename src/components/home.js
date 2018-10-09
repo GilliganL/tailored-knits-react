@@ -13,6 +13,7 @@ function loggedIn() {
 }
 
 function requireAuth(nextState, replace) {
+    console.log('requireAuth');
     if(!loggedIn()) {
         replace({
             pathname: '/'
@@ -23,21 +24,15 @@ function requireAuth(nextState, replace) {
 
 export default function Home() {
 
-
     return (
         <Router>
             <div>
                 <Header />
                 <Switch>
-                    
-                    <Route exact path='/projects' component={Projects} />
-                    <Route exact path='/account' component={Account} />
-                    <Route exact path='/projects/:projectId' component={SingleProject} />
+                    <Route exact path='/projects' component={Projects} onEnter={requireAuth}/>
+                    <Route exact path='/account' component={Account} onEnter={requireAuth} />
+                    <Route exact path='/projects/:projectId' component={SingleProject} onEnter={requireAuth} />
                     <Route path='/' component={Landing} />
-                    {/* if logged in <Redirect exact from='/' to='/projects' />
-                            if not logged in redirect to '/'?
-                         onEnter={requireAuth} add to routes requiring auth
-                                   */}
                 </Switch>
                 <Footer />
             </div>

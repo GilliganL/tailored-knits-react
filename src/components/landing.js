@@ -1,9 +1,15 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import LoginForm from './login-form';
 import SignupForm from './signup-form';
 
-export default function Landing(props) {
+export function Landing(props) {
+
+    if(props.loggedIn) {
+        return <Redirect to='/projects' />;
+    }
+
     return (
         <div>
             <section>
@@ -33,3 +39,9 @@ export default function Landing(props) {
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    loggedIn: state.auth.currentUser !== null
+});
+
+export default connect(mapStateToProps)(Landing);

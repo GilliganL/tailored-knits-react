@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import authReducer from './reducers/auth';
 import { tailoredKnitsReducer } from './reducers';
-
+import { API_BASE_URL } from './config';
 import { loadAuthToken } from './local-storage';
 import { setAuthToken, refreshAuthToken } from './actions/auth'
 
@@ -17,10 +17,10 @@ const store = createStore(
     applyMiddleware(thunk)
 );
 
-const authToken = loadAuthToken;
+const authToken = loadAuthToken();
 if (authToken) {
     store.dispatch(setAuthToken(authToken));
-    store.dispatch(refreshAuthToken());
+   store.dispatch(refreshAuthToken());
 }
 
 export default store;
