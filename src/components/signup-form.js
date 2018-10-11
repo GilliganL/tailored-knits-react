@@ -3,7 +3,7 @@ import { reduxForm, Field, focus } from 'redux-form';
 
 import { registerUser } from '../actions/users';
 import { login } from '../actions/auth'
-import { required, nonEmpty, length, isTrimmed, matches } from '../validators';
+import { required, nonEmpty, length, isTrimmed, matches, email } from '../validators';
 import './signup-form.css';
 
 const passwordLength = length({min: 8, max: 72});
@@ -47,7 +47,7 @@ export class Signup extends React.Component {
                         </li>
                         <li className='form-row'>
                             <label htmlFor='email'>Email</label>
-                            <Field type='text' id='email' name='email' component='input' validate={[required, nonEmpty]} />
+                            <Field type='text' id='email' name='email' component='input' validate={[required, nonEmpty, email]} />
                         </li>
                         <li className='form-row'>
                             <label htmlFor='password'>Password</label>

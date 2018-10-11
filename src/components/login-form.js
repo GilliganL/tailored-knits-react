@@ -1,8 +1,8 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, focus } from 'redux-form';
 
 import { login } from '../actions/auth';
-
+import { required, nonEmpty } from '../validators';
 import './login-form.css';
 
 export class Login extends React.Component {
@@ -13,6 +13,15 @@ export class Login extends React.Component {
     }
 
     render() {
+
+        let formError = (
+            <li className='form-row'>
+                <div className='formError' aria-live='assertive'>
+                    {this.props.error}
+                </div>
+            </li>
+        )
+
         return (
             <fieldset className='login-form-container'>
                 <legend>Login</legend>
@@ -22,16 +31,17 @@ export class Login extends React.Component {
                     )}>
                     <ul className='form-wrapper' role='none'>
                         <li className='form-row'>
-                            <label htmlFor='login-username'>Username</label>
-                            <Field type='text' id='login-username' name='login-username' component='input' />
+                            <label htmlFor='username'>Username</label>
+                            <Field type='text' id='loginUsername' name='username' component='input' validate={[required, nonEmpty]} />
                         </li>
                         <li className='form-row'>
-                            <label htmlFor='login-password'>Password</label>
-                            <Field type='password' id='login-password' name='login-password' component='input' />
+                            <label htmlFor='password'>Password</label>
+                            <Field type='password' id='loginPassword' name='password' component='input' validate={[required, nonEmpty]} />
                         </li>
                         <li className='form-row hidden' id='login-error-row' hidden>
                             <p id='login-error'></p>
                         </li>
+                        {formError}
                         <li className='form-row'>
                             <button type='submit' id='login-button'>Login</button>
                         </li>
@@ -44,5 +54,5 @@ export class Login extends React.Component {
 
 export default reduxForm({
     form: 'login',
-
+    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
 })(Login);
