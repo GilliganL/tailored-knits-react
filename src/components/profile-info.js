@@ -13,8 +13,6 @@ export class ProfileInfo extends React.Component {
         this.props.dispatch(setEditing(editing));
     }
 
-
-
     render() {
         if (!this.props.editing) {
             return (
@@ -29,18 +27,17 @@ export class ProfileInfo extends React.Component {
         }
 
         return (
-            <ProfileForm id={this.props.id} />
+            <ProfileForm />
         );
     }
 }
 
 const mapStateToProps = state => {
     const { currentUser } = state.auth;
-   
     return {
         id: currentUser.id,
         username: currentUser.username,
-        name: `${currentUser.firstName} ${currentUser.lastName}`,
+        name: `${state.users.data.firstName} ${state.users.data.lastName}`,
         users: state.users.data,
         editing: state.users.editing
     }

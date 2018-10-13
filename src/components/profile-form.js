@@ -1,12 +1,25 @@
 import React from 'react';
 import { reduxForm, Field, focus } from 'redux-form';
+import { connect } from 'react-redux';
 import { email, required, nonEmpty } from '../validators';
 import { updateUser, setEditing } from '../actions/users';
 
 export class ProfileForm extends React.Component {
 
+    componentDidMount() {
+        this.handleInitialize();
+    }
+
+    handleInitialize() {
+        const initialData = {
+            'firstName': this.props.firstName,
+            'lastName': this.props.lastName,
+            'email': this.props.email
+        };
+        this.props.initialize(initialData);
+    }
+
     onSubmit(values) {
-        //submit updatebyUserId, setEditting
         return this.props
             .dispatch(updateUser(this.props.id, values))
             .then(() => this.props.dispatch(setEditing(false)))
@@ -20,6 +33,7 @@ export class ProfileForm extends React.Component {
                 </div>
             </li>
         )
+
         return (
             <section className='profile-section'>
                 <fieldset className='edit-profile-container'>
@@ -52,7 +66,18 @@ export class ProfileForm extends React.Component {
     }
 }
 
-export default reduxForm({
+const mapStateToProps = state => {
+    const user = state.users.data;
+    return {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+    }
+}
+
+ProfileForm = reduxForm({
     form: 'profileForm',
     onSubmitFail: (errors, dispatch) => dispatch(focus('profileForm', Object.keys(errors)[0]))
 })(ProfileForm);
+
+export default connect(mapStateToProps)(ProfileForm);

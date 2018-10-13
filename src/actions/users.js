@@ -1,7 +1,7 @@
 import {SubmissionError} from 'redux-form';
 import { API_BASE_URL} from '../config';
 import { normalizeResponseErrors } from './utils';
-import jwtDecode from 'jwt-decode';
+
 
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const fetchUsersSuccess = data => ({
@@ -62,8 +62,7 @@ export const fetchUserById = (id) => (dispatch, getState) => {
 
 export const updateUser = (id, values) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    const decodedToken = jwtDecode(authToken);
-    console.log(decodedToken)
+  
     return fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'PUT',
         headers: {
