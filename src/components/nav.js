@@ -21,7 +21,6 @@ export class Nav extends React.Component {
     }
 
     render() {
-
          const navItems = this.props.navItems.map((item, index) => {
             if (item !== 'Logout') {
             return <li key={index} className='nav-bar-item'>
