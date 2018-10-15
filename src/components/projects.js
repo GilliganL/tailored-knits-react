@@ -5,9 +5,14 @@ import requiresLogin from './requires-login';
 
 export class Projects extends React.Component {
     // componentDidMount() {
-    //     this.props.dispatch(fetchUsers());
+    //     this.props.dispatch(fetchProjects());
     // }
 
+//actions for fetchProjects, createProject, updateProject, deleteProject
+
+    //project form, toggle edit
+    //pattern form, toggle edit
+    //calculations
     render() {
     
 
