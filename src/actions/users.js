@@ -77,7 +77,8 @@ export const updateUser = (id, values) => (dispatch, getState) => {
         body: JSON.stringify(values)
     })
     .then(res => normalizeResponseErrors(res))
-    .then((data) => dispatch(usersSuccess(data)))
+    .then(res => res.json())
+    .then(data => dispatch(usersSuccess(data)))
     .catch(err => {
         const {reason, message, location} = err;
         if (reason === 'ValidationError') {

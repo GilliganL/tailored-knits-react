@@ -7,7 +7,6 @@ export const projectsRequest = () => ({
     type: PROJECTS_REQUEST
 });
 
-
 export const PROJECTS_SUCCESS = 'PROJECTS_SUCCESS';
 export const projectsSuccess = data => ({
     type: PROJECTS_SUCCESS,
@@ -37,7 +36,7 @@ export const fetchProjects = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(projectsSuccess(data)))
+        .then(data => dispatch(projectsSuccess(data)))
         .catch(err => dispatch(projectsError(err)))
 };
 
