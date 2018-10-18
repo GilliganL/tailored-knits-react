@@ -54,10 +54,10 @@ export const fetchProjectsById = id => (dispatch, getState) => {
         .then(res => res.json())
         .then((data) => dispatch(projectsSuccess(data)))
         .catch(err => dispatch(projectsError(err)))
-    //validation error on API for bad id
 };
 
 export const createProject = values => (dispatch, getState) => {
+    values.name = values.projectName;
     dispatch(projectsRequest());
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/projects`, {
@@ -124,5 +124,5 @@ export const deleteProject = id => (dispatch, getState) => {
         .then(res => res.json())
         .then((data) => dispatch(projectsSuccess(data)))
         .catch(err => dispatch(projectsError(err)))
-    //validation error on API for bad id
 };
+

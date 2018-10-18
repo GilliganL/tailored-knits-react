@@ -6,6 +6,6 @@
 
 .project-card {
     border: 2px solid black;
-    width: 250px;
-    height: 200px;
+    min-width: 250px;
+    min-height: 200px;
 }

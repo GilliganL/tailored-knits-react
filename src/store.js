@@ -2,7 +2,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import { reducer as formReducer } from 'redux-form';
-import { tailoredKnitsReducer, authReducer, usersReducer, projectsReducer } from './reducers';
+import { tailoredKnitsReducer, 
+         authReducer, 
+         usersReducer, 
+         projectsReducer, 
+         patternsReducer } from './reducers';
 
 import { loadAuthToken } from './local-storage';
 import { setAuthToken, refreshAuthToken } from './actions/auth'
@@ -13,7 +17,8 @@ const store = createStore(
         tailoredKnits: tailoredKnitsReducer,
         auth: authReducer,
         users: usersReducer,
-        projects: projectsReducer
+        projects: projectsReducer,
+        patterns: patternsReducer
     }),
     applyMiddleware(thunk)
 );
