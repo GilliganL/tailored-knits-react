@@ -46,7 +46,7 @@ export const fetchProjects = (username) => (dispatch, getState) => {
         .catch(err => dispatch(projectsError(err)))
 };
 
-export const fetchProjectsById = id => (dispatch, getState) => {
+export const fetchProjectById = id => (dispatch, getState) => {
     dispatch(projectsRequest());
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/projects/${id}`, {

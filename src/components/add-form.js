@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { required, nonEmpty } from '../validators';
 import { createProject } from '../actions/projects';
@@ -17,9 +18,7 @@ export class AddForm extends React.Component {
                     return values
                 })
                 .then((values) => this.props.dispatch(createProject(values)))
-                .then((data) => {
-                    console.log(data.project) 
-                    this.props.history.push(`/projects/${data.project._id}`)})
+                .then((data) => this.props.history.push(`/projects/${data.project._id}`))
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
@@ -122,8 +121,8 @@ export class AddForm extends React.Component {
 }
 
 
-export default reduxForm({
+export default withRouter(reduxForm({
     form: 'addForm',
     onSubmitFail: (errors, dispatch) =>
         dispatch(focus('addForm', Object.keys(errors)[0]))
-})(AddForm);
+})(AddForm));

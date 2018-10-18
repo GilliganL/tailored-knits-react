@@ -55,3 +55,45 @@ export const createPattern = name => (dispatch, getState) => {
             dispatch(patternsError(err))
         });
 }
+
+export const fetchPatternById = id => (dispatch, getState) => {
+    dispatch(patternsRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/patterns/${id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((data) => dispatch(patternsSuccess(data)))
+        .catch(err => dispatch(patternsError(err)))
+};
+
+export const updatePattern = (id, values) => (dispatch, getState) => {
+    dispatch(patternsRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/patterns/${id}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify(values)
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((data) => dispatch(patternsSuccess(data)))
+        .catch(err => {
+            const { reason, message, location } = err;
+            if (reason === 'ValidationError') {
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+            dispatch(patternsError(err))
+        });
+}
