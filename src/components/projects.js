@@ -25,9 +25,9 @@ export class Projects extends React.Component {
     }
 
     render() {
-        console.log(this.props.projects)
+        console.log(this.props)
         let projects;
-        if (this.props.projects) {
+        if (this.props.projects && !this.props.loading) {
             projects = this.props.projects.map((project, index) =>
                 (<div key={index} className='project-card'>
                     <h3><Link to={`/projects/${project.id}`}>{project.name}</Link></h3>
@@ -59,7 +59,8 @@ const mapStateToProps = state => {
         username: currentUser.username,
         name: currentUser.fullName,
         projects: state.projects.data,
-        editing: state.projects.editing
+        editing: state.projects.editing,
+        loading: state.projects.loading
     }
 }
 

@@ -17,13 +17,15 @@ export class AddForm extends React.Component {
                     return values
                 })
                 .then((values) => this.props.dispatch(createProject(values)))
-                .then((project) => this.props.history.push(`/projects/${project.id}`))
+                .then((data) => {
+                    console.log(data.project) 
+                    this.props.history.push(`/projects/${data.project._id}`)})
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
 
                         return Promise.reject(
-                            new SubmissionError({
+                            new SubmissionError({   
                                 [location]: message
                             })
                         );

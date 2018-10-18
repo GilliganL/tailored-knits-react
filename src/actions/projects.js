@@ -2,6 +2,11 @@ import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
+export const ADD_PROJECT = 'ADD_PROJECT';
+export const addProject = project => ({
+    type: ADD_PROJECT,
+    project
+});
 
 export const PROJECTS_REQUEST = 'PROJECTS_REQUEST';
 export const projectsRequest = () => ({
@@ -70,7 +75,7 @@ export const createProject = values => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(projectsSuccess(data)))
+        .then(project => dispatch(addProject(project)))
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {

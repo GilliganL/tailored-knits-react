@@ -1,4 +1,5 @@
 import {
+    ADD_PROJECT,
     PROJECTS_REQUEST,
     PROJECTS_SUCCESS,
     PROJECTS_ERROR,
@@ -34,6 +35,12 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === SET_EDITING) {
         return Object.assign({}, state, {
             editing: action.editing
+        });
+    } else if (action.type === ADD_PROJECT) {
+        return Object.assign({}, state, {
+            data: [...state.data, action.project],
+            loading: false,
+            error: null
         });
     }
     return state;
