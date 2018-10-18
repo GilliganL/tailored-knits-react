@@ -1,40 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
-import { fetchProjects, createProject } from '../actions/projects';
+import { Link } from 'react-router-dom';
+import { fetchProjects, createProject, setEditing } from '../actions/projects';
+
+import AddForm from './add-form';
+
+import './projects.css';
 
 export class Projects extends React.Component {
     componentDidMount() {
-        this.props.dispatch(fetchProjects());
+        this.props.dispatch(fetchProjects(this.props.username));
     }
 
+    pluralize(username) {
+        if (this.props.projects.length > 1) {
+            return username.endsWith('s') ? username + '\'' : username + '\'s';
+        }
+        return username;
+    }
 
-
-    //button for each project onClick sends to /projects/id {SingleProject}
+    setEditing(editing) {
+        this.props.dispatch(setEditing(editing))
+    }
 
     render() {
         console.log(this.props.projects)
         let projects;
         if (this.props.projects) {
             projects = this.props.projects.map((project, index) =>
-                (<li key={index}>
-                    <h4>{project.name}</h4>
+                (<div key={index} className='project-card'>
+                    <h3><Link to={`/projects/${project.id}`}>{project.name}</Link></h3>
+                    <p>{project.pattern.name}</p>
                     <p>{project.size}</p>
-                    <p>{project.style}</p>
-                </li>)
+                    <p>{project.pattern.style}</p>
+                </div>)
             )
         }
 
-
         return (
             <div>
-                <h1>Projects</h1>
-                <ul>
+                <h1>{this.pluralize(this.props.username)} Projects</h1>
+                <div className='card-container'>
                     {projects}
-                </ul>
+                    <div className='project-card'>
+                        <AddForm setEditing={editing => this.setEditing(editing)} editing={this.props.editing} />
+                    </div>
+                </div>
             </div>
         );
     }
+
 }
 
 const mapStateToProps = state => {
@@ -42,7 +58,8 @@ const mapStateToProps = state => {
     return {
         username: currentUser.username,
         name: currentUser.fullName,
-        projects: state.projects.data
+        projects: state.projects.data,
+        editing: state.projects.editing
     }
 }
 

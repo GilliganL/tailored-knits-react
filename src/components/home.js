@@ -5,7 +5,7 @@ import { refreshAuthToken } from '../actions/auth';
 import Header from './header';
 import Landing from './landing';
 import Projects from './projects';
-import SingleProject from './single-project';
+import ProjectDetail from './project-detail';
 import Profile from './profile';
 import Footer from './footer';
 
@@ -46,7 +46,7 @@ export class Home extends React.Component {
                     <Switch>
                         <Route exact path='/projects' component={Projects} />
                         <Route exact path='/profile' component={Profile}  />
-                        <Route exact path='/projects/:projectId' component={SingleProject}  />
+                        <Route exact path='/projects/:projectId' component={ProjectDetail}  />
                         <Route path='/' component={Landing} />
                     </Switch>
                     <Footer />

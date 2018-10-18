@@ -2,6 +2,7 @@ import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
+
 export const PROJECTS_REQUEST = 'PROJECTS_REQUEST';
 export const projectsRequest = () => ({
     type: PROJECTS_REQUEST
@@ -25,10 +26,10 @@ export const setEditing = editing => ({
     editing
 });
 
-export const fetchProjects = () => (dispatch, getState) => {
+export const fetchProjects = (username) => (dispatch, getState) => {
     dispatch(projectsRequest());
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/projects`, {
+    return fetch(`${API_BASE_URL}/projects/${username}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${authToken}`
