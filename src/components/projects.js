@@ -25,12 +25,11 @@ export class Projects extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         let projects;
         if (this.props.projects && !this.props.loading) {
             projects = this.props.projects.map((project, index) =>
                 (<div key={index} className='project-card'>
-                    <h3><Link to={`/projects/${project.id}`}>{project.name}</Link></h3>
+                    <h3><Link to={`/projects/${project._id}`}>{project.name}</Link></h3>
                     <p>{project.pattern.name}</p>
                     <p>{project.size}</p>
                     <p>{project.pattern.style}</p>
@@ -58,7 +57,7 @@ const mapStateToProps = state => {
     return {
         username: currentUser.username,
         name: currentUser.fullName,
-        projects: state.projects.data,
+        projects: state.projects.projects,
         editing: state.projects.editing,
         loading: state.projects.loading
     }

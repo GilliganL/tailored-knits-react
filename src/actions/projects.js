@@ -14,9 +14,15 @@ export const projectsRequest = () => ({
 });
 
 export const PROJECTS_SUCCESS = 'PROJECTS_SUCCESS';
-export const projectsSuccess = data => ({
+export const projectsSuccess = projects => ({
     type: PROJECTS_SUCCESS,
-    data
+    projects
+});
+
+export const PROJECT_SUCCESS = 'PROJECT_SUCCESS';
+export const projectSuccess = project => ({
+    type: PROJECT_SUCCESS,
+    project
 });
 
 export const PROJECTS_ERROR = 'PROJECTS_ERROR';
@@ -42,7 +48,7 @@ export const fetchProjects = (username) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(data => dispatch(projectsSuccess(data)))
+        .then(projects => dispatch(projectsSuccess(projects)))
         .catch(err => dispatch(projectsError(err)))
 };
 
@@ -57,7 +63,7 @@ export const fetchProjectById = id => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(projectsSuccess(data)))
+        .then((project) => dispatch(projectSuccess(project)))
         .catch(err => dispatch(projectsError(err)))
 };
 

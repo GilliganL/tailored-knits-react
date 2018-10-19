@@ -1,82 +1,53 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import requiresLogin from './requires-login';
+
 import MeasurementsForm from './measurements-form';
 
-import { fetchProjectById, updateProject, deleteProject } from '../actions/projects';
-import { fetchPatternById, updatePattern } from '../actions/patterns';
-import { fetchUserById, updateUsers } from '../actions/users';
 
 
-export class Measurements extends React.Component {
 
-    componentDidMount() {
-        if (this.props.type === 'Project') {
-            this.props.dispatch(fetchProjectById(this.props.project.id));
-        } else if (this.props.type === 'Pattern') {
-            this.props.dispatch(fetchPatternById(this.props.pattern.id));
-        } else {
-            this.props.dispatch(fetchUserById(this.props.user.id));
-        }
-    }
+export default function Measurements(props) {
+
 
     //calculations - update values as form changes. Send info to server onchange? 
+    // if (editing) {
+    //     return (
+    //         <MeasurementsForm type={this.props.type} />
+    //     )
+    // }
 
-    render() {
-        let content;
-        let editing;
-        if (this.props.type === 'Project') {
-            content = this.props.project;
-            editing = this.props.editingProject;
-        } else if (this.props.type === 'Pattern') {
-            content = this.props.pattern;
-            editing = this.props.editingPattern;
-        } else {
-            content = this.props.user;
-            editing = this.props.editingUser;
-        }
-
-        if (editing) {
-            return (
-                <MeasurementsForm type={this.props.type} />
-            )
-        }
-
-        let keys = Object.keys(content);
-        let contentList = content.map((item, index) =>
-            (
-                <li key={index} className='list-row'>
-                    <p className='list-label'>{keys[index]}</p>
-                    <p className='list-value'>{content[keys[index]]}</p>
-                </li>
-            )
-        )
-
+    if(!props.content) {
         return (
-            <div className={this.props.type} measurements >
-                <h2>{this.props.type} Measurements</h2>
-                <ul className='list-wrapper'>
-                    {contentList}
-                    <li className='list-row'>
-                        <button>Update</button>
-                    </li>
-                </ul>
-            </div >
+            <div></div>
         )
     }
-}
+    let measureKeys = {
+        waist: true,
+        chest: true
+    };
+    
+    let keys = Object.keys(props.content).filter(k => k in measureKeys);
+    
+    let contentList = keys.map((key, index) =>
+        (
+            <li key={index} className='list-row'>
+                <p className='list-label'>{key}</p>
+                <p className='list-value'>{props.content[key]}</p>
+            </li>
+        )
+    )
 
-const mapStateToProps = state => {
-    return {
-        project: state.projects.data,
-        pattern: state.patterns.data,
-        user: state.users.data,
-        editingProject: state.projects.editing,
-        editingPattern: state.patterns.editing,
-        editingUser: state.users.editing
-    }
-}
+    return (
+        <div className={props.type} measurements >
+            <h2>{props.type} Measurements</h2>
+            <ul className='list-wrapper'>
+                {contentList}
+                <li className='list-row'>
+                    <button>Update</button>
+                </li>
+            </ul>
+        </div >
+    )
 
-export default requiresLogin()(connect(mapStateToProps)(Measurements));
+}
 
 

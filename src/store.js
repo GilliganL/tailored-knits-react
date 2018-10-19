@@ -17,7 +17,7 @@ const store = createStore(
         tailoredKnits: tailoredKnitsReducer,
         auth: authReducer,
         users: usersReducer,
-        projects: projectsReducer,
+        projectsReducer,
         patterns: patternsReducer
     }),
     applyMiddleware(thunk)
