@@ -1,0 +1,26 @@
+.measurements-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.list-row {
+    height: 30px;
+    border-bottom: 1px dotted gray;
+    text-align: left;
+}
+
+.list-row p {
+    margin: 10px;
+}
+
+.list-row.button-row {
+    text-align: center;
+}
+
+.label,
+.value {
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+}

@@ -8,9 +8,9 @@ export const usersRequest = () => ({
 });
 
 export const USERS_SUCCESS = 'USERS_SUCCESS';
-export const usersSuccess = data => ({
+export const usersSuccess = user => ({
     type: USERS_SUCCESS,
-    data
+    user
 });
 
 export const USERS_ERROR = 'USERS_ERROR';
@@ -36,7 +36,7 @@ export const registerUser = user => dispatch => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(data => dispatch(usersSuccess(data)))
+        .then(user => dispatch(usersSuccess(user)))
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
@@ -52,7 +52,7 @@ export const registerUser = user => dispatch => {
 
 export const fetchUserById = (id) => (dispatch, getState) => {
     dispatch(usersRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'GET',
         headers: {
@@ -61,13 +61,13 @@ export const fetchUserById = (id) => (dispatch, getState) => {
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then((data) => dispatch(usersSuccess(data)))
+    .then((user) => dispatch(usersSuccess(user)))
     .catch(err => dispatch(usersError(err)));
 };
 
 export const updateUser = (id, values) => (dispatch, getState) => {
     dispatch(usersRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/users/${id}`, {
         method: 'PUT',
         headers: {
@@ -78,7 +78,7 @@ export const updateUser = (id, values) => (dispatch, getState) => {
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then(data => dispatch(usersSuccess(data)))
+    .then(user => dispatch(usersSuccess(user)))
     .catch(err => {
         const {reason, message, location} = err;
         if (reason === 'ValidationError') {

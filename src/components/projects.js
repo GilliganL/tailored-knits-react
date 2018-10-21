@@ -53,13 +53,13 @@ export class Projects extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { currentUser } = state.auth;
+    const { currentUser } = state.authReducer;
     return {
         username: currentUser.username,
         name: currentUser.fullName,
-        projects: state.projects.projects,
-        editing: state.projects.editing,
-        loading: state.projects.loading
+        projects: state.projectsReducer.projects,
+        editing: state.projectsReducer.editing,
+        loading: state.projectsReducer.loading
     }
 }
 

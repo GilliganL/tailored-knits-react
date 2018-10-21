@@ -67,7 +67,7 @@ export class ProfileForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const user = state.users.data;
+    const user = state.usersReducer.user;
     return {
         firstName: user.firstName,
         lastName: user.lastName,

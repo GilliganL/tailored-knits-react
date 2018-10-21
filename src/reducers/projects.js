@@ -1,20 +1,21 @@
 import {
-    ADD_PROJECT,
     PROJECTS_REQUEST,
     PROJECTS_SUCCESS,
     PROJECT_SUCCESS,
     PROJECTS_ERROR,
-    SET_EDITING
+    SET_EDITING,
+    ADD_PROJECT,
+    REMOVE_PROJECT
 } from '../actions/projects';
 
 const initialState = {
-    data: '',
+    projects: '',
+    project: '',
     editing: false,
     loading: false, 
+    message: '',
     error: null
 };
-
-//add IS for measurements, pattern specs 
 
 export default function reducer(state = initialState, action) {
     if (action.type === PROJECTS_REQUEST) {
@@ -45,7 +46,13 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === ADD_PROJECT) {
         return Object.assign({}, state, {
-            data: [...state.data, action.project],
+            projects: [...state.projects, action.project],
+            loading: false,
+            error: null
+        });
+    } else if (action.type === REMOVE_PROJECT) {
+        return Object.assign({}, state, {
+            message: action.message,
             loading: false,
             error: null
         });

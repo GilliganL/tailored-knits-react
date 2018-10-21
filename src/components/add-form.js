@@ -12,19 +12,19 @@ export class AddForm extends React.Component {
     onSubmit(values) {
         if (values) {
             return this.props
-                .dispatch(createPattern(values.patternName))
-                .then(pattern =>{
-                     values.pattern = pattern.data._id
+                .dispatch(createPattern(values.patternName, values.style))
+                .then(res => {
+                    values.pattern = res.pattern._id
                     return values
                 })
                 .then((values) => this.props.dispatch(createProject(values)))
-                .then((data) => this.props.history.push(`/projects/${data.project._id}`))
+                .then((res) => this.props.history.push(`/projects/${res.project._id}`))
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
 
                         return Promise.reject(
-                            new SubmissionError({   
+                            new SubmissionError({
                                 [location]: message
                             })
                         );
@@ -86,14 +86,21 @@ export class AddForm extends React.Component {
                                 label='Raglan'
                                 name='style'
                                 component={Input}
-                                value='raglan'
+                                value='Raglan'
                                 validate={[required, nonEmpty]} />
                             <Field
                                 type='radio'
                                 label='Set In'
                                 name='style'
                                 component={Input}
-                                value='set in'
+                                value='Set In'
+                                validate={[required, nonEmpty]} />
+                            <Field
+                                type='radio'
+                                label='Yoke'
+                                name='style'
+                                component={Input}
+                                value='Yoke'
                                 validate={[required, nonEmpty]} />
                         </li>
                         <li className='form-row'>

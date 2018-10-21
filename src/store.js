@@ -15,10 +15,10 @@ const store = createStore(
     combineReducers({
         form: formReducer,
         tailoredKnits: tailoredKnitsReducer,
-        auth: authReducer,
-        users: usersReducer,
+        authReducer,
+        usersReducer,
         projectsReducer,
-        patterns: patternsReducer
+        patternsReducer
     }),
     applyMiddleware(thunk)
 );

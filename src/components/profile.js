@@ -21,6 +21,4 @@ export class Profile extends React.Component {
     }
 }
 
-
-
 export default requiresLogin()(Profile);

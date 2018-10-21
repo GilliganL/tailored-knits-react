@@ -9,9 +9,15 @@ export const patternsRequest = () => ({
 });
 
 export const PATTERNS_SUCCESS = 'PATTERNS_SUCCESS';
-export const patternsSuccess = data => ({
+export const patternsSuccess = patterns => ({
     type: PATTERNS_SUCCESS,
-    data
+    patterns
+});
+
+export const PATTERN_SUCCESS = 'PATTERN_SUCCESS';
+export const patternSuccess = pattern => ({
+    type: PATTERN_SUCCESS,
+    pattern
 });
 
 export const PATTERNS_ERROR = 'PATTERNS_ERROR';
@@ -26,12 +32,13 @@ export const setEditing = editing => ({
     editing
 });
 
-export const createPattern = name => (dispatch, getState) => {
+export const createPattern = (name, style) => (dispatch, getState) => {
     const patternObject = {
-        name
+        name,
+        style
     }
     dispatch(patternsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/patterns`, {
         method: 'POST',
         headers: {
@@ -42,7 +49,7 @@ export const createPattern = name => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(patternsSuccess(data)))
+        .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {
@@ -58,7 +65,7 @@ export const createPattern = name => (dispatch, getState) => {
 
 export const fetchPatternById = id => (dispatch, getState) => {
     dispatch(patternsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/patterns/${id}`, {
         method: 'GET',
         headers: {
@@ -67,13 +74,13 @@ export const fetchPatternById = id => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(patternsSuccess(data)))
+        .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => dispatch(patternsError(err)))
 };
 
 export const updatePattern = (id, values) => (dispatch, getState) => {
     dispatch(patternsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/patterns/${id}`, {
         method: 'PUT',
         headers: {
@@ -84,7 +91,7 @@ export const updatePattern = (id, values) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(patternsSuccess(data)))
+        .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {

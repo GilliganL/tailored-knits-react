@@ -4,9 +4,9 @@ import Measurements from './measurements';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 
-import { fetchProjectById, updateProject, deleteProject } from '../actions/projects';
-import { fetchPatternById, updatePattern } from '../actions/patterns';
-import { fetchUserById, updateUsers } from '../actions/users';
+import { fetchProjectById} from '../actions/projects';
+
+import './project-detail.css';
 
 export class ProjectDetail extends React.Component {
 
@@ -15,13 +15,19 @@ export class ProjectDetail extends React.Component {
     }
 
     render() {
-        console.log(this.props.project)
+
+        if(!this.props.project) {
+            return (
+                <div></div>
+            )
+        }
+
         return (
             <div>
                 <h1>Project Detail</h1>
                 <section className='measurements-container'>
-                    <Measurements type='Project' content={this.props.project} />
-                    <Measurements type='Pattern' content={this.props.project.pattern} />
+                    <Measurements type='Pattern' content={this.props.project} style={this.props.pattern.style} />
+                    <Measurements type='Project' content={this.props.project.pattern} style={this.props.pattern.style} />
                     <Measurements type='User' content={this.props.project.user} />
                 </section>
             </div>
@@ -29,10 +35,12 @@ export class ProjectDetail extends React.Component {
     }
 }
 
-
+//can't do pattern.style here
 const mapStateToProps = state => {
+   const pattern = state.projectsReducer.project.pattern
     return {
-        project: state.projects.project
+        project: state.projectsReducer.project,
+        pattern
     }
 }
 

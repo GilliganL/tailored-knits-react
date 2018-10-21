@@ -1,12 +1,14 @@
 import {
     PATTERNS_REQUEST,
     PATTERNS_SUCCESS,
+    PATTERN_SUCCESS,
     PATTERNS_ERROR,
     SET_EDITING
 } from '../actions/patterns';
 
 const initialState = {
-    data: '',
+    patterns: '',
+    pattern: '',
     editing: false,
     loading: false, 
     error: null
@@ -22,7 +24,13 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === PATTERNS_SUCCESS) {
         return Object.assign({}, state, {
-            data: action.data,
+            patterns: action.patterns,
+            loading: false,
+            error: null
+        });
+    } else if (action.type === PATTERN_SUCCESS) {
+        return Object.assign({}, state, {
+            pattern: action.pattern,
             loading: false,
             error: null
         });

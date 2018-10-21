@@ -57,8 +57,8 @@ export class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    hasAuthToken: state.auth.authToken !== null,
-    loggedIn: state.auth.currentUser !== null
+    hasAuthToken: state.authReducer.authToken !== null,
+    loggedIn: state.authReducer.currentUser !== null
 });
 
 export default connect(mapStateToProps)(Home);

@@ -2,12 +2,6 @@ import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
-export const ADD_PROJECT = 'ADD_PROJECT';
-export const addProject = project => ({
-    type: ADD_PROJECT,
-    project
-});
-
 export const PROJECTS_REQUEST = 'PROJECTS_REQUEST';
 export const projectsRequest = () => ({
     type: PROJECTS_REQUEST
@@ -37,9 +31,21 @@ export const setEditing = editing => ({
     editing
 });
 
+export const ADD_PROJECT = 'ADD_PROJECT';
+export const addProject = project => ({
+    type: ADD_PROJECT,
+    project
+});
+
+export const REMOVE_PROJECT = 'REMOVE_PROJECT';
+export const removeProject = message => ({
+    type: REMOVE_PROJECT,
+    message
+});
+
 export const fetchProjects = (username) => (dispatch, getState) => {
     dispatch(projectsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects/${username}`, {
         method: 'GET',
         headers: {
@@ -54,7 +60,7 @@ export const fetchProjects = (username) => (dispatch, getState) => {
 
 export const fetchProjectById = id => (dispatch, getState) => {
     dispatch(projectsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects/${id}`, {
         method: 'GET',
         headers: {
@@ -70,7 +76,7 @@ export const fetchProjectById = id => (dispatch, getState) => {
 export const createProject = values => (dispatch, getState) => {
     values.name = values.projectName;
     dispatch(projectsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects`, {
         method: 'POST',
         headers: {
@@ -97,7 +103,7 @@ export const createProject = values => (dispatch, getState) => {
 
 export const updateProject = (id, values) => (dispatch, getState) => {
     dispatch(projectsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects/${id}`, {
         method: 'PUT',
         headers: {
@@ -108,7 +114,7 @@ export const updateProject = (id, values) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(projectsSuccess(data)))
+        .then((project) => dispatch(projectSuccess(project)))
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {
@@ -124,7 +130,7 @@ export const updateProject = (id, values) => (dispatch, getState) => {
 
 export const deleteProject = id => (dispatch, getState) => {
     dispatch(projectsRequest());
-    const authToken = getState().auth.authToken;
+    const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects/${id}`, {
         method: 'DELETE',
         headers: {
@@ -133,7 +139,7 @@ export const deleteProject = id => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => dispatch(projectsSuccess(data)))
+        .then((res) => dispatch(removeProject(res.message)))
         .catch(err => dispatch(projectsError(err)))
 };
 

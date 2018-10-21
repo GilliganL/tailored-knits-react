@@ -6,7 +6,7 @@ import {
 } from '../actions/users';
 
 const initialState = {
-    data: '',
+    user: '',
     editing: false,
     loading: false,
     error: null
@@ -22,7 +22,7 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === USERS_SUCCESS) {
         return Object.assign({}, state, {
-            data: action.data,
+            user: action.user,
             loading: false,
             error: null
         });

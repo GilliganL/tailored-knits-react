@@ -20,7 +20,7 @@ export class ProfileInfo extends React.Component {
                     <h3>Your Profile</h3>
                     <h3>{this.props.username}</h3>
                     <p>{this.props.name}</p>
-                    <p>{this.props.users.email}</p>
+                    <p>{this.props.user.email}</p>
                     <button onClick={() => this.setEditing(true)}>Edit Profile</button>
                 </section>
             )
@@ -33,13 +33,14 @@ export class ProfileInfo extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { currentUser } = state.auth;
+    const { currentUser } = state.authReducer;
     return {
         id: currentUser.id,
         username: currentUser.username,
-        name: `${state.users.data.firstName} ${state.users.data.lastName}`,
-        users: state.users.data,
-        editing: state.users.editing
+        //fix so updating user updates currentUser
+        name: `${state.usersReducer.user.firstName} ${state.usersReducer.user.lastName}`,
+        user: state.usersReducer.user,
+        editing: state.usersReducer.editing
     }
 }
 
