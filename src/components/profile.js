@@ -15,7 +15,7 @@ export class Profile extends React.Component {
             <div>
                 <h1>Profile</h1>
                 <ProfileInfo />
-                <Measurements />
+                {/* <Measurements /> */}
             </div>
         );
     }

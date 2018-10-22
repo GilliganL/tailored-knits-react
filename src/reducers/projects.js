@@ -12,6 +12,9 @@ const initialState = {
     projects: '',
     project: '',
     editing: false,
+    editProject: false,
+    editPattern: false,
+    editUser: false,
     loading: false, 
     message: '',
     error: null
@@ -42,7 +45,8 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === SET_EDITING) {
         return Object.assign({}, state, {
-            editing: action.editing
+            editing: action.editing,
+            [action.editType]: action.editing
         });
     } else if (action.type === ADD_PROJECT) {
         return Object.assign({}, state, {

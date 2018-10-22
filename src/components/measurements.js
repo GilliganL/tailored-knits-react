@@ -1,78 +1,139 @@
 import React from 'react';
-
-import MeasurementsForm from './measurements-form';
-
-
-
-
-export default function Measurements(props) {
+import { connect } from 'react-redux';
+import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
+import { required, nonEmpty } from '../validators';
+import { setEditing } from '../actions/projects';
 
 
-    //calculations - update values as form changes. Send info to server onchange? 
-    // if (editing) {
-    //     return (
-    //         <MeasurementsForm type={this.props.type} />
-    //     )
-    // }
 
-    // if(!props.content) {
-    //     return (
-    //         <div></div>
-    //     )
-    // }
+export class Measurements extends React.Component {
 
-    let measureKeys = {
-		chest: true,
-        waist: true,
-        hips: true,
-		upperArm: true,
-		length: true,
-		wrist: true
-    };
-	
-	if (props.style === 'Set In' || props.type === 'User') {
-		measureKeys.armhole = true;
-	} else if (props.style === 'Raglan'){
-		measureKeys.raglanDepth = true;
-	} else {
-		measureKeys.yokeDepth = true;
-    }
-    
-    if (props.type !== 'User') {
-        measureKeys.ease = true;
-        measureKeys.gaugeRow = true;
-        measureKeys.gaugeStitches = true;
-        measureKeys.needles = true;
+    // calculations - update values as form changes. Send info to server onchange? 
+
+    setEditing(editing, type) {
+        let editType = `edit${type}`
+        this.props.dispatch(setEditing(editing, editType));
     }
 
-    if (props.type === 'Pattern') {
-        measureKeys.style = true;
+    onSubmit(values) {
+        console.log(values)
+        // return this.props
+        //     .dispatch(updateUser(this.props.id, values))
+        //     .then(() => this.props.dispatch(setEditing(false)))
     }
 
-    if (props.type === 'Project') {
-        measureKeys.notes = true;
-    }
-    
-    let contentList = Object.keys(measureKeys).map((key, index) =>
-        (
-            <li key={index} className='list-row'>
-               <p><span className='label'>{key}:</span><span className='value'> {props.content[key]}</span></p>
-            </li>
+    render() {
+
+        let measureKeys = {
+            chest: 'Chest',
+            waist: 'Waist',
+            hips: 'Hips',
+            upperArm: 'Upper Arm',
+            length: 'Length',
+            wrist: 'Wrist'
+        };
+
+        if (this.props.style === 'Set In' || this.props.type === 'User') {
+            measureKeys.armhole = 'Armhole';
+        } else if (this.props.style === 'Raglan') {
+            measureKeys.raglanDepth = 'Raglan Depth';
+        } else {
+            measureKeys.yokeDepth = true;
+        }
+
+        if (this.props.type !== 'User') {
+            measureKeys.ease = 'Ease';
+            measureKeys.gaugeRow = 'Gauge Row';
+            measureKeys.gaugeStitches = 'Gauge Stitches';
+            measureKeys.needles = 'Needles';
+        }
+
+        let editing;
+        if (this.props.type === 'Pattern') {
+            measureKeys.style = 'Style';
+            editing = this.props.editPattern;
+        }
+
+        if (this.props.type === 'Project') {
+            measureKeys.notes = 'Notes';
+            editing = this.props.editProject;
+        }
+
+        if (this.props.type === 'User') {
+            editing = this.props.editUser;
+        }
+
+        let contentList;
+        let updateButton;
+        if (!editing) {
+            contentList = Object.keys(measureKeys).map((key, index) =>
+                (
+                    <li key={index} className='list-row'>
+                        <label htmlFor={key} className='label'>{measureKeys[key]}:</label>
+                        <p className='value'>{this.props.content[key]}</p>
+                    </li>
+                )
+            )
+            updateButton = (<li className='list-row button-row'>
+                <button type='button' className='edit-button' onClick={() => this.setEditing(true, this.props.type)}>Edit</button>
+            </li>)
+
+        } else {
+            contentList = Object.keys(measureKeys).map((key, index) =>
+                (
+                    <li key={index} className='list-row'>
+                        <label htmlFor={key} className='label'>{measureKeys[key]}:</label>
+                        <Field
+                            type='text'
+                            id={key}
+                            name={key}
+                            component='input'
+                        />
+                    </li>
+                )
+            )
+            updateButton = (<li className='list-row button-row'><button className='update-button'>Update</button></li>)
+        }
+
+        return (
+            <div className={this.props.type + `measurements`}>
+                <h2>{this.props.type} Measurements</h2>
+                <form className='measurements-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                <ul className='list-wrapper'>
+                    {contentList}
+                    {updateButton}
+                </ul>
+                </form>
+            </div >
         )
-    )
-
-    return (
-        <div className={props.type + `measurements`}>
-            <h2>{props.type} Measurements</h2>
-            <ul className='list-wrapper'>
-                {contentList}
-                <li className='list-row button-row'>
-                    <button className='update-button'>Update</button>
-                </li>
-            </ul>
-        </div >
-    )
-
+    }
 }
 
+const mapStateToProps = (state, ownProps) => {
+    let initialValues;
+    if (ownProps.type === 'Project') {
+        initialValues = state.projectsReducer.project;
+    }
+     if (ownProps.type === 'User') {
+        initialValues = state.usersReducer.user;
+    } 
 
+    if (ownProps.type === 'Pattern') {
+        initialValues = state.patternsReducer.pattern;
+    } 
+
+    return {
+        initialValues,
+        editProject: state.projectsReducer.editProject,
+        editPattern: state.projectsReducer.editPattern,
+        editUser: state.projectsReducer.editUser,
+    }
+}
+
+Measurements = reduxForm({
+    form: 'measurements',
+    onSubmitFail: (errors, dispatch) =>
+        dispatch(focus('measurements', Object.keys(errors)[0]))
+})(Measurements);
+
+export default connect(mapStateToProps)(Measurements);

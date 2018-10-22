@@ -26,9 +26,10 @@ export const projectsError = error => ({
 });
 
 export const SET_EDITING = 'SET_EDITING';
-export const setEditing = editing => ({
+export const setEditing = (editing, editType) => ({
     type: SET_EDITING,
-    editing
+    editing,
+    editType
 });
 
 export const ADD_PROJECT = 'ADD_PROJECT';
