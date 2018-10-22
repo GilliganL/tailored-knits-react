@@ -26,9 +26,9 @@ export class ProjectDetail extends React.Component {
             <div>
                 <h1>Project Detail</h1>
                 <section className='measurements-container'>
-                    <Measurements type='Pattern' content={this.props.project} style={this.props.pattern.style} />
-                    <Measurements type='Project' content={this.props.project.pattern} style={this.props.pattern.style} />
-                    <Measurements type='User' content={this.props.project.user} />
+                    <Measurements form='patternForm' type='Pattern' content={this.props.project.pattern} initialValues={this.props.pattern} style={this.props.pattern.style} />
+                    <Measurements form='projectForm' type='Project' content={this.props.project} initialValues={this.props.project} style={this.props.pattern.style} />
+                    <Measurements form='userForm' type='User' content={this.props.project.user} initialValues={this.props.project.user} />
                 </section>
             </div>
         )

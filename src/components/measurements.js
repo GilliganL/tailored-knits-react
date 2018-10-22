@@ -109,21 +109,10 @@ export class Measurements extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    let initialValues;
-    if (ownProps.type === 'Project') {
-        initialValues = state.projectsReducer.project;
-    }
-     if (ownProps.type === 'User') {
-        initialValues = state.usersReducer.user;
-    } 
-
-    if (ownProps.type === 'Pattern') {
-        initialValues = state.patternsReducer.pattern;
-    } 
+const mapStateToProps = state => {
 
     return {
-        initialValues,
+        enableReinitialize: true,
         editProject: state.projectsReducer.editProject,
         editPattern: state.projectsReducer.editPattern,
         editUser: state.projectsReducer.editUser,
