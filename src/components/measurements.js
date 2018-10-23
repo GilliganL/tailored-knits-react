@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { required, nonEmpty } from '../validators';
 import { setEditing } from '../actions/projects';
+import { updateProject } from '../actions/projects';
+import { updatePattern } from '../actions/patterns';
+import { updateUser } from '../actions/users';
+import Input from './input';
 
 
 
@@ -16,13 +20,89 @@ export class Measurements extends React.Component {
     }
 
     onSubmit(values) {
-        console.log(values)
-        // return this.props
-        //     .dispatch(updateUser(this.props.id, values))
-        //     .then(() => this.props.dispatch(setEditing(false)))
+        if (this.props.type === 'Project') {
+            console.log(values)
+            return this.props
+                .dispatch(updateProject(values._id, values))
+                .then((res) => console.log(res))
+                .then(() => this.props.dispatch(setEditing(false)))
+                .catch(err => {
+                    const { reason, message, location } = err;
+                    if (reason === 'ValidationError') {
+                        return Promise.reject(
+                            new SubmissionError({
+                                [location]: message
+                            })
+                        );
+                    }
+                    return Promise.reject(
+                        new SubmissionError({
+                            _error: 'Error submitting message'
+                        })
+                    );
+                });
+        }
+
+        if (this.props.type === 'Pattern') {
+            console.log(values)
+            return this.props
+                .dispatch(updatePattern(values.pattern._id, values.pattern))
+                .then((res) => console.log(res))
+                .then(() => this.props.dispatch(setEditing(false)))
+                .catch(err => {
+                    const { reason, message, location } = err;
+                    if (reason === 'ValidationError') {
+                        return Promise.reject(
+                            new SubmissionError({
+                                [location]: message
+                            })
+                        );
+                    }
+                    return Promise.reject(
+                        new SubmissionError({
+                            _error: 'Error submitting message'
+                        })
+                    );
+                });
+        }
+
+        if (this.props.type === 'User') {
+            console.log(values)
+            return this.props
+                .dispatch(updateUser(values.user._user, values))
+                .then((res) => console.log(res))
+                .then(() => this.props.dispatch(setEditing(false)))
+                .catch(err => {
+                    const { reason, message, location } = err;
+                    if (reason === 'ValidationError') {
+                        return Promise.reject(
+                            new SubmissionError({
+                                [location]: message
+                            })
+                        );
+                    }
+                    return Promise.reject(
+                        new SubmissionError({
+                            _error: 'Error submitting message'
+                        })
+                    );
+                });
+        }
     }
 
+
     render() {
+
+        let formError;
+        if (this.props.error) {
+            formError = (
+                <li className='form-row'>
+                    <div className='formError' aria-live='assertive'>
+                        {this.props.error}
+                    </div>
+                </li>
+            );
+        }
 
         let measureKeys = {
             chest: 'Chest',
@@ -81,28 +161,32 @@ export class Measurements extends React.Component {
         } else {
             contentList = Object.keys(measureKeys).map((key, index) =>
                 (
-                    <li key={index} className='list-row'>
-                        <label htmlFor={key} className='label'>{measureKeys[key]}:</label>
+                    <li key={index} className='list-row form-row'>
                         <Field
                             type='text'
-                            id={key}
+                            parse={value => Number(value)}
+                            label={measureKeys[key]}
                             name={key}
-                            component='input'
+                            component={Input}
                         />
                     </li>
                 )
             )
-            updateButton = (<li className='list-row button-row'><button className='update-button'>Update</button></li>)
+            updateButton = (<li className='list-row form-row button-row'>
+                <button className='update-button' id={this.props.type} disabled={this.props.pristine || this.props.submitting}>Update</button>
+            </li>)
+
         }
 
         return (
             <div className={this.props.type + `measurements`}>
                 <h2>{this.props.type} Measurements</h2>
                 <form className='measurements-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                <ul className='list-wrapper'>
-                    {contentList}
-                    {updateButton}
-                </ul>
+                    <ul className='list-wrapper'>
+                        {contentList}
+                        {formError}
+                        {updateButton}
+                    </ul>
                 </form>
             </div >
         )
@@ -112,7 +196,7 @@ export class Measurements extends React.Component {
 const mapStateToProps = state => {
 
     return {
-        enableReinitialize: true,
+        // enableReinitialize: true,
         editProject: state.projectsReducer.editProject,
         editPattern: state.projectsReducer.editPattern,
         editUser: state.projectsReducer.editUser,
@@ -121,8 +205,7 @@ const mapStateToProps = state => {
 
 Measurements = reduxForm({
     form: 'measurements',
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('measurements', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('profileForm', Object.keys(errors)[0]))
 })(Measurements);
 
 export default connect(mapStateToProps)(Measurements);
