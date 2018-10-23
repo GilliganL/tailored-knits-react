@@ -46,7 +46,7 @@ export class Measurements extends React.Component {
         if (this.props.type === 'Pattern') {
             console.log(values)
             return this.props
-                .dispatch(updatePattern(values.pattern._id, values.pattern))
+                .dispatch(updatePattern(values._id, values))
                 .then((res) => console.log(res))
                 .then(() => this.props.dispatch(setEditing(false)))
                 .catch(err => {
@@ -69,7 +69,7 @@ export class Measurements extends React.Component {
         if (this.props.type === 'User') {
             console.log(values)
             return this.props
-                .dispatch(updateUser(values.user._user, values))
+                .dispatch(updateUser(values._id, values))
                 .then((res) => console.log(res))
                 .then(() => this.props.dispatch(setEditing(false)))
                 .catch(err => {
@@ -92,7 +92,7 @@ export class Measurements extends React.Component {
 
 
     render() {
-
+        console.log(this.props.style)
         let formError;
         if (this.props.error) {
             formError = (
@@ -115,10 +115,14 @@ export class Measurements extends React.Component {
 
         if (this.props.style === 'Set In' || this.props.type === 'User') {
             measureKeys.armhole = 'Armhole';
-        } else if (this.props.style === 'Raglan') {
+        }
+        
+        if (this.props.style === 'Raglan') {
             measureKeys.raglanDepth = 'Raglan Depth';
-        } else {
-            measureKeys.yokeDepth = true;
+        }
+        
+        if (this.props.style === 'Yoke') {
+            measureKeys.yokeDepth = 'Yoke Depth';
         }
 
         if (this.props.type !== 'User') {
@@ -196,7 +200,8 @@ export class Measurements extends React.Component {
 const mapStateToProps = state => {
 
     return {
-        // enableReinitialize: true,
+        enableReinitialize: true,
+        style: state.projectsReducer.project.pattern.style,
         editProject: state.projectsReducer.editProject,
         editPattern: state.projectsReducer.editPattern,
         editUser: state.projectsReducer.editUser,
