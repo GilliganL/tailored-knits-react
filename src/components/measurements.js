@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
-import { required, nonEmpty } from '../validators';
+import { required, nonEmpty, length, matches, number } from '../validators';
 import { setEditing } from '../actions/projects';
 import { updateProject } from '../actions/projects';
 import { updatePattern } from '../actions/patterns';
@@ -9,13 +9,15 @@ import { updateUser } from '../actions/users';
 import Input from './input';
 
 
+const measurementLength = length({ min: 0, max: 5 });
+// (needs own validator?)
+const matchesStyle = matches('Set In' || 'Yoke' || 'Raglan');
 
 export class Measurements extends React.Component {
 
     // calculations - update values as form changes. Send info to server onchange? 
 
     setEditing(editing, type) {
-        console.log(editing, type)
         let editType = `edit${type}`
         this.props.dispatch(setEditing(editing, editType));
     }
@@ -107,6 +109,8 @@ export class Measurements extends React.Component {
             wrist: 'Wrist'
         };
 
+        let specKeys = {};
+
         if (this.props.style === 'Set In' || this.props.type === 'User') {
             measureKeys.armhole = 'Armhole';
         }
@@ -123,25 +127,26 @@ export class Measurements extends React.Component {
             measureKeys.ease = 'Ease';
             measureKeys.gaugeRow = 'Gauge Row';
             measureKeys.gaugeStitches = 'Gauge Stitches';
-            measureKeys.needles = 'Needles';
+            specKeys.needles = 'Needles';
         }
 
         let editing;
         if (this.props.type === 'Pattern') {
-            measureKeys.style = 'Style';
+            specKeys.style = 'Style';
             editing = this.props.editPattern;
         }
 
         if (this.props.type === 'Project') {
-            measureKeys.notes = 'Notes';
+            specKeys.notes = 'Notes';
+            specKeys.size = 'Size';
             editing = this.props.editProject;
         }
 
         if (this.props.type === 'User') {
             editing = this.props.editUser;
         }
-//How to only use parse property for number fields? for in loop? 
-    //    let numberArray = ['needles', 'style', 'notes'];
+        //How to only use parse property for number fields? for in loop? 
+        //    let numberArray = ['needles', 'style', 'notes'];
 
         let displayForm;
         let contentList;
@@ -155,6 +160,16 @@ export class Measurements extends React.Component {
                     </li>
                 )
             )
+
+            Object.keys(specKeys).map((key, index) =>
+                contentList = [...contentList, (
+                    <li key={index + 10} className='list-row'>
+                        <label htmlFor={key} className='label'>{specKeys[key]}:</label>
+                        <p className='value'>{this.props.content[key]}</p>
+                    </li>
+                )]
+            )
+
             displayForm =
                 (
                     <ul className='list-wrapper'>
@@ -172,15 +187,31 @@ export class Measurements extends React.Component {
                 (
                     <li key={index} className='list-row form-row'>
                         <Field
-                            type='text'
+                            type='number'
                             parse={value => Number(value)}
                             label={measureKeys[key]}
                             name={key}
                             component={Input}
+                            validate={[measurementLength, number]}
                         />
                     </li>
                 )
             )
+
+            Object.keys(specKeys).map((key, index) =>
+                contentList = [...contentList, (
+                    <li key={index + 10} className='list-row form-row'>
+                        <Field
+                            type='text'
+                            label={specKeys[key]}
+                            name={key}
+                            component={Input}
+                          //  onChange={e => this.props.stitches[key] = e.target.value}
+                        />
+                    </li>
+                )]
+            )
+
             displayForm =
                 (
                     <form className='measurements-form'
