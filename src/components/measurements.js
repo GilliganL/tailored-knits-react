@@ -15,17 +15,16 @@ export class Measurements extends React.Component {
     // calculations - update values as form changes. Send info to server onchange? 
 
     setEditing(editing, type) {
+        console.log(editing, type)
         let editType = `edit${type}`
         this.props.dispatch(setEditing(editing, editType));
     }
 
     onSubmit(values) {
         if (this.props.type === 'Project') {
-            console.log(values)
             return this.props
                 .dispatch(updateProject(values._id, values))
-                .then((res) => console.log(res))
-                .then(() => this.props.dispatch(setEditing(false)))
+                .then(() => this.setEditing(false, 'Project'))
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
@@ -44,11 +43,9 @@ export class Measurements extends React.Component {
         }
 
         if (this.props.type === 'Pattern') {
-            console.log(values)
             return this.props
                 .dispatch(updatePattern(values._id, values))
-                .then((res) => console.log(res))
-                .then(() => this.props.dispatch(setEditing(false)))
+                .then(() => this.setEditing(false, 'Pattern'))
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
@@ -67,11 +64,9 @@ export class Measurements extends React.Component {
         }
 
         if (this.props.type === 'User') {
-            console.log(values)
             return this.props
                 .dispatch(updateUser(values._id, values))
-                .then((res) => console.log(res))
-                .then(() => this.props.dispatch(setEditing(false)))
+                .then(() => this.setEditing(false, 'User'))
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
@@ -92,7 +87,6 @@ export class Measurements extends React.Component {
 
 
     render() {
-        console.log(this.props.style)
         let formError;
         if (this.props.error) {
             formError = (
@@ -116,11 +110,11 @@ export class Measurements extends React.Component {
         if (this.props.style === 'Set In' || this.props.type === 'User') {
             measureKeys.armhole = 'Armhole';
         }
-        
+
         if (this.props.style === 'Raglan') {
             measureKeys.raglanDepth = 'Raglan Depth';
         }
-        
+
         if (this.props.style === 'Yoke') {
             measureKeys.yokeDepth = 'Yoke Depth';
         }
@@ -146,10 +140,13 @@ export class Measurements extends React.Component {
         if (this.props.type === 'User') {
             editing = this.props.editUser;
         }
+//How to only use parse property for number fields? for in loop? 
+    //    let numberArray = ['needles', 'style', 'notes'];
 
+        let displayForm;
         let contentList;
-        let updateButton;
         if (!editing) {
+
             contentList = Object.keys(measureKeys).map((key, index) =>
                 (
                     <li key={index} className='list-row'>
@@ -158,9 +155,17 @@ export class Measurements extends React.Component {
                     </li>
                 )
             )
-            updateButton = (<li className='list-row button-row'>
-                <button type='button' className='edit-button' onClick={() => this.setEditing(true, this.props.type)}>Edit</button>
-            </li>)
+            displayForm =
+                (
+                    <ul className='list-wrapper'>
+                        {contentList}
+                        <li className='list-row button-row'>
+                            <button type='button' id='edit-button' onClick={() => this.setEditing(true, this.props.type)}>
+                                Edit
+                            </button>
+                        </li>
+                    </ul>
+                )
 
         } else {
             contentList = Object.keys(measureKeys).map((key, index) =>
@@ -176,22 +181,25 @@ export class Measurements extends React.Component {
                     </li>
                 )
             )
-            updateButton = (<li className='list-row form-row button-row'>
-                <button className='update-button' id={this.props.type} disabled={this.props.pristine || this.props.submitting}>Update</button>
-            </li>)
-
+            displayForm =
+                (
+                    <form className='measurements-form'
+                        onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+                        <ul className='list-wrapper'>
+                            {contentList}
+                            {formError}
+                            <li className='list-row form-row button-row'>
+                                <button id='update-button' disabled={this.props.pristine || this.props.submitting}>Update</button>
+                            </li>
+                        </ul>
+                    </form>
+                )
         }
 
         return (
             <div className={this.props.type + `measurements`}>
                 <h2>{this.props.type} Measurements</h2>
-                <form className='measurements-form' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <ul className='list-wrapper'>
-                        {contentList}
-                        {formError}
-                        {updateButton}
-                    </ul>
-                </form>
+                {displayForm}
             </div >
         )
     }

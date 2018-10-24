@@ -15,7 +15,6 @@ export class ProjectDetail extends React.Component {
     }
 
     render() {
-        console.log(this.props.project)
         if(!this.props.project) {
             return (
                 <div></div>
