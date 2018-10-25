@@ -220,7 +220,7 @@ export class Measurements extends React.Component {
                             {contentList}
                             {formError}
                             <li className='list-row form-row button-row'>
-                                <button id='update-button' disabled={this.props.pristine || this.props.submitting}>Update</button>
+                                <button id='update-button'>Update</button>
                             </li>
                         </ul>
                     </form>
@@ -239,7 +239,6 @@ export class Measurements extends React.Component {
 const mapStateToProps = state => {
 
     return {
-        enableReinitialize: true,
         style: state.projectsReducer.project.pattern.style,
         editProject: state.projectsReducer.editProject,
         editPattern: state.projectsReducer.editPattern,
@@ -249,6 +248,8 @@ const mapStateToProps = state => {
 
 Measurements = reduxForm({
     form: 'measurements',
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true,
     onSubmitFail: (errors, dispatch) => dispatch(focus('profileForm', Object.keys(errors)[0]))
 })(Measurements);
 
