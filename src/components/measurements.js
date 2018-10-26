@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
-import { required, nonEmpty, length, matches, number } from '../validators';
+import { length, matches, number } from '../validators';
 import { setEditing } from '../actions/projects';
 import { updateProject } from '../actions/projects';
 import { updatePattern } from '../actions/patterns';
 import { updateUser } from '../actions/users';
 import Input from './input';
 
+import './measurements.css';
+
 
 const measurementLength = length({ min: 0, max: 5 });
 // (needs own validator?)
-const matchesStyle = matches('Set In' || 'Yoke' || 'Raglan');
+//const matchesStyle = matches('Set In' || 'Yoke' || 'Raglan');
 
 export class Measurements extends React.Component {
 
@@ -20,6 +22,18 @@ export class Measurements extends React.Component {
     setEditing(editing, type) {
         let editType = `edit${type}`
         this.props.dispatch(setEditing(editing, editType));
+    }
+
+    calculateGauge(measurement) {
+        let rowKeys = ['length', 'armhole', 'raglanDepth', 'yokeDepth'];
+        let stitches = 0;
+        if (rowKeys.find(key => key === measurement)) {
+            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeRow)/2);
+
+        } else {
+            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeStitches)/2);
+        }
+        return stitches;
     }
 
     onSubmit(values) {
@@ -137,19 +151,18 @@ export class Measurements extends React.Component {
         }
 
         if (this.props.type === 'Project') {
-            specKeys.notes = 'Notes';
             specKeys.size = 'Size';
+            specKeys.notes = 'Notes';
             editing = this.props.editProject;
         }
 
         if (this.props.type === 'User') {
             editing = this.props.editUser;
         }
-        //How to only use parse property for number fields? for in loop? 
-        //    let numberArray = ['needles', 'style', 'notes'];
 
         let displayForm;
         let contentList;
+        let stitchesList;
         if (!editing) {
 
             contentList = Object.keys(measureKeys).map((key, index) =>
@@ -173,6 +186,7 @@ export class Measurements extends React.Component {
             displayForm =
                 (
                     <ul className='list-wrapper'>
+                        <h3>Measurements</h3>
                         {contentList}
                         <li className='list-row button-row'>
                             <button type='button' id='edit-button' onClick={() => this.setEditing(true, this.props.type)}>
@@ -181,6 +195,21 @@ export class Measurements extends React.Component {
                         </li>
                     </ul>
                 )
+            if (this.props.type !== 'User') {
+                let toCalculate = Object.keys(measureKeys).filter(key => !key.includes('gauge') && key !== 'ease')
+                stitchesList = toCalculate.map((key, index) =>
+                    (
+                        <li key={index} className='list-row'>
+                            <p className='value'>{this.calculateGauge(key)}</p>
+                        </li>
+                    )
+                )
+                stitchesList = <ul className='list-wrapper stitches-list'>
+                    <h3>Stitches</h3>
+                    {stitchesList}
+                </ul>
+            }
+
 
         } else {
             contentList = Object.keys(measureKeys).map((key, index) =>
@@ -206,7 +235,7 @@ export class Measurements extends React.Component {
                             label={specKeys[key]}
                             name={key}
                             component={Input}
-                          //  onChange={e => this.props.stitches[key] = e.target.value}
+                        //  onChange={e => this.props.stitches[key] = e.target.value}
                         />
                     </li>
                 )]
@@ -217,6 +246,7 @@ export class Measurements extends React.Component {
                     <form className='measurements-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                         <ul className='list-wrapper'>
+                            <h3>Measurements</h3>
                             {contentList}
                             {formError}
                             <li className='list-row form-row button-row'>
@@ -228,9 +258,12 @@ export class Measurements extends React.Component {
         }
 
         return (
-            <div className={this.props.type + `measurements`}>
-                <h2>{this.props.type} Measurements</h2>
-                {displayForm}
+            <div className={this.props.type.toLowerCase() + `-measurements`}>
+                <h2>{this.props.type}</h2>
+                <div className='list-container'>
+                    {displayForm}
+                    {stitchesList}
+                </div>
             </div >
         )
     }
