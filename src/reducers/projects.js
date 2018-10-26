@@ -2,6 +2,7 @@ import {
     PROJECTS_REQUEST,
     PROJECTS_SUCCESS,
     PROJECT_SUCCESS,
+    UPDATE_SUCCESS,
     PROJECTS_ERROR,
     SET_EDITING,
     ADD_PROJECT,
@@ -57,6 +58,11 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === REMOVE_PROJECT) {
         return Object.assign({}, state, {
             message: action.message,
+            loading: false,
+            error: null
+        });
+    } else if (action.type === UPDATE_SUCCESS) {
+        return Object.assign({}, state, {
             loading: false,
             error: null
         });

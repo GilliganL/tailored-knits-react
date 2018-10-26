@@ -51,7 +51,7 @@ export class ProfileForm extends React.Component {
                             </li>
                             <li className='form-row'>
                                 <label htmlFor='email'>Email</label>
-                                <Field type='text' id='email' name='email' component='input' validate={[required, nonEmpty, email]} />
+                                <Field type='email' id='email' name='email' component='input' validate={[required, nonEmpty, email]} />
                             </li>
                             {formError}
                             <li className='form-row'>

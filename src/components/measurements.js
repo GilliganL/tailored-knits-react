@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
-import { length, matches, number } from '../validators';
+import { length, number } from '../validators';
 import { setEditing } from '../actions/projects';
-import { updateProject } from '../actions/projects';
+import { updateProject, fetchProjectById } from '../actions/projects';
 import { updatePattern } from '../actions/patterns';
 import { updateUser } from '../actions/users';
 import Input from './input';
@@ -12,8 +12,6 @@ import './measurements.css';
 
 
 const measurementLength = length({ min: 0, max: 5 });
-// (needs own validator?)
-//const matchesStyle = matches('Set In' || 'Yoke' || 'Raglan');
 
 export class Measurements extends React.Component {
 
@@ -28,10 +26,13 @@ export class Measurements extends React.Component {
         let rowKeys = ['length', 'armhole', 'raglanDepth', 'yokeDepth'];
         let stitches = 0;
         if (rowKeys.find(key => key === measurement)) {
-            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeRow)/2);
+            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeRow) / 2);
 
         } else {
-            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeStitches)/2);
+            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeStitches) / 2);
+        }
+        if (!stitches) {
+            stitches = '';
         }
         return stitches;
     }
@@ -40,6 +41,7 @@ export class Measurements extends React.Component {
         if (this.props.type === 'Project') {
             return this.props
                 .dispatch(updateProject(values._id, values))
+                .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
                 .then(() => this.setEditing(false, 'Project'))
                 .catch(err => {
                     const { reason, message, location } = err;
@@ -61,6 +63,7 @@ export class Measurements extends React.Component {
         if (this.props.type === 'Pattern') {
             return this.props
                 .dispatch(updatePattern(values._id, values))
+                .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
                 .then(() => this.setEditing(false, 'Pattern'))
                 .catch(err => {
                     const { reason, message, location } = err;
@@ -82,6 +85,7 @@ export class Measurements extends React.Component {
         if (this.props.type === 'User') {
             return this.props
                 .dispatch(updateUser(values._id, values))
+                .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
                 .then(() => this.setEditing(false, 'User'))
                 .catch(err => {
                     const { reason, message, location } = err;
@@ -101,6 +105,7 @@ export class Measurements extends React.Component {
         }
     }
 
+        
 
     render() {
         let formError;
@@ -124,6 +129,8 @@ export class Measurements extends React.Component {
         };
 
         let specKeys = {};
+        let notes;
+        let style;
 
         if (this.props.style === 'Set In' || this.props.type === 'User') {
             measureKeys.armhole = 'Armhole';
@@ -146,13 +153,13 @@ export class Measurements extends React.Component {
 
         let editing;
         if (this.props.type === 'Pattern') {
-            specKeys.style = 'Style';
+            style = 'Style';
             editing = this.props.editPattern;
         }
 
         if (this.props.type === 'Project') {
             specKeys.size = 'Size';
-            specKeys.notes = 'Notes';
+            notes = 'Notes';
             editing = this.props.editProject;
         }
 
@@ -182,6 +189,20 @@ export class Measurements extends React.Component {
                     </li>
                 )]
             )
+
+            contentList = [...contentList,
+            (
+                <li key={20} className='list-row'>
+                    <label htmlFor='style' className='label'>Style:</label>
+                    <p className='value'>{this.props.content['style']}</p>
+                </li>
+            ),
+            (
+                <li key={21} className='list-row'>
+                    <label htmlFor='notes' className='label'>Notes:</label>
+                    <p className='value'>{this.props.content['notes']}</p>
+                </li>
+            )];
 
             displayForm =
                 (
@@ -241,6 +262,34 @@ export class Measurements extends React.Component {
                 )]
             )
 
+            contentList = [...contentList,
+                (
+                    <li key={20} className='list-row form-row'>
+                        <Field
+                            element='select'
+                            label='Style'
+                            name='style'
+                            component={Input}
+                        //  onChange={e => this.props.stitches[key] = e.target.value}
+                        >
+                        <option />
+                        <option value='Set In'>Set In</option>
+                        <option value='Raglan'>Raglan</option>
+                        <option value='Yoke'>Yoke</option></Field>
+                    </li>
+                ),
+                (
+                    <li key={21} className='list-row form-row'>
+                        <Field
+                            element='textarea'
+                            label='Notes'
+                            name='notes'
+                            component={Input}
+                        //  onChange={e => this.props.stitches[key] = e.target.value}
+                        />
+                    </li>
+                )];
+
             displayForm =
                 (
                     <form className='measurements-form'
@@ -281,8 +330,6 @@ const mapStateToProps = state => {
 
 Measurements = reduxForm({
     form: 'measurements',
-    enableReinitialize: true,
-    keepDirtyOnReinitialize: true,
     onSubmitFail: (errors, dispatch) => dispatch(focus('profileForm', Object.keys(errors)[0]))
 })(Measurements);
 

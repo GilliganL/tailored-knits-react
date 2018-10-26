@@ -19,6 +19,11 @@ export const projectSuccess = project => ({
     project
 });
 
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const updateSuccess = () => ({
+    type: UPDATE_SUCCESS
+});
+
 export const PROJECTS_ERROR = 'PROJECTS_ERROR';
 export const projectsError = error => ({
     type: PROJECTS_ERROR,
@@ -115,7 +120,7 @@ export const updateProject = (id, values) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((project) => dispatch(projectSuccess(project)))
+        .then(() => dispatch(updateSuccess()))
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {
