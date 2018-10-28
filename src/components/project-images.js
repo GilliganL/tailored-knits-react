@@ -1,20 +1,13 @@
 import React from 'react';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
-import { } from '../validators';
-import { setEditing } from '../actions/projects';
-import { updateProject, fetchProjectById } from '../actions/projects';
+import { fileType } from '../validators';
+import { handleImage, updateProject, fetchProjectById } from '../actions/projects';
 import Input from './input';
-
-
 
 export class ProjectImages extends React.Component {
 
-    onChange(value) {
-        console.log(value)
-    }
-
-    onSubmit(value) {
-        console.log(value)
+    onSubmit(event) {
+        console.log(event.upload[0])
     }
 
     render() {
@@ -29,43 +22,47 @@ export class ProjectImages extends React.Component {
             );
         }
 
-        let images = Object.keys(this.props.images).map((image, index) =>
+        let images = this.props.images.map((image, index) =>
             (
-                <li key={index} className='list-row'>
-                    <img className='project-image' alt='Knit sweater'>{image}</img>
-                </li>
+                <img className='project-image' alt='Knit sweater'>{image}</img>
             )
         )
 
+        const adaptFileEventToValue = delegate => e => {
+            this.props.dispatch(handleImage(e.target.files[0]));
+            return delegate(e.target.files[0])
+        }
+
+        const UploadFile = ({ input: {value: omitValue, onChange, ...inputProps }, meta: omitMeta, ...props }) => (
+            <input type='file' onChange={adaptFileEventToValue(onChange)} {...inputProps} {...props} />
+        );
+
         return (
-            <div className={this.props.type.toLowerCase() + `-measurements`}>
-                <h2>{this.props.type}</h2>
-                <div className='list-container'>
+            <div>
+                <div className='images-container'>
                     {images}
-                    <fieldset className='image-form-container'>
-                        <legend>Photo Upload</legend>
-                        <form className='image-form'
-                            onSubmit={this.props.handleSubmit(value => this.onSubmit(value))}>
-                            <ul className='form-wrapper' role='none'>
-                                <li className='list-row form-row'>
-                                    <Field
-                                        element='file'
-                                        accept='.jpg, .png, .jpeg'
-                                        label='Upload A File'
-                                        name='upload'
-                                        id='upload'
-                                        component={Input}
-                                        onChange={value => this.onChange(value)}
-                                    />
-                                </li>
-                                {formError}
-                                <li className='form-row button-row'>
-                                    <button id='image-button'>Upload</button>
-                                </li>
-                            </ul>
-                        </form>
-                    </fieldset>
                 </div>
+                <fieldset className='image-form-container'>
+                    <legend>Photo Upload</legend>
+                    <form className='image-form'
+                       onSubmit={this.props.handleSubmit(value => this.onSubmit(value))}
+                        >
+                        <ul className='form-wrapper' role='none'>
+                            <li className='list-row form-row'>
+                                <Field
+                                    accept='.jpg, .png, .jpeg'
+                                    name='upload'
+                                    id='upload'
+                                    component={UploadFile}
+                                />
+                            </li>
+                            {formError}
+                            <li className='form-row button-row'>
+                                <button id='image-button'>Upload</button>
+                            </li>
+                        </ul>
+                    </form>
+                </fieldset>
             </div >
         )
     }

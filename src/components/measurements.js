@@ -105,7 +105,7 @@ export class Measurements extends React.Component {
         }
     }
 
-        
+
 
     render() {
         let formError;
@@ -150,6 +150,9 @@ export class Measurements extends React.Component {
         }
 
         let editing;
+        let style;
+        let notes;
+
         if (this.props.type === 'Pattern') {
             style = 'Style';
             editing = this.props.editPattern;
@@ -188,19 +191,25 @@ export class Measurements extends React.Component {
                 )]
             )
 
-            contentList = [...contentList,
-            (
-                <li key={20} className='list-row'>
-                    <label htmlFor='style' className='label'>Style:</label>
-                    <p className='value'>{this.props.content['style']}</p>
-                </li>
-            ),
-            (
-                <li key={21} className='list-row'>
-                    <label htmlFor='notes' className='label'>Notes:</label>
-                    <p className='value'>{this.props.content['notes']}</p>
-                </li>
-            )];
+            if (style) {
+                contentList = [...contentList,
+                (
+                    <li key={20} className='list-row'>
+                        <label htmlFor='style' className='label'>Style:</label>
+                        <p className='value'>{this.props.content['style']}</p>
+                    </li>
+                )];
+            }
+
+            if (notes) {
+                contentList = [...contentList,
+                (
+                    <li key={21} className='list-row'>
+                        <label htmlFor='notes' className='label'>Notes:</label>
+                        <p className='value'>{this.props.content['notes']}</p>
+                    </li>
+                )];
+            }
 
             displayForm =
                 (
@@ -214,6 +223,7 @@ export class Measurements extends React.Component {
                         </li>
                     </ul>
                 )
+
             if (this.props.type !== 'User') {
                 let toCalculate = Object.keys(measureKeys).filter(key => !key.includes('gauge') && key !== 'ease')
                 stitchesList = toCalculate.map((key, index) =>
@@ -261,32 +271,32 @@ export class Measurements extends React.Component {
             )
 
             contentList = [...contentList,
-                (
-                    <li key={20} className='list-row form-row'>
-                        <Field
-                            element='select'
-                            label='Style'
-                            name='style'
-                            component={Input}
-                        //  onChange={e => this.props.stitches[key] = e.target.value}
-                        >
+            (
+                <li key={20} className='list-row form-row'>
+                    <Field
+                        element='select'
+                        label='Style'
+                        name='style'
+                        component={Input}
+                    //  onChange={e => this.props.stitches[key] = e.target.value}
+                    >
                         <option />
                         <option value='Set In'>Set In</option>
                         <option value='Raglan'>Raglan</option>
                         <option value='Yoke'>Yoke</option></Field>
-                    </li>
-                ),
-                (
-                    <li key={21} className='list-row form-row'>
-                        <Field
-                            element='textarea'
-                            label='Notes'
-                            name='notes'
-                            component={Input}
-                        //  onChange={e => this.props.stitches[key] = e.target.value}
-                        />
-                    </li>
-                )];
+                </li>
+            ),
+            (
+                <li key={21} className='list-row form-row'>
+                    <Field
+                        element='textarea'
+                        label='Notes'
+                        name='notes'
+                        component={Input}
+                    //  onChange={e => this.props.stitches[key] = e.target.value}
+                    />
+                </li>
+            )];
 
             displayForm =
                 (

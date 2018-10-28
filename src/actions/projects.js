@@ -49,6 +49,23 @@ export const removeProject = message => ({
     message
 });
 
+export const IMAGES_REQUEST = 'IMAGES_REQUEST';
+export const imagesRequest = () => ({
+    type: IMAGES_REQUEST
+});
+
+export const IMAGES_SUCCESS = 'IMAGES_SUCCESS';
+export const imagesSuccess = images => ({
+    type: IMAGES_SUCCESS,
+    images
+});
+
+export const IMAGES_ERROR = 'IMAGES_ERROR';
+export const imagesError = error => ({
+    type: IMAGES_ERROR,
+    error
+});
+
 export const fetchProjects = (username) => (dispatch, getState) => {
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;
@@ -76,6 +93,7 @@ export const fetchProjectById = id => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((project) => dispatch(projectSuccess(project)))
+        .then((project) => dispatch(imagesSuccess(project.images)))
         .catch(err => dispatch(projectsError(err)))
 };
 
@@ -149,3 +167,85 @@ export const deleteProject = id => (dispatch, getState) => {
         .catch(err => dispatch(projectsError(err)))
 };
 
+export const handleImage = file => dispatch => {
+    dispatch(imagesRequest());
+
+    const fileType = file.type;
+    const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (validFileTypes.find(i => i === fileType) === undefined) {
+        let err = {
+            reason: 'ValidationError',
+            message: 'Please choose a JPEG, PNG or GIF file',
+            location: 'Image upload'
+        }
+        throw err;
+    }
+
+    if (file == null) {
+        let err = {
+            reason: 'ValidationError',
+            message: 'No file selected',
+            location: 'Image upload'
+        }
+        throw err;
+    }
+
+    return this.props
+        .dispatch(file => getSignedRequest(file))
+        .then((file, signedRequest, url) => dispatch(uploadFile(file, signedRequest, url)))
+        .then(res => dispatch(imagesSuccess(res)))
+        .catch(err => {
+            const { reason, message, location } = err;
+            if (reason === 'ValidationError') {
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+            dispatch(imagesError(err))
+        });
+}
+
+const getSignedRequest = file => (dispatch, getState) => {
+    const xhr = new XMLHttpRequest();
+    const authToken = getState().authReducer.authToken;
+    xhr.open('GET', `/api/projects/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`);
+    xhr.setRequestHeader('authorization', 'bearer ' + authToken);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                return (file, response.signedRequest, response.url);
+            } else {
+                let err = {
+                    reason: 'ValidationError',
+                    message: 'Something went wrong',
+                    location: 'Getting signed request'
+                }
+                throw err;   
+            }
+        }
+    };
+    xhr.send();
+}
+
+const uploadFile = (file, signedRequest, url) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', signedRequest);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                   return url;
+                } else {
+                    let err = {
+                        reason: 'ValidationError',
+                        message: 'Something went wrong',
+                        location: 'File upload'
+                    }
+                    throw err;
+                }
+            }
+        };
+        xhr.send(file);
+    }

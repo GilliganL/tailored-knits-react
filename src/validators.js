@@ -1,10 +1,10 @@
 
 export const required = value => (value ? undefined : 'Required');
 
-export const nonEmpty = value => 
+export const nonEmpty = value =>
     value.trim() !== '' ? undefined : 'Cannot be empty';
 
-export const isTrimmed = value => 
+export const isTrimmed = value =>
     value.trim() === value ? undefined : 'Cannot start or end with spaces';
 
 export const length = length => value => {
@@ -19,14 +19,26 @@ export const length = length => value => {
     }
 };
 
-export const matches = field => (value, allValues) => 
+export const matches = field => (value, allValues) =>
     field in allValues && value.trim() === allValues[field].trim() ?
         undefined :
         'Does not match';
-    
+
 export const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
-    : undefined;
+    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+        ? 'Invalid email address'
+        : undefined;
 
 export const number = value => value && isNaN(value) ? 'Must be a number' : undefined;
+
+export const fileType = file => {
+    console.log(file)
+    if (file === null) {
+        return 'No file selected'
+    }
+
+    const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (validFileTypes.find(i => i === file.type) === undefined) {
+        return 'Please choose a JPEG, PNG or GIF file'
+    }
+}

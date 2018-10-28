@@ -1,10 +1,11 @@
 import React from 'react';
-import Measurements from './measurements';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 
 import { fetchProjectById, deleteProject } from '../actions/projects';
+import Measurements from './measurements';
+import ProjectImages from './project-images';
 
 import './project-detail.css';
 
@@ -32,7 +33,10 @@ export class ProjectDetail extends React.Component {
         return (
             <div>
                 <h1>Project Detail</h1>
-                <section className='measurements-container'>
+                <section className='images-section'>
+                    <ProjectImages images={this.props.project.images} />
+                </section>
+                <section className='measurements-section'>
                     <Measurements form='patternForm' type='Pattern' content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />
                     <Measurements form='projectForm' type='Project' content={this.props.project} initialValues={this.props.project} id={this.props.match.params.projectId} />
                     <Measurements form='userForm' type='User' content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
