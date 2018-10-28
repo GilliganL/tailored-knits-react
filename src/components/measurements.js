@@ -129,8 +129,6 @@ export class Measurements extends React.Component {
         };
 
         let specKeys = {};
-        let notes;
-        let style;
 
         if (this.props.style === 'Set In' || this.props.type === 'User') {
             measureKeys.armhole = 'Armhole';
@@ -330,7 +328,7 @@ const mapStateToProps = state => {
 
 Measurements = reduxForm({
     form: 'measurements',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('profileForm', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('measurements', Object.keys(errors)[0]))
 })(Measurements);
 
 export default connect(mapStateToProps)(Measurements);
