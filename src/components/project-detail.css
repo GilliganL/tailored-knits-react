@@ -4,7 +4,7 @@
 }
 
 .measurements-section {
-    display: content;
+    display: contents;
 }
 
 .list-row {
@@ -25,4 +25,10 @@
 .value {
     display: inline-block;
     margin: 0;
+}
+
+#delete-button {
+    grid-column: 1 / span 2;
+    width: 50%;
+    margin: 0 auto;
 }

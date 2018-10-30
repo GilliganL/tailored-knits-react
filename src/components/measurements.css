@@ -1,6 +1,5 @@
-.project-measurements,
-.pattern-measurements {
- 
+.user-measurements {
+ grid-column: 1 / span 2;
 }
 
 

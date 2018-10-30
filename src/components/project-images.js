@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
+import { reduxForm, Field, focus , SubmissionError } from 'redux-form';
 import { handleImage, updateProject, fetchProjectById } from '../actions/projects';
 
 import './project-images.css';
@@ -8,13 +8,28 @@ export class ProjectImages extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        console.log(this.props.images)
-        console.log(this.props.image)
         const imageObject = {
             images: [...this.props.images, this.props.image]
         }
         if (this.props.image) {
-            this.props.dispatch(updateProject(this.props.id, imageObject))
+            return this.props
+                .dispatch(updateProject(this.props.id, imageObject))
+                .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
+                .catch(err => {
+                    const { reason, message, location } = err;
+                    if (reason === 'ValidationError') {
+                        return Promise.reject(
+                            new SubmissionError({
+                                [location]: message
+                            })
+                        );
+                    }
+                    return Promise.reject(
+                        new SubmissionError({
+                            _error: 'Error submitting message'
+                        })
+                    );
+                });
         }
     }
 
@@ -42,7 +57,7 @@ export class ProjectImages extends React.Component {
             imagePreview = <img src={this.props.image} className='preview-image' alt='Knit sweater' />
         }
 
-       // const myObject = this;
+        // const myObject = this;
         const adaptFileEventToValue = delegate => e => {
             this.props.dispatch(handleImage(e.target.files[0]));
             return delegate(e.target.files[0])

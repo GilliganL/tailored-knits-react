@@ -41,7 +41,7 @@ export class ProjectDetail extends React.Component {
                     <Measurements form='projectForm' type='Project' content={this.props.project} initialValues={this.props.project} id={this.props.match.params.projectId} />
                     <Measurements form='userForm' type='User' content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
                 </section>
-                <button type='button' onClick={() => this.onClick()}>Delete</button>
+                <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>
             </div>
         )
     }
