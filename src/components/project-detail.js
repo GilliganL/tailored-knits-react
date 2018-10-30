@@ -34,7 +34,7 @@ export class ProjectDetail extends React.Component {
             <div className='project-detail'>
                 <h1>Project Detail</h1>
                 <section className='images-section'>
-                    <ProjectImages images={this.props.project.images} id={this.props.match.params.projectId} />
+                    <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
                 </section>
                 <section className='measurements-section'>
                     <Measurements form='patternForm' type='Pattern' content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />
@@ -49,10 +49,18 @@ export class ProjectDetail extends React.Component {
 
 //can't do pattern.style here
 const mapStateToProps = state => {
-    const pattern = state.projectsReducer.project.pattern
+    console.log(state.projectsReducer)
+    let image;
+    if(state.projectsReducer.image) {
+        image = state.projectsReducer.image
+    }
+    const pattern = state.projectsReducer.project.pattern;
+    const images = state.projectsReducer.project.images;
     return {
         project: state.projectsReducer.project,
-        pattern
+        pattern,
+        images,
+        image
     }
 }
 

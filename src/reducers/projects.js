@@ -21,7 +21,8 @@ const initialState = {
     editUser: false,
     loading: false, 
     message: '',
-    error: null
+    error: null,
+    image: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -66,6 +67,7 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === UPDATE_SUCCESS) {
         return Object.assign({}, state, {
+            image: '',
             loading: false,
             error: null
         });
@@ -76,7 +78,7 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === IMAGES_SUCCESS) {
         return Object.assign({}, state, {
-            images: [...state.project.images, action.image],
+            image: action.image,
             loading: false,
             error: null
         });

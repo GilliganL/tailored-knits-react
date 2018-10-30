@@ -55,9 +55,9 @@ export const imagesRequest = () => ({
 });
 
 export const IMAGES_SUCCESS = 'IMAGES_SUCCESS';
-export const imagesSuccess = images => ({
+export const imagesSuccess = image => ({
     type: IMAGES_SUCCESS,
-    images
+    image
 });
 
 export const IMAGES_ERROR = 'IMAGES_ERROR';
@@ -126,6 +126,7 @@ export const createProject = values => (dispatch, getState) => {
 }
 
 export const updateProject = (id, values) => (dispatch, getState) => {
+    console.log(id, values)
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects/${id}`, {
@@ -167,7 +168,7 @@ export const deleteProject = id => (dispatch, getState) => {
         .catch(err => dispatch(projectsError(err)))
 };
 
-export const handleImage = (file, id, imagesArray) => (dispatch, getState) => {
+export const handleImage = file => (dispatch, getState) => {
     const fileType = file.type;
     const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (validFileTypes.find(i => i === fileType) === undefined) {
@@ -191,12 +192,7 @@ export const handleImage = (file, id, imagesArray) => (dispatch, getState) => {
 
     return getSignedRequest(file, authToken)
         .then((response) => uploadFile(response))
-        .then((url) => {
-            const update = {
-                images: [...imagesArray, url]
-            }
-            return dispatch(updateProject(id, update))
-        })
+        .then((url) => dispatch(imagesSuccess(url)))
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {
