@@ -167,9 +167,7 @@ export const deleteProject = id => (dispatch, getState) => {
         .catch(err => dispatch(projectsError(err)))
 };
 
-export const handleImage = file => dispatch => {
-    dispatch(imagesRequest());
-
+export const handleImage = (file, id, imagesArray) => (dispatch, getState) => {
     const fileType = file.type;
     const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (validFileTypes.find(i => i === fileType) === undefined) {
@@ -189,11 +187,16 @@ export const handleImage = file => dispatch => {
         }
         throw err;
     }
+    const authToken = getState().authReducer.authToken;
 
-    return this.props
-        .dispatch(file => getSignedRequest(file))
-        .then((file, signedRequest, url) => dispatch(uploadFile(file, signedRequest, url)))
-        .then(res => dispatch(imagesSuccess(res)))
+    return getSignedRequest(file, authToken)
+        .then((response) => uploadFile(response))
+        .then((url) => {
+            const update = {
+                images: [...imagesArray, url]
+            }
+            return dispatch(updateProject(id, update))
+        })
         .catch(err => {
             const { reason, message, location } = err;
             if (reason === 'ValidationError') {
@@ -203,49 +206,65 @@ export const handleImage = file => dispatch => {
                     })
                 );
             }
-            dispatch(imagesError(err))
         });
 }
 
-const getSignedRequest = file => (dispatch, getState) => {
+
+export const getSignedRequest = (file, authToken) => {
+ 
     const xhr = new XMLHttpRequest();
-    const authToken = getState().authReducer.authToken;
-    xhr.open('GET', `/api/projects/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`);
-    xhr.setRequestHeader('authorization', 'bearer ' + authToken);
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                return (file, response.signedRequest, response.url);
-            } else {
-                let err = {
-                    reason: 'ValidationError',
-                    message: 'Something went wrong',
-                    location: 'Getting signed request'
+    return new Promise((resolve, reject) => {
+        xhr.open('GET', `${API_BASE_URL}/projects/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`);
+        xhr.setRequestHeader('authorization', 'bearer ' + authToken);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const responseObject = {
+                        file,
+                        signedRequest: response.signedRequest,
+                        url: response.url
+                    }
+                    resolve(responseObject);
+                } else {
+                    let err = {
+                        reason: 'ValidationError',
+                        message: 'Something went wrong',
+                        location: 'Getting signed request'
+                    }
+                    reject(err);
                 }
-                throw err;   
             }
-        }
-    };
-    xhr.send();
+        };
+        xhr.send();
+    });
 }
 
-const uploadFile = (file, signedRequest, url) => {
-        const xhr = new XMLHttpRequest();
+export const uploadFile = (requestObject) => {
+
+    const {
+        file,
+        signedRequest,
+        url
+    } = requestObject;
+
+    const xhr = new XMLHttpRequest();
+    return new Promise((resolve, reject) => {
         xhr.open('PUT', signedRequest);
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                   return url;
+                    resolve(url)
                 } else {
                     let err = {
                         reason: 'ValidationError',
                         message: 'Something went wrong',
                         location: 'File upload'
                     }
-                    throw err;
+                    reject(err);
                 }
             }
         };
         xhr.send(file);
-    }
+    });
+}

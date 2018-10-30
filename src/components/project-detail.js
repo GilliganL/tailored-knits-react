@@ -31,10 +31,10 @@ export class ProjectDetail extends React.Component {
         }
 
         return (
-            <div>
+            <div className='project-detail'>
                 <h1>Project Detail</h1>
                 <section className='images-section'>
-                    <ProjectImages images={this.props.project.images} />
+                    <ProjectImages images={this.props.project.images} id={this.props.match.params.projectId} />
                 </section>
                 <section className='measurements-section'>
                     <Measurements form='patternForm' type='Pattern' content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />

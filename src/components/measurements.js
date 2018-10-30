@@ -134,7 +134,7 @@ export class Measurements extends React.Component {
             measureKeys.armhole = 'Armhole';
         }
 
-        if (this.props.style === 'Raglan') {
+        if (this.props.style === 'Raglan' || this.props.style === 'Yoke') {
             measureKeys.raglanDepth = 'Raglan Depth';
         }
 
@@ -171,6 +171,7 @@ export class Measurements extends React.Component {
         let displayForm;
         let contentList;
         let stitchesList;
+
         if (!editing) {
 
             contentList = Object.keys(measureKeys).map((key, index) =>
@@ -233,10 +234,11 @@ export class Measurements extends React.Component {
                         </li>
                     )
                 )
-                stitchesList = <ul className='list-wrapper stitches-list'>
-                    <h3>Stitches</h3>
-                    {stitchesList}
-                </ul>
+                stitchesList =
+                    <ul className='list-wrapper stitches-list'>
+                        <h3>Stitches</h3>
+                        {stitchesList}
+                    </ul>
             }
 
 
@@ -302,7 +304,7 @@ export class Measurements extends React.Component {
                 (
                     <form className='measurements-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                        <ul className='list-wrapper'>
+                        <ul className='form-wrapper'>
                             <h3>Measurements</h3>
                             {contentList}
                             {formError}

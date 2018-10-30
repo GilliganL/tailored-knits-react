@@ -2,13 +2,15 @@ import React from 'react';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { fileType } from '../validators';
 import { handleImage, updateProject, fetchProjectById } from '../actions/projects';
-import Input from './input';
+
+import './project-images.css';
 
 export class ProjectImages extends React.Component {
 
     onSubmit(event) {
         console.log(event.upload[0])
     }
+
 
     render() {
         let formError;
@@ -24,16 +26,16 @@ export class ProjectImages extends React.Component {
 
         let images = this.props.images.map((image, index) =>
             (
-                <img className='project-image' alt='Knit sweater'>{image}</img>
+                <img src={image} className='project-image' alt='Knit sweater' key={index} />
             )
         )
-
+        const myObject = this;
         const adaptFileEventToValue = delegate => e => {
-            this.props.dispatch(handleImage(e.target.files[0]));
+            myObject.props.dispatch(handleImage(e.target.files[0], myObject.props.id, myObject.props.images));
             return delegate(e.target.files[0])
         }
 
-        const UploadFile = ({ input: {value: omitValue, onChange, ...inputProps }, meta: omitMeta, ...props }) => (
+        const UploadImage = ({ input: { value: omitValue, onChange, ...inputProps }, meta: omitMeta, ...props }) => (
             <input type='file' onChange={adaptFileEventToValue(onChange)} {...inputProps} {...props} />
         );
 
@@ -42,18 +44,18 @@ export class ProjectImages extends React.Component {
                 <div className='images-container'>
                     {images}
                 </div>
-                <fieldset className='image-form-container'>
+                <fieldset className='images-form-container'>
                     <legend>Photo Upload</legend>
                     <form className='image-form'
-                       onSubmit={this.props.handleSubmit(value => this.onSubmit(value))}
-                        >
+                        onSubmit={this.props.handleSubmit(value => this.onSubmit(value))}
+                    >
                         <ul className='form-wrapper' role='none'>
                             <li className='list-row form-row'>
                                 <Field
                                     accept='.jpg, .png, .jpeg'
                                     name='upload'
                                     id='upload'
-                                    component={UploadFile}
+                                    component={UploadImage}
                                 />
                             </li>
                             {formError}

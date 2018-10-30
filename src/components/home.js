@@ -9,6 +9,8 @@ import ProjectDetail from './project-detail';
 import Profile from './profile';
 import Footer from './footer';
 
+import './home.css';
+
 export class Home extends React.Component {
 
     componentDidUpdate(prevProps) {
