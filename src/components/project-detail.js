@@ -31,18 +31,16 @@ export class ProjectDetail extends React.Component {
         }
 
         return (
-            <div className='project-detail'>
-                <h1>Project Detail</h1>
-                <section className='images-section'>
-                    <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
-                </section>
+            <main role='main'>
+                <h2 className='page-title'>Project Detail</h2>
+                <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
                 <section className='measurements-section'>
                     <Measurements form='patternForm' type='Pattern' content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />
                     <Measurements form='projectForm' type='Project' content={this.props.project} initialValues={this.props.project} id={this.props.match.params.projectId} />
                     <Measurements form='userForm' type='User' content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
                 </section>
                 <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>
-            </div>
+            </main>
         )
     }
 }

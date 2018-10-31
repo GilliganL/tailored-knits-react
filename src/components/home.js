@@ -43,14 +43,14 @@ export class Home extends React.Component {
     render() {
         return (
             <Router>
-                <div>
+                <div className='app'>
                     <Header />
-                    <Switch>
-                        <Route exact path='/projects' component={Projects} />
-                        <Route exact path='/profile' component={Profile}  />
-                        <Route path='/projects/:projectId' component={ProjectDetail}  />
-                        <Route path='/' component={Landing} />
-                    </Switch>
+                        <Switch>
+                            <Route exact path='/projects' component={Projects} />
+                            <Route exact path='/profile' component={Profile} />
+                            <Route path='/projects/:projectId' component={ProjectDetail} />
+                            <Route path='/' component={Landing} />
+                        </Switch>
                     <Footer />
                 </div>
             </Router>

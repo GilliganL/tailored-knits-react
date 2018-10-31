@@ -10,12 +10,9 @@ import Input from './input';
 
 import './measurements.css';
 
-
 const measurementLength = length({ min: 0, max: 5 });
 
 export class Measurements extends React.Component {
-
-    // calculations - update values as form changes. Send info to server onchange? 
 
     setEditing(editing, type) {
         let editType = `edit${type}`
@@ -215,7 +212,7 @@ export class Measurements extends React.Component {
             displayForm =
                 (
                     <ul className='list-wrapper'>
-                        <h3>Measurements</h3>
+                        <h4 className='list-title'>Measurements</h4>
                         {contentList}
                         <li className='list-row button-row'>
                             <button type='button' id='edit-button' onClick={() => this.setEditing(true, this.props.type)}>
@@ -236,7 +233,7 @@ export class Measurements extends React.Component {
                 )
                 stitchesList =
                     <ul className='list-wrapper stitches-list'>
-                        <h3>Stitches</h3>
+                        <h4>Stitches</h4>
                         {stitchesList}
                     </ul>
             }
@@ -317,12 +314,10 @@ export class Measurements extends React.Component {
         }
 
         return (
-            <div className={this.props.type.toLowerCase() + `-measurements`}>
-                <h2>{this.props.type}</h2>
-                <div className='list-container'>
-                    {displayForm}
-                    {stitchesList}
-                </div>
+            <div className={this.props.type.toLowerCase() + `-measurements measurements-div`}>
+                <h3 className='measurements-title'>{this.props.type}</h3>
+                {displayForm}
+                {stitchesList}
             </div >
         )
     }

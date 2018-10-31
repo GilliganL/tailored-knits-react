@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, focus , SubmissionError } from 'redux-form';
+import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { handleImage, updateProject, fetchProjectById } from '../actions/projects';
 
 import './project-images.css';
@@ -48,13 +48,19 @@ export class ProjectImages extends React.Component {
 
         let images = this.props.images.map((image, index) =>
             (
-                <img src={image} className='project-image' alt='Knit sweater' key={index} />
+                <figure>
+                    <img src={image} className='project-image' alt='Knit sweater' key={index} />
+                </figure>
             )
         )
 
         let imagePreview;
         if (this.props.image) {
-            imagePreview = <img src={this.props.image} className='preview-image' alt='Knit sweater' />
+            imagePreview = (
+                <figure>
+                    <img src={this.props.image} className='preview-image' alt='Knit sweater' />
+                </figure>
+            )
         }
 
         // const myObject = this;
@@ -68,33 +74,30 @@ export class ProjectImages extends React.Component {
         );
 
         return (
-            <div>
-                <div className='images-container'>
-                    {images}
-                </div>
+            <section className='images-section'>
+                {images}
                 <fieldset className='images-form-container'>
                     <legend>Photo Upload</legend>
                     <form className='image-form'
-                        onSubmit={e => this.onSubmit(e)}
-                    >
-                        <ul className='form-wrapper' role='none'>
-                            <li className='list-row form-row'>
-                                <Field
-                                    accept='.jpg, .png, .jpeg'
-                                    name='upload'
-                                    id='upload'
-                                    component={UploadImage}
-                                />
-                            </li>
-                            {imagePreview}
-                            {formError}
-                            <li className='form-row button-row'>
-                                <button id='image-button'>Upload</button>
-                            </li>
-                        </ul>
+                        onSubmit={e => this.onSubmit(e)}>
+                        {/* <ul className='form-wrapper' role='none'>
+                            <li className='list-row form-row'> */}
+                        <Field
+                            accept='.jpg, .png, .jpeg'
+                            name='upload'
+                            id='upload'
+                            component={UploadImage}
+                        />
+                        {/* </li> */}
+                        {imagePreview}
+                        {formError}
+                        {/* <li className='form-row button-row'> */}
+                        <button id='image-button'>Upload</button>
+                        {/* </li>
+                        </ul> */}
                     </form>
                 </fieldset>
-            </div >
+            </section>
         )
     }
 }

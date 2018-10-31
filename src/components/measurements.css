@@ -1,5 +1,67 @@
+.measurements-section {
+    display: contents;
+}
+
+.list-row {
+    width: 90%;
+    height: 30px;
+    border-bottom: 1px dotted gray;
+    text-align: left;
+    padding: 3px;
+}
+
+.list-row p {
+    margin: 10px;
+}
+
+.list-row.button-row {
+    text-align: center;
+}
+
+.label,
+.value {
+    display: inline-block;
+    margin: 0;
+}
+
+#delete-button {
+    grid-column: 1 / span 2;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.list-container {
+    display: contents;
+}
+
+.list-wrapper {
+    display: grid;
+    margin: 0;
+    padding: 0;
+}
+
+.list-row {
+    padding: 3px;
+}
+
+.project-measurements,
+.pattern-measurements {
+    display: grid;
+    grid-template-rows: 50px 550px auto;
+}
+
+
 .user-measurements {
  grid-column: 1 / span 2;
+}
+
+.label {
+    padding-right: 5px;
+    width: 140px;
+}
+
+.value {
+   margin-left: 155px;
 }
 
 
