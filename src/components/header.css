@@ -2,28 +2,27 @@ header {
     grid-area: menu; 
 }
 
-/* header.active {
-    grid-area: tab;
-} */
-
 nav {
-    position: absolute;
-    top: 0;
-    right: -300px;
+    visibility: hidden;
+    position: fixed;
+    display: block;
     width: 300px;
     height: 100%;
-    transition: 0.4s;
+    top: 0;
+    right: 0;
+    transform: translateX(300px);
+    transition: transform 0.4s ease, visibility 0.4s;
     background-color: lightblue;
 }
 
 header.active nav {
-    right: 0;
-    transition: 0.4s;
+    visibility: visible;
+    transform: translateX(0);
 }
 
 #menu-container {
-    position: absolute;
-    display: inline-block;
+    position: fixed;
+    display: block;
     top: 0;
     right: 0;
     height: 50px;
@@ -32,6 +31,7 @@ header.active nav {
     cursor: pointer;
     transition: 0.4s;
     background-color: lightblue;
+    border-radius: 0 0 0 10px;
 }
 
 #menu-container.active {
@@ -45,7 +45,7 @@ header.active nav {
     height: 5px;
     background-color: #333;
     margin: 5px 0;
-    transition: 0.6s;
+    transition: 0.4s;
     border-radius: 5px;
 }
 

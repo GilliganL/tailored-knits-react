@@ -1,12 +1,21 @@
-.app {
+main {
     display: grid;
-    grid-template-columns: repeat(3, minmax(200px, 1fr)) 75px;
+    grid-template-columns: 250px repeat(3, minmax(100px, 1fr)) 50px;
     grid-template-rows: 100px 1fr;
-    grid-template-areas: "images . tab menu"
-                        "images label value sidebar"
+    grid-template-areas: "images title title title menu"
+                        "images diagram label value sidebar"
 }
 
-main {
-    display: contents; 
+.page-title {
+    grid-area: title;
+}
+
+#delete-button {
+    visibility: hidden;
+    position: absolute;
+    height: 20px;
+    width: 100px;
+    bottom: 0;
+    left: 0;
 }
 
