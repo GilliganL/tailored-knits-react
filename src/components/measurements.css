@@ -1,6 +1,23 @@
-.measurements-section {
-    grid-row: 2 / span 3;
-    grid-column: 2 / span 2;
+.measurements-section,
+.project-measurements,
+.pattern-measurements,
+.user-measurements
+ {
+    display: contents
+}
+
+.measurements-list {
+    display: none;
+}
+
+.project-measurements .stitches-list,
+.project-measurements .measurements-title {
+    grid-area: label;
+}
+
+.pattern-measurements .stitches-list, 
+.pattern-measurements .measurements-title {
+    display: none;
 }
 
 .list-row {
@@ -26,7 +43,6 @@
     margin-left: 155px;
  }
 
- 
 .list-row.button-row {
     text-align: center;
 }
@@ -36,8 +52,6 @@
     width: 50%;
     margin: 0 auto;
 }
-
-
 
 @media (min-width: 768px) {
 .list-container {

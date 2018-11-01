@@ -211,7 +211,7 @@ export class Measurements extends React.Component {
 
             displayForm =
                 (
-                    <ul className='list-wrapper'>
+                    <ul className='list-wrapper measurements-list'>
                         <h4 className='list-title'>Measurements</h4>
                         {contentList}
                         <li className='list-row button-row'>
@@ -227,6 +227,7 @@ export class Measurements extends React.Component {
                 stitchesList = toCalculate.map((key, index) =>
                     (
                         <li key={index} className='list-row'>
+                            <label className='label stitches-label'>{measureKeys[key]}:</label>
                             <p className='value'>{this.calculateGauge(key)}</p>
                         </li>
                     )
@@ -301,7 +302,7 @@ export class Measurements extends React.Component {
                 (
                     <form className='measurements-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                        <ul className='form-wrapper'>
+                        <ul className='form-wrapper measurements-form-list'>
                             <h3>Measurements</h3>
                             {contentList}
                             {formError}
