@@ -1,0 +1,64 @@
+header {
+    grid-area: menu; 
+}
+
+/* header.active {
+    grid-area: tab;
+} */
+
+nav {
+    position: absolute;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    transition: 0.4s;
+    background-color: lightblue;
+}
+
+header.active nav {
+    right: 0;
+    transition: 0.4s;
+}
+
+#menu-container {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    padding: 7.5px;
+    cursor: pointer;
+    transition: 0.4s;
+    background-color: lightblue;
+}
+
+#menu-container.active {
+    right: 300px;
+}
+
+#bar-1,
+#bar-2,
+#bar-3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.6s;
+    border-radius: 5px;
+}
+
+#bar-1.active {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+#bar-2.active {
+    opacity: 0;
+}
+
+#bar-3.active {
+    -webkit-transform: rotate(45deg) translate(-7px, -7px);
+    transform: rotate(45deg) translate(-7px, -7px);
+}

@@ -1,36 +1,12 @@
-.project-detail {
+.app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(200px, 1fr)) 75px;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas: "images . tab menu"
+                        "images label value sidebar"
 }
 
-.measurements-section {
-    display: contents;
+main {
+    display: contents; 
 }
 
-.list-row {
-    width: 90%;
-    height: 30px;
-    border-bottom: 1px dotted gray;
-    text-align: left;
-    padding: 3px;
-}
-
-.list-row p {
-    margin: 10px;
-}
-
-.list-row.button-row {
-    text-align: center;
-}
-
-.label,
-.value {
-    display: inline-block;
-    margin: 0;
-}
-
-#delete-button {
-    grid-column: 1 / span 2;
-    width: 50%;
-    margin: 0 auto;
-}

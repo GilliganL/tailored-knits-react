@@ -51,7 +51,7 @@ export class Home extends React.Component {
                             <Route path='/projects/:projectId' component={ProjectDetail} />
                             <Route path='/' component={Landing} />
                         </Switch>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             </Router>
         );

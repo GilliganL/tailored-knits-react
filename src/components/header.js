@@ -3,7 +3,25 @@ import { withRouter } from 'react-router';
 
 import Nav from './nav';
 
+import './header.css';
+
 export class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: '',
+            headerClass: ''
+        }
+    }
+
+    onClick() {
+        const headerClass = this.state.active ? '' : 'active';
+        const active = this.state.active ? '' : 'active';
+        this.setState({
+            active,
+            headerClass
+        });
+    }
 
     render() {
         let content;
@@ -15,12 +33,19 @@ export class Header extends React.Component {
                 <button>View Demo</button>
             </div>
         } else {
-            content = <Nav />
+            content = (
+                <div id='menu-container' className={this.state.active} onClick={() => this.onClick()}>
+                    <div id='bar-1' className={this.state.active}></div>
+                    <div id='bar-2' className={this.state.active}></div>
+                    <div id='bar-3' className={this.state.active}></div>
+                </div>
+            )
         }
 
         return (
-            <header>
+            <header className={this.state.headerClass}>
                 {content}
+                <Nav />
             </header>
         );
     }
