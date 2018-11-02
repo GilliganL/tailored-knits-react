@@ -47,7 +47,6 @@ export class ProjectDetail extends React.Component {
 
 //can't do pattern.style here
 const mapStateToProps = state => {
-    console.log(state.projectsReducer)
     let image;
     if(state.projectsReducer.image) {
         image = state.projectsReducer.image

@@ -66,6 +66,12 @@ export const imagesError = error => ({
     error
 });
 
+export const SAVE_IMAGE = 'SAVE_IMAGE';
+export const saveImage = croppedImage => ({
+    type: SAVE_IMAGE,
+    croppedImage
+});
+
 export const fetchProjects = (username) => (dispatch, getState) => {
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;
@@ -170,15 +176,15 @@ export const deleteProject = id => (dispatch, getState) => {
 
 export const handleImage = file => (dispatch, getState) => {
     const fileType = file.type;
-    const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    if (validFileTypes.find(i => i === fileType) === undefined) {
-        let err = {
-            reason: 'ValidationError',
-            message: 'Please choose a JPEG, PNG or GIF file',
-            location: 'Image upload'
-        }
-        throw err;
-    }
+    // const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    // if (validFileTypes.find(i => i === fileType) === undefined) {
+    //     let err = {
+    //         reason: 'ValidationError',
+    //         message: 'Please choose a JPEG, PNG or GIF file',
+    //         location: 'Image upload'
+    //     }
+    //     throw err;
+    // }
 
     if (file == null) {
         let err = {

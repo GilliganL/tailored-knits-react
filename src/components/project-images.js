@@ -1,19 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { handleImage, updateProject, fetchProjectById } from '../actions/projects';
-
+import ImagesForm from './images-form';
 import './project-images.css';
 
 export class ProjectImages extends React.Component {
 
     onSubmit(event) {
+        console.log(this.props.croppedImage)
+ 
         event.preventDefault();
-        const imageObject = {
-            images: [...this.props.images, this.props.image]
-        }
-        if (this.props.image) {
-            return this.props
-                .dispatch(updateProject(this.props.id, imageObject))
+
+        if (this.props.croppedImage) {
+
+            return this.props.dispatch(handleImage(this.props.croppedImage))
+                .then((url) => {
+                    const imageObject = {
+                        images: [...this.props.images, url]
+                    }
+                    return this.props.dispatch(updateProject(this.props.id, imageObject))
+                })
                 .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
                 .catch(err => {
                     const { reason, message, location } = err;
@@ -76,34 +83,20 @@ export class ProjectImages extends React.Component {
         return (
             <section className='images-section'>
                 {images}
-                <fieldset className='images-form-container'>
-                    <legend>Photo Upload</legend>
-                    <form className='image-form'
-                        onSubmit={e => this.onSubmit(e)}>
-                        {/* <ul className='form-wrapper' role='none'>
-                            <li className='list-row form-row'> */}
-                        <Field
-                            accept='.jpg, .png, .jpeg'
-                            name='upload'
-                            id='upload'
-                            component={UploadImage}
-                        />
-                        {/* </li> */}
-                        {imagePreview}
-                        {formError}
-                        {/* <li className='form-row button-row'> */}
-                        <button id='image-button'>Upload</button>
-                        {/* </li>
-                        </ul> */}
-                    </form>
-                </fieldset>
+                <ImagesForm />
+                <button type='button' id='save-image' onClick={(e) => this.onSubmit(e)}>Save</button>
             </section>
         )
     }
 }
 
-export default reduxForm({
+const mapStateToProps = state => ({
+    croppedImage: state.projectsReducer.croppedImage
+});
+
+const ProjectImagesForm = reduxForm({
     form: 'projectImages',
     onSubmitFail: (errors, dispatch) => dispatch(focus('projectImages', Object.keys(errors)[0]))
 })(ProjectImages);
 
+export default connect(mapStateToProps)(ProjectImagesForm);

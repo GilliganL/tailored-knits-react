@@ -9,7 +9,8 @@ import {
     REMOVE_PROJECT,
     IMAGES_ERROR,
     IMAGES_REQUEST,
-    IMAGES_SUCCESS
+    IMAGES_SUCCESS,
+    SAVE_IMAGE
 } from '../actions/projects';
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
     loading: false, 
     message: '',
     error: null,
-    image: ''
+    image: '',
+    croppedImage: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -86,6 +88,10 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             loading: false,
             error: action.error
+        });
+    } else if (action.type === SAVE_IMAGE) {
+        return Object.assign({}, state, {
+            croppedImage: action.croppedImage
         });
     }
 

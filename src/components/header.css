@@ -12,7 +12,7 @@ nav {
     right: 0;
     transform: translateX(300px);
     transition: transform 0.4s ease, visibility 0.4s;
-    background-color: lightblue;
+    background-color: #F7CB8C;
 }
 
 header.active nav {
@@ -30,7 +30,7 @@ header.active nav {
     padding: 7.5px;
     cursor: pointer;
     transition: 0.4s;
-    background-color: lightblue;
+    background-color: #F7CB8C;
     border-radius: 0 0 0 10px;
 }
 
