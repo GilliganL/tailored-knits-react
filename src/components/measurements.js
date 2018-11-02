@@ -212,7 +212,7 @@ export class Measurements extends React.Component {
             displayForm =
                 (
                     <ul className='list-wrapper measurements-list'>
-                        <h4 className='list-title'>Measurements</h4>
+                        <h3 className='list-title'>Measurements</h3>
                         {contentList}
                         <li className='list-row button-row'>
                             <button type='button' id='edit-button' onClick={() => this.setEditing(true, this.props.type)}>
@@ -234,7 +234,7 @@ export class Measurements extends React.Component {
                 )
                 stitchesList =
                     <ul className='list-wrapper stitches-list'>
-                        <h4>Stitches</h4>
+                        <h3 className='stitches-title'>Stitches</h3>
                         {stitchesList}
                     </ul>
             }
@@ -303,7 +303,7 @@ export class Measurements extends React.Component {
                     <form className='measurements-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                         <ul className='form-wrapper measurements-form-list'>
-                            <h3>Measurements</h3>
+                            <h2>Measurements</h2>
                             {contentList}
                             {formError}
                             <li className='list-row form-row button-row'>
@@ -316,7 +316,7 @@ export class Measurements extends React.Component {
 
         return (
             <div className={this.props.type.toLowerCase() + `-measurements measurements-div`}>
-                <h3 className='measurements-title'>{this.props.type}</h3>
+                <h2 className='measurements-title'>{this.props.type}</h2>
                 {displayForm}
                 {stitchesList}
             </div >
