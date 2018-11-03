@@ -10,7 +10,8 @@ import {
     IMAGES_ERROR,
     IMAGES_REQUEST,
     IMAGES_SUCCESS,
-    SAVE_IMAGE
+    SAVE_IMAGE,
+    CLEAR_IMAGE
 } from '../actions/projects';
 
 const initialState = {
@@ -24,7 +25,8 @@ const initialState = {
     message: '',
     error: null,
     image: '',
-    croppedImage: ''
+    croppedImage: '',
+    croppedFile: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -91,7 +93,13 @@ export default function reducer(state = initialState, action) {
         });
     } else if (action.type === SAVE_IMAGE) {
         return Object.assign({}, state, {
-            croppedImage: action.croppedImage
+            croppedImage: action.croppedImage,
+            croppedFile: action.croppedFile
+        });
+    } else if (action.type === CLEAR_IMAGE) {
+        return Object.assign({}, state, {
+            croppedImage: '',
+            croppedFile: ''
         });
     }
 

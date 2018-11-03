@@ -1,26 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
-import { handleImage, updateProject, fetchProjectById } from '../actions/projects';
+import { reduxForm, focus, SubmissionError } from 'redux-form';
+import { handleImage, updateProject, fetchProjectById, clearImage } from '../actions/projects';
 import ImagesForm from './images-form';
 import './project-images.css';
 
 export class ProjectImages extends React.Component {
 
-    onSubmit(event) {
-        console.log(this.props.croppedImage)
- 
+    onClick(event) {
         event.preventDefault();
-
-        if (this.props.croppedImage) {
-
-            return this.props.dispatch(handleImage(this.props.croppedImage))
-                .then((url) => {
+        if (this.props.croppedFile) {
+            return this.props.dispatch(handleImage(this.props.croppedFile))
+                .then((res) => {
                     const imageObject = {
-                        images: [...this.props.images, url]
+                        images: [...this.props.images, res.image]
                     }
                     return this.props.dispatch(updateProject(this.props.id, imageObject))
                 })
+                .then(() => this.props.dispatch(clearImage()))
                 .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
                 .catch(err => {
                     const { reason, message, location } = err;
@@ -61,38 +58,21 @@ export class ProjectImages extends React.Component {
             )
         )
 
-        let imagePreview;
-        if (this.props.image) {
-            imagePreview = (
-                <figure>
-                    <img src={this.props.image} className='preview-image' alt='Knit sweater' />
-                </figure>
-            )
-        }
-
-        // const myObject = this;
-        const adaptFileEventToValue = delegate => e => {
-            this.props.dispatch(handleImage(e.target.files[0]));
-            return delegate(e.target.files[0])
-        }
-
-        const UploadImage = ({ input: { value: omitValue, onChange, ...inputProps }, meta: omitMeta, ...props }) => (
-            <input type='file' onChange={adaptFileEventToValue(onChange)} {...inputProps} {...props} />
-        );
-
         return (
             <section className='images-section'>
                 {images}
-                <ImagesForm />
-                <button type='button' id='save-image' onClick={(e) => this.onSubmit(e)}>Save</button>
+                <ImagesForm saveFile={(e) => this.onClick(e)} />
+                {formError}
             </section>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    croppedImage: state.projectsReducer.croppedImage
+    croppedImage: state.projectsReducer.croppedImage,
+    croppedFile: state.projectsReducer.croppedFile
 });
+
 
 const ProjectImagesForm = reduxForm({
     form: 'projectImages',

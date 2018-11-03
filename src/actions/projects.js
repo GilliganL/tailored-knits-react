@@ -67,9 +67,15 @@ export const imagesError = error => ({
 });
 
 export const SAVE_IMAGE = 'SAVE_IMAGE';
-export const saveImage = croppedImage => ({
+export const saveImage = (croppedImage, croppedFile) => ({
     type: SAVE_IMAGE,
-    croppedImage
+    croppedImage,
+    croppedFile
+});
+
+export const CLEAR_IMAGE = 'CLEAR_IMAGE'
+export const clearImage = () => ({
+    type: CLEAR_IMAGE
 });
 
 export const fetchProjects = (username) => (dispatch, getState) => {
@@ -132,7 +138,6 @@ export const createProject = values => (dispatch, getState) => {
 }
 
 export const updateProject = (id, values) => (dispatch, getState) => {
-    console.log(id, values)
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects/${id}`, {
@@ -176,15 +181,15 @@ export const deleteProject = id => (dispatch, getState) => {
 
 export const handleImage = file => (dispatch, getState) => {
     const fileType = file.type;
-    // const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    // if (validFileTypes.find(i => i === fileType) === undefined) {
-    //     let err = {
-    //         reason: 'ValidationError',
-    //         message: 'Please choose a JPEG, PNG or GIF file',
-    //         location: 'Image upload'
-    //     }
-    //     throw err;
-    // }
+    const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (validFileTypes.find(i => i === fileType) === undefined) {
+        let err = {
+            reason: 'ValidationError',
+            message: 'Please choose a JPEG, PNG or GIF file',
+            location: 'Image upload'
+        }
+        throw err;
+    }
 
     if (file == null) {
         let err = {
@@ -211,9 +216,7 @@ export const handleImage = file => (dispatch, getState) => {
         });
 }
 
-
 export const getSignedRequest = (file, authToken) => {
- 
     const xhr = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
         xhr.open('GET', `${API_BASE_URL}/projects/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`);
@@ -243,13 +246,11 @@ export const getSignedRequest = (file, authToken) => {
 }
 
 export const uploadFile = (requestObject) => {
-
     const {
         file,
         signedRequest,
         url
     } = requestObject;
-
     const xhr = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
         xhr.open('PUT', signedRequest);
