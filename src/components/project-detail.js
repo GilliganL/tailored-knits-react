@@ -54,7 +54,7 @@ export class ProjectDetail extends React.Component {
 
         return (
             <main role='main'>
-                <h1 className='page-title'>Project Detail</h1>
+                <h1 className='page-title'>{this.props.project.name}</h1>
                 <button className='tablinks measurements-heading' onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
                 <button className='tablinks upload-heading' onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
                 <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />

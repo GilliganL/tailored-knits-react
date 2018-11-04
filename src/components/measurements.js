@@ -114,11 +114,11 @@ export class Measurements extends React.Component {
             measureKeys.armhole = 'Armhole';
         }
 
-        if (this.props.style === 'Raglan' || this.props.style === 'Yoke') {
+        if ((this.props.style === 'Raglan' || this.props.style === 'Yoke') && this.props.type !== 'User') {
             measureKeys.raglanDepth = 'Raglan Depth';
         }
 
-        if (this.props.style === 'Yoke') {
+        if (this.props.style === 'Yoke' && this.props.type !== 'User') {
             measureKeys.yokeDepth = 'Yoke Depth';
         }
 
@@ -231,32 +231,38 @@ export class Measurements extends React.Component {
                 )]
             )
 
-            contentList = [...contentList,
-            (
-                <li key={20} className='list-row form-row'>
-                    <Field
-                        element='select'
-                        label='Style'
-                        name='style'
-                        component={Input}
-                    >
-                        <option />
-                        <option value='Set In'>Set In</option>
-                        <option value='Raglan'>Raglan</option>
-                        <option value='Yoke'>Yoke</option></Field>
-                </li>
-            ),
-            (
-                <li key={21} className='list-row form-row'>
-                    <Field
-                        element='textarea'
-                        label='Notes'
-                        name='notes'
-                        component={Input}
-                    />
-                </li>
-            )];
+            if (style) {
+                contentList = [...contentList,
+                (
+                    <li key={20} className='list-row form-row'>
+                        <Field
+                            element='select'
+                            label='Style'
+                            name='style'
+                            component={Input}
+                        >
+                            <option />
+                            <option value='Set In'>Set In</option>
+                            <option value='Raglan'>Raglan</option>
+                            <option value='Yoke'>Yoke</option></Field>
+                    </li>
+                )];
+            }
 
+            if (notes) {
+                contentList = [...contentList,
+                (
+                    <li key={21} className='list-row form-row'>
+                        <Field
+                            element='textarea'
+                            label='Notes'
+                            name='notes'
+                            component={Input}
+                        />
+                    </li>
+                )];
+            }
+            
             displayContent =
                 (
                     <form className='measurements-form'
