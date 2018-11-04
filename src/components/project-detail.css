@@ -24,8 +24,9 @@ main {
 
 .measurements-heading:hover,
 .upload-heading:hover {
-    color: #B56969;
+    color: #22264B;
     cursor: pointer;
+    box-shadow: 1px 1px 4px 1px #22264B;
 }
 
 .measurements-heading,
@@ -41,9 +42,11 @@ main {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
     border-radius: 10px;
-    background: #FAFAFA;
+    background: #B56969;
+    color: #FAFAFA;
     border: none;
-    box-shadow: 0 0 4px 1px #B56969;
+    transition: 0.2s ease;
+    
 }
 
 .upload-heading {
@@ -84,4 +87,8 @@ main {
 #delete-button {
     width: 50%;
     margin: 0 auto;
+}
+
+.stitches-section {
+    display: contents;
 }
