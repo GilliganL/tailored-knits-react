@@ -22,35 +22,11 @@ main {
     left: 0;
 }
 
-/* .measurements-heading,
-.upload-heading {
-    margin: 0 20px;
-    padding-top: 20px;
-    height: 75px;
-    min-width: 250px;
-    -ms-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
- 
-} */
-
 .measurements-heading:hover,
 .upload-heading:hover {
     color: #B56969;
     cursor: pointer;
 }
-
-/* .measurements-heading {
-    grid-area: sidebar1;
-    align-self: center;
-    z-index: 100;
-}
-
-.upload-heading {
-    grid-area: sidebar2;
-    align-self: start;  
-    text-align: right;
-} */
 
 .measurements-heading,
 .upload-heading {
@@ -66,8 +42,46 @@ main {
     transform: rotate(90deg);
     border-radius: 10px;
     background: #FAFAFA;
+    border: none;
+    box-shadow: 0 0 4px 1px #B56969;
 }
 
 .upload-heading {
     top: 450px;
+}
+
+.list-wrapper {
+    min-height: 500px;
+}
+
+.list-row {
+    width: 90%;
+    min-height: 25px;
+    border-bottom: 1px dotted gray;
+    text-align: left;
+    padding: 3px;
+}
+
+.label,
+.value {
+    display: inline-block;
+    margin: 0;
+}
+
+.label {
+    width: 60%;
+    padding-right: 5px;
+}
+
+.value {
+   width: 40%;
+ }
+
+.list-row.button-row {
+    text-align: center;
+}
+
+#delete-button {
+    width: 50%;
+    margin: 0 auto;
 }

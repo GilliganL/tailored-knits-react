@@ -13,11 +13,16 @@ import './project-detail.css';
 export class ProjectDetail extends React.Component {
 
     componentDidMount() {
-        this.props.dispatch(fetchProjectById(this.props.match.params.projectId))
+        this.props.dispatch(fetchProjectById(this.props.match.params.projectId));
+        this.props.dispatch(activeTab('stitches'));
     }
 
     showTab(display) {
-        this.props.dispatch(activeTab(display));
+        if (this.props.activeTab === display) {
+            this.props.dispatch(activeTab('stitches'));
+        } else {
+            this.props.dispatch(activeTab(display));
+        }
     }
 
     onClick() {
@@ -31,10 +36,8 @@ export class ProjectDetail extends React.Component {
     render() {
         let display;
         if (this.props.project && this.props.activeTab === 'stitches') {
-            console.log(this.props.project);
-            console.log(this.props.pattern)
             display = (
-                <section className='measurements-section'>
+                <section className='stitches-section'>
                     <Stitches content={this.props.project} type='Project' />
                     <Stitches content={this.props.pattern} type='Pattern' />
                 </section>
@@ -53,7 +56,7 @@ export class ProjectDetail extends React.Component {
             <main role='main'>
                 <h1 className='page-title'>Project Detail</h1>
                 <button className='tablinks measurements-heading' onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
-                <button className='tablinks upload-heading' onClick={() => this.showTab('upload')}><h2 className='upload-heading'>Upload Image</h2></button>
+                <button className='tablinks upload-heading' onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
                 <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
                 <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>

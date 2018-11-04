@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './stitches.css';
+
 export default class Stitches extends React.Component {
 
     calculateGauge(measurement) {
@@ -33,8 +35,6 @@ export default class Stitches extends React.Component {
 
         let stitchesList;
 
-        // let toCalculate = Object.keys(measureKeys).filter(key => !key.includes('gauge') && key !== 'ease')
-
         stitchesList = Object.keys(measureKeys).map((key, index) => {
             let listItem;
             if (this.props.content[key]) {
@@ -49,7 +49,7 @@ export default class Stitches extends React.Component {
         })
 
         return (
-            <div className={this.props.type.toLowerCase() + `-measurements measurements-div`}>
+            <div className={this.props.type.toLowerCase() + `-stitches stitches-div`}>
                 <ul className='list-wrapper stitches-list'>
                     <h3 className='stitches-title'>{this.props.type} Stitches</h3>
                     {stitchesList}
