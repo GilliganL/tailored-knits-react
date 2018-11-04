@@ -12,7 +12,8 @@ nav {
     right: 0;
     transform: translateX(300px);
     transition: transform 0.4s ease, visibility 0.4s;
-    background-color: #F7CB8C;
+    background-color: #fafafa;
+    z-index: 1000;
 }
 
 header.active nav {
@@ -30,8 +31,9 @@ header.active nav {
     padding: 7.5px;
     cursor: pointer;
     transition: 0.4s;
-    background-color: #F7CB8C;
+    background-color: #fafafa;
     border-radius: 0 0 0 10px;
+    z-index: 1000;
 }
 
 #menu-container.active {
@@ -43,10 +45,16 @@ header.active nav {
 #bar-3 {
     width: 35px;
     height: 5px;
-    background-color: #333;
+    background-color: #22264B;
     margin: 5px 0;
     transition: 0.4s;
     border-radius: 5px;
+}
+
+#menu-container:hover #bar-1,
+#menu-container:hover #bar-2,
+#menu-container:hover #bar-3 {
+    background-color: #B56969;
 }
 
 #bar-1.active {

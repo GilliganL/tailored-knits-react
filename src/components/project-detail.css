@@ -1,9 +1,10 @@
 main {
     display: grid;
     grid-template-columns: 250px repeat(3, minmax(100px, 1fr)) 50px;
-    grid-template-rows: 100px 1fr;
+    grid-template-rows: 100px repeat(2, minmax(250px, 1fr));
     grid-template-areas: "title title title title menu"
-                        "images diagram label value sidebar";
+                        "images diagram label value sidebar1"
+                        "images diagram label value sidebar2";
     justify-items: center;
 }
 
@@ -20,3 +21,34 @@ main {
     left: 0;
 }
 
+/* .tab-items {
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: 50px;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "measurements"
+                        "upload";
+} */
+
+.measurements-heading,
+.upload-heading {
+    margin: 0 20px;
+    height: 50px;
+    min-width: 250px;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+ 
+}
+
+.measurements-heading {
+    grid-area: sidebar1;
+    align-self: center;
+    z-index: 100;
+}
+
+.upload-heading {
+    grid-area: sidebar2;
+    align-self: start;  
+    text-align: right;
+}

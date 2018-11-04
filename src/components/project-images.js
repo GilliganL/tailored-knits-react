@@ -52,8 +52,8 @@ export class ProjectImages extends React.Component {
 
         let images = this.props.images.map((image, index) =>
             (
-                <figure>
-                    <img src={image} className='project-image' alt='Knit sweater' key={index} />
+                <figure key={index}>
+                    <img src={image} className='project-image' alt='Knit sweater' />
                 </figure>
             )
         )

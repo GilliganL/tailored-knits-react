@@ -303,7 +303,7 @@ export class Measurements extends React.Component {
                     <form className='measurements-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                         <ul className='form-wrapper measurements-form-list'>
-                            <h2>Measurements</h2>
+                            {/* <h2>Measurements</h2> */}
                             {contentList}
                             {formError}
                             <li className='list-row form-row button-row'>
