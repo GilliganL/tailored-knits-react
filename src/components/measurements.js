@@ -19,21 +19,6 @@ export class Measurements extends React.Component {
         this.props.dispatch(setEditing(editing, editType));
     }
 
-    calculateGauge(measurement) {
-        let rowKeys = ['length', 'armhole', 'raglanDepth', 'yokeDepth'];
-        let stitches = 0;
-        if (rowKeys.find(key => key === measurement)) {
-            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeRow) / 2);
-
-        } else {
-            stitches = 2 * Math.round((this.props.content[measurement] * this.props.content.gaugeStitches) / 2);
-        }
-        if (!stitches) {
-            stitches = '';
-        }
-        return stitches;
-    }
-
     onSubmit(values) {
         if (this.props.type === 'Project') {
             return this.props
@@ -102,8 +87,6 @@ export class Measurements extends React.Component {
         }
     }
 
-
-
     render() {
         let formError;
         if (this.props.error) {
@@ -165,12 +148,10 @@ export class Measurements extends React.Component {
             editing = this.props.editUser;
         }
 
-        let displayForm;
+        let displayContent;
         let contentList;
-        let stitchesList;
 
         if (!editing) {
-
             contentList = Object.keys(measureKeys).map((key, index) =>
                 (
                     <li key={index} className='list-row'>
@@ -209,7 +190,7 @@ export class Measurements extends React.Component {
                 )];
             }
 
-            displayForm =
+            displayContent =
                 (
                     <ul className='list-wrapper measurements-list'>
                         <h3 className='list-title'>Measurements</h3>
@@ -221,25 +202,6 @@ export class Measurements extends React.Component {
                         </li>
                     </ul>
                 )
-
-            if (this.props.type !== 'User') {
-                let toCalculate = Object.keys(measureKeys).filter(key => !key.includes('gauge') && key !== 'ease')
-                stitchesList = toCalculate.map((key, index) =>
-                    (
-                        <li key={index} className='list-row'>
-                            <label className='label stitches-label'>{measureKeys[key]}:</label>
-                            <p className='value'>{this.calculateGauge(key)}</p>
-                        </li>
-                    )
-                )
-                stitchesList =
-                    <ul className='list-wrapper stitches-list'>
-                        <h3 className='stitches-title'>Stitches</h3>
-                        {stitchesList}
-                    </ul>
-            }
-
-
         } else {
             contentList = Object.keys(measureKeys).map((key, index) =>
                 (
@@ -264,7 +226,6 @@ export class Measurements extends React.Component {
                             label={specKeys[key]}
                             name={key}
                             component={Input}
-                        //  onChange={e => this.props.stitches[key] = e.target.value}
                         />
                     </li>
                 )]
@@ -278,7 +239,6 @@ export class Measurements extends React.Component {
                         label='Style'
                         name='style'
                         component={Input}
-                    //  onChange={e => this.props.stitches[key] = e.target.value}
                     >
                         <option />
                         <option value='Set In'>Set In</option>
@@ -293,17 +253,15 @@ export class Measurements extends React.Component {
                         label='Notes'
                         name='notes'
                         component={Input}
-                    //  onChange={e => this.props.stitches[key] = e.target.value}
                     />
                 </li>
             )];
 
-            displayForm =
+            displayContent =
                 (
                     <form className='measurements-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                         <ul className='form-wrapper measurements-form-list'>
-                            {/* <h2>Measurements</h2> */}
                             {contentList}
                             {formError}
                             <li className='list-row form-row button-row'>
@@ -317,8 +275,7 @@ export class Measurements extends React.Component {
         return (
             <div className={this.props.type.toLowerCase() + `-measurements measurements-div`}>
                 <h2 className='measurements-title'>{this.props.type}</h2>
-                {displayForm}
-                {stitchesList}
+                {displayContent}
             </div >
         )
     }

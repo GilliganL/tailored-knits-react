@@ -78,6 +78,12 @@ export const clearImage = () => ({
     type: CLEAR_IMAGE
 });
 
+export const ACTIVE_TAB = 'ACTIVE_TAB'
+export const activeTab = display => ({
+    type: ACTIVE_TAB,
+    display
+});
+
 export const fetchProjects = (username) => (dispatch, getState) => {
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;

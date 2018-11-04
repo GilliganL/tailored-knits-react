@@ -11,7 +11,8 @@ import {
     IMAGES_REQUEST,
     IMAGES_SUCCESS,
     SAVE_IMAGE,
-    CLEAR_IMAGE
+    CLEAR_IMAGE,
+    ACTIVE_TAB
 } from '../actions/projects';
 
 const initialState = {
@@ -26,7 +27,8 @@ const initialState = {
     error: null,
     image: '',
     croppedImage: '',
-    croppedFile: ''
+    croppedFile: '',
+    activeTab: 'stitches'
 };
 
 export default function reducer(state = initialState, action) {
@@ -101,9 +103,10 @@ export default function reducer(state = initialState, action) {
             croppedImage: '',
             croppedFile: ''
         });
+    } else if (action.type === ACTIVE_TAB) {
+        return Object.assign({}, state, {
+            activeTab: action.display
+        });
     }
-
-
-
     return state;
 }

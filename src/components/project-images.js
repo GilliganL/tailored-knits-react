@@ -37,7 +37,6 @@ export class ProjectImages extends React.Component {
         }
     }
 
-
     render() {
         let formError;
         if (this.props.error) {
@@ -50,13 +49,16 @@ export class ProjectImages extends React.Component {
             );
         }
 
-        let images = this.props.images.map((image, index) =>
-            (
-                <figure key={index}>
-                    <img src={image} className='project-image' alt='Knit sweater' />
-                </figure>
+        let images;
+        if (this.props.images) {
+            images = this.props.images.map((image, index) =>
+                (
+                    <figure key={index}>
+                        <img src={image} className='project-image' alt='Knit sweater' />
+                    </figure>
+                )
             )
-        )
+        }
 
         return (
             <section className='images-section'>
