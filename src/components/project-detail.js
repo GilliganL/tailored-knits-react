@@ -1,9 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import {  SubmissionError } from 'redux-form';
 import requiresLogin from './requires-login';
-
-import { fetchProjectById, deleteProject, activeTab } from '../actions/projects';
+import { handleImage, updateProject, fetchProjectById, clearImage } from '../actions/projects';
+import ImagesForm from './images-form';
+import { deleteProject, activeTab } from '../actions/projects';
 import Measurements from './measurements';
 import ProjectImages from './project-images';
 import Stitches from './stitches';
@@ -22,6 +24,7 @@ export class ProjectDetail extends React.Component {
             this.props.dispatch(activeTab('stitches'));
         } else {
             this.props.dispatch(activeTab(display));
+
         }
     }
 
@@ -33,15 +36,50 @@ export class ProjectDetail extends React.Component {
         }
     }
 
+    onClickImage(event) {
+        event.preventDefault();
+        if (this.props.croppedFile) {
+            return this.props.dispatch(handleImage(this.props.croppedFile))
+                .then((res) => {
+                    const imageObject = {
+                        images: [...this.props.images, res.image]
+                    }
+                    return this.props.dispatch(updateProject(this.props.id, imageObject))
+                })
+                .then(() => this.props.dispatch(clearImage()))
+                .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
+                .catch(err => {
+                    const { reason, message, location } = err;
+                    if (reason === 'ValidationError') {
+                        return Promise.reject(
+                            new SubmissionError({
+                                [location]: message
+                            })
+                        );
+                    }
+                    return Promise.reject(
+                        new SubmissionError({
+                            _error: 'Error submitting message'
+                        })
+                    );
+                });
+        }
+    }
+
     render() {
         let display;
+        let measurementsClass;
+        let uploadClass;
         if (this.props.project && this.props.activeTab === 'stitches') {
             display = (
                 <section className='stitches-section'>
                     <Stitches content={this.props.project} type='Project' />
                     <Stitches content={this.props.pattern} type='Pattern' />
                 </section>
+
             )
+            measurementsClass = '';
+            uploadClass = '';
         } else if (this.props.project && this.props.activeTab === 'measurements') {
             display = (
                 <section className='measurements-section'>
@@ -50,13 +88,23 @@ export class ProjectDetail extends React.Component {
                     <Measurements form='userForm' type='User' content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
                 </section>
             )
+            measurementsClass = 'active';
+            uploadClass = '';
+        } else if (this.props.project && this.props.activeTab === 'upload') {
+            display = (
+                <section className='upload-section'>
+                    <ImagesForm saveFile={(e) => this.onClickImage(e)} />
+                </section>
+            )
+            measurementsClass = '';
+            uploadClass = 'active';
         }
 
         return (
-            <main role='main'>
+            <main role='main' id='main-detail'>
                 <h1 className='page-title'>{this.props.project.name}</h1>
-                <button className='tablinks measurements-heading' onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
-                <button className='tablinks upload-heading' onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
+                <button className={'tablinks measurements-heading ' + measurementsClass} onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
+                <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
                 <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
                 <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>

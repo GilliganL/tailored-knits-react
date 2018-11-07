@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { Link } from 'react-router-dom';
-import { fetchProjects, createProject, setEditing } from '../actions/projects';
+import { fetchProjects, setEditing } from '../actions/projects';
 
 import AddForm from './add-form';
 
@@ -38,15 +38,17 @@ export class Projects extends React.Component {
         }
 
         return (
-            <div>
-                <h1>{this.pluralize(this.props.username)} Projects</h1>
-                <div className='card-container'>
-                    {projects}
-                    <div className='project-card'>
-                        <AddForm setEditing={editing => this.setEditing(editing)} editing={this.props.editing} />
-                    </div>
+            <main role='main' id='main-projects'>
+                <div className='projects-container'>
+                    <h1>{this.pluralize(this.props.username)} Projects</h1>
+                    <section className='card-container'>
+                        {projects}
+                        <div className='project-card'>
+                            <AddForm setEditing={editing => this.setEditing(editing)} editing={this.props.editing} />
+                        </div>
+                    </section>
                 </div>
-            </div>
+            </main>
         );
     }
 

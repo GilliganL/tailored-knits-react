@@ -5,6 +5,7 @@ import { required, nonEmpty } from '../validators';
 import { createProject } from '../actions/projects';
 import { createPattern } from '../actions/patterns';
 import Input from './input';
+import './add-form.css';
 
 
 export class AddForm extends React.Component {
