@@ -1,5 +1,5 @@
 .measurements-section {
-    grid-row: 2 / span 2;
+    grid-row: 2 / span 1;
     grid-column: 2 / span 2;
     display: grid;
     grid-template-rows: 1fr;

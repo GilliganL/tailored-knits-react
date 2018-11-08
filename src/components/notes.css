@@ -1,0 +1,33 @@
+.notes-section {
+    grid-area: notes;
+    justify-self: center;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.notes-heading {
+    margin-top: 0;
+}
+
+#notes-button,
+#update-notes-button {
+    display: block;
+    margin: 0 auto;
+}
+
+#notes-button:hover,
+#update-notes-button:hover {
+    background: #22264B;
+    transition: 0.4s;
+}
+
+.notes-form label {
+    display: none;
+}
+
+.notes-form textarea {
+    width: 400px;
+    min-height: 200px;
+    border-radius: 10px;
+    border: none;
+}

@@ -131,7 +131,6 @@ export class Measurements extends React.Component {
 
         let editing;
         let style;
-        let notes;
 
         if (this.props.type === 'Pattern') {
             style = 'Style';
@@ -140,7 +139,6 @@ export class Measurements extends React.Component {
 
         if (this.props.type === 'Project') {
             specKeys.size = 'Size';
-            notes = 'Notes';
             editing = this.props.editProject;
         }
 
@@ -176,16 +174,6 @@ export class Measurements extends React.Component {
                     <li key={20} className='list-row'>
                         <label htmlFor='style' className='label'>Style:</label>
                         <p className='value'>{this.props.content['style']}</p>
-                    </li>
-                )];
-            }
-
-            if (notes) {
-                contentList = [...contentList,
-                (
-                    <li key={21} className='list-row'>
-                        <label htmlFor='notes' className='label'>Notes:</label>
-                        <p className='value'>{this.props.content['notes']}</p>
                     </li>
                 )];
             }
@@ -249,20 +237,6 @@ export class Measurements extends React.Component {
                 )];
             }
 
-            if (notes) {
-                contentList = [...contentList,
-                (
-                    <li key={21} className='list-row form-row'>
-                        <Field
-                            element='textarea'
-                            label='Notes'
-                            name='notes'
-                            component={Input}
-                        />
-                    </li>
-                )];
-            }
-            
             displayContent =
                 (
                     <form className='measurements-form'

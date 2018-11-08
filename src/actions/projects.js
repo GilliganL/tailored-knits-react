@@ -84,6 +84,12 @@ export const activeTab = display => ({
     display
 });
 
+export const EDIT_NOTES = 'EDIT_NOTES'
+export const editNotes = editingNotes => ({
+    type: EDIT_NOTES,
+    editingNotes
+});
+
 export const fetchProjects = (username) => (dispatch, getState) => {
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;

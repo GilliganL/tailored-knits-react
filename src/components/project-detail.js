@@ -9,6 +9,7 @@ import { deleteProject, activeTab } from '../actions/projects';
 import Measurements from './measurements';
 import ProjectImages from './project-images';
 import Stitches from './stitches';
+import Notes from './notes';
 
 import './project-detail.css';
 
@@ -100,6 +101,9 @@ export class ProjectDetail extends React.Component {
             uploadClass = 'active';
         }
 
+        const notes = {
+            notes: this.props.notes
+        }
         return (
             <main role='main' id='main-detail'>
                 <h1 className='page-title'>{this.props.project.name}</h1>
@@ -107,6 +111,7 @@ export class ProjectDetail extends React.Component {
                 <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
                 <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
+                <Notes content={this.props.notes} initialValues={notes} id={this.props.match.params.projectId} />
                 <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>
             </main>
         )
@@ -118,6 +123,7 @@ const mapStateToProps = state => {
     if (state.projectsReducer.image) {
         image = state.projectsReducer.image
     }
+    const notes = state.projectsReducer.project.notes;
     const pattern = state.projectsReducer.project.pattern;
     const images = state.projectsReducer.project.images;
     return {
@@ -125,7 +131,8 @@ const mapStateToProps = state => {
         pattern,
         images,
         image,
-        activeTab: state.projectsReducer.activeTab
+        activeTab: state.projectsReducer.activeTab,
+        notes
     }
 }
 

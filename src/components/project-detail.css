@@ -1,10 +1,10 @@
 #main-detail {
     display: grid;
     grid-template-columns: minmax(200px, 300px) repeat(2, minmax(200px, 1fr)) 75px;
-    grid-template-rows: 100px repeat(2, minmax(250px, 1fr));
-    grid-template-areas: "title  title title menu"
+    grid-template-rows: 100px repeat(2, fit-content(80%));
+    grid-template-areas: "images  title title menu"
                          "images label value sidebar1"
-                         "images label value sidebar2";
+                         "images notes notes sidebar2";
     justify-items: center;
     margin: 10px;
 }

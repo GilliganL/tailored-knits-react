@@ -31,7 +31,6 @@ header.active nav {
     padding: 7.5px;
     cursor: pointer;
     transition: 0.4s;
-    background-color: #fafafa;
     border-radius: 0 0 0 10px;
     z-index: 1000;
 }
@@ -51,8 +50,10 @@ header.active nav {
     border-radius: 5px;
 }
 
-#menu-container:hover {
-    box-shadow: 1px 1px 4px 1px #B56969;
+#menu-container:hover #bar-2 {
+    width: 25px;
+    margin: 0 5px;
+    transition: 0.3s;
 }
 
 #menu-container:hover #bar-1,

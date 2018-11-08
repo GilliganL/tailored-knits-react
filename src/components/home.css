@@ -17,8 +17,13 @@ input {
 
 button {
     min-width: 100px;
+    min-height: 25px;
+    background: #B56969;
+    color: #FAFAFA;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .hidden {
