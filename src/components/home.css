@@ -9,6 +9,22 @@ body {
     letter-spacing: .6px;
 }
 
+input {
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+button {
+    min-width: 100px;
+    border: none;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
 
 @media (min-width: 768px) { 
 body {

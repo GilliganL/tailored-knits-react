@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 import { saveImage } from '../actions/projects';
 import "react-image-crop/dist/ReactCrop.css";
 
+import './images-form.css';
 
 class ImagesForm extends PureComponent {
   state = {
     src: null,
+    buttonClass: 'hidden',
+    labelClass: '',
     crop: {
       x: 10,
       y: 10,
@@ -21,6 +24,8 @@ class ImagesForm extends PureComponent {
     this.props.saveFile(e);
     this.setState({
       croppedImageUrl: '',
+      buttonClass: 'hidden',
+      labelClass: '',
       src: null,
       crop: {
         x: 10,
@@ -35,7 +40,11 @@ class ImagesForm extends PureComponent {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener("load", () =>
-        this.setState({ src: reader.result })
+        this.setState({
+          src: reader.result,
+          buttonClass: '',
+          labelClass: 'hidden'
+        })
       );
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -59,7 +68,7 @@ class ImagesForm extends PureComponent {
 
   onCropChange = crop => {
     this.setState({
-        crop
+      crop
     })
   };
 
@@ -80,7 +89,7 @@ class ImagesForm extends PureComponent {
       pixelCrop.width,
       pixelCrop.height
     );
- 
+
     return new Promise((resolve, reject) => {
       canvas.toBlob(file => {
         file.name = fileName;
@@ -99,8 +108,9 @@ class ImagesForm extends PureComponent {
     const { croppedImageUrl } = this.state;
     return (
       <div className="crop">
-        <div>
-          <input type="file" id='image-input' onChange={this.onSelectFile} />
+        <div className='file-container'>
+          <input type="file" className='uploadPhoto' id='uploadPhoto' name='uploadPhoto' tabIndex='-1' accept='image/*' onChange={this.onSelectFile} />
+          <label role='button' className={this.state.labelClass} tabIndex='0' htmlFor='uploadPhoto' id='upload-label' aria-live='assertive'><span id='upload-span'>Upload a Photo</span></label>
         </div>
         {this.state.src && (
           <ReactCrop
@@ -111,8 +121,8 @@ class ImagesForm extends PureComponent {
             onChange={this.onCropChange}
           />
         )}
-        {croppedImageUrl && <img alt="Crop" src={croppedImageUrl} />}
-        <button type='button' id='save-image' onClick={(e) => this.onClick(e)}>Save</button>
+        {croppedImageUrl && <img id='crop-preview' alt="Crop" src={croppedImageUrl} />}
+        <button type='button ' className={this.state.buttonClass} id='save-image' onClick={(e) => this.onClick(e)}>Save</button>
       </div>
     );
   }
