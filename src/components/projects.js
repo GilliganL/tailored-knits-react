@@ -27,25 +27,30 @@ export class Projects extends React.Component {
     render() {
         let projects;
         if (this.props.projects && !this.props.loading) {
-            projects = this.props.projects.map((project, index) =>
-                (<div key={index} className='project-card'>
-                    <h3><Link to={`/projects/${project._id}`}>{project.name}</Link></h3>
-                    <p>{project.pattern.name}</p>
-                    <p>{project.size}</p>
-                    <p>{project.pattern.style}</p>
-                </div>)
-            )
+            projects = this.props.projects.map((project, index) => {
+                let style = index % 2 === 0 ? 'style1' : 'style2';
+                return  (
+                    <div key={index} className={'project-card ' + style}>
+                        <div className='image'>
+                            <img src={project.images[0]} alt={`${project.name} knit sweater`} alt />
+                        </div>
+                        <Link to={`/projects/${project._id}`}>
+                            <h2>{project.name}</h2>
+                        </Link>
+                    </div>
+                )
+            })
         }
 
         return (
             <main role='main' id='main-projects'>
+            <h1>{this.pluralize(this.props.username)} Projects</h1>
                 <div className='projects-container'>
-                    <h1>{this.pluralize(this.props.username)} Projects</h1>
                     <section className='card-container'>
                         {projects}
-                        <div className='project-card'>
-                            <AddForm setEditing={editing => this.setEditing(editing)} editing={this.props.editing} />
-                        </div>
+                    </section>
+                    <section className='add-form'>
+                        <AddForm setEditing={editing => this.setEditing(editing)} editing={this.props.editing} />
                     </section>
                 </div>
             </main>

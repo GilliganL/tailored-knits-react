@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import {  SubmissionError } from 'redux-form';
+import { SubmissionError } from 'redux-form';
 import requiresLogin from './requires-login';
 import { handleImage, updateProject, fetchProjectById, clearImage } from '../actions/projects';
 import ImagesForm from './images-form';
@@ -14,6 +14,10 @@ import Notes from './notes';
 import './project-detail.css';
 
 export class ProjectDetail extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onClickImage = this.onClickImage.bind(this);
+    }
 
     componentDidMount() {
         this.props.dispatch(fetchProjectById(this.props.match.params.projectId));
@@ -45,10 +49,10 @@ export class ProjectDetail extends React.Component {
                     const imageObject = {
                         images: [...this.props.images, res.image]
                     }
-                    return this.props.dispatch(updateProject(this.props.id, imageObject))
+                    return this.props.dispatch(updateProject(this.props.match.params.projectId, imageObject))
                 })
                 .then(() => this.props.dispatch(clearImage()))
-                .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
+                .then(() => this.props.dispatch(fetchProjectById(this.props.match.params.projectId)))
                 .catch(err => {
                     const { reason, message, location } = err;
                     if (reason === 'ValidationError') {
@@ -100,9 +104,12 @@ export class ProjectDetail extends React.Component {
             measurementsClass = '';
             uploadClass = 'active';
         }
-
-        const notes = {
-            notes: this.props.notes
+        
+        let notes;
+        if (this.props.notes) {
+            notes = {
+                notes: this.props.notes
+            }
         }
         return (
             <main role='main' id='main-detail'>
@@ -132,7 +139,8 @@ const mapStateToProps = state => {
         images,
         image,
         activeTab: state.projectsReducer.activeTab,
-        notes
+        notes,
+        croppedFile: state.projectsReducer.croppedFile
     }
 }
 

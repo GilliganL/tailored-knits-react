@@ -123,6 +123,7 @@ export const fetchProjectById = id => (dispatch, getState) => {
 
 export const createProject = values => (dispatch, getState) => {
     values.name = values.projectName;
+    values.images = 'https://s3-us-west-1.amazonaws.com/tailored-knits-repository/default-image.jpg';   
     dispatch(projectsRequest());
     const authToken = getState().authReducer.authToken;
     return fetch(`${API_BASE_URL}/projects`, {

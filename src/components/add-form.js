@@ -80,7 +80,7 @@ export class AddForm extends React.Component {
                                 component={Input}
                                 validate={[required, nonEmpty]} />
                         </li>
-                        <li className='form-row'>
+                        <li className='form-row radio'>
                             <label>Style</label>
                             <Field
                                 type='radio'
@@ -102,14 +102,6 @@ export class AddForm extends React.Component {
                                 name='style'
                                 component={Input}
                                 value='Yoke'
-                                validate={[required, nonEmpty]} />
-                        </li>
-                        <li className='form-row'>
-                            <Field
-                                type='text'
-                                label='Size'
-                                name='size'
-                                component={Input}
                                 validate={[required, nonEmpty]} />
                         </li>
                         {formError}

@@ -181,7 +181,6 @@ export class Measurements extends React.Component {
             displayContent =
                 (
                     <ul className='list-wrapper measurements-list'>
-                        <h3 className='list-title'>Measurements</h3>
                         {contentList}
                         <li className='list-row button-row'>
                             <button type='button' id='edit-button' onClick={() => this.setEditing(true, this.props.type)}>
@@ -254,7 +253,7 @@ export class Measurements extends React.Component {
 
         return (
             <div className={this.props.type.toLowerCase() + `-measurements measurements-div`}>
-                <h2 className='measurements-title'>{this.props.type}</h2>
+                <h2 className='measurements-title'>{this.props.type} Measurements</h2>
                 {displayContent}
             </div >
         )

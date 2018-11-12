@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: minmax(200px, 300px) repeat(2, minmax(200px, 1fr)) 75px;
     grid-template-rows: 100px repeat(2, fit-content(80%));
-    grid-template-areas: "images  title title menu"
+    grid-template-areas: "title  title title menu"
                          "images label value sidebar1"
                          "images notes notes sidebar2";
     justify-items: center;
@@ -20,19 +20,6 @@
     width: 100px;
     bottom: 0;
     left: 0;
-}
-
-.measurements-heading:hover,
-.upload-heading:hover {
-    color: #22264B;
-    cursor: pointer;
-    box-shadow: 1px 1px 4px 1px #22264B;
-}
-
-.measurements-heading:focus,
-.upload-heading:focus {
-    outline: none;
-    box-shadow: 1px 1px 4px 1px #22264B;
 }
 
 .measurements-heading,
@@ -55,6 +42,19 @@
     
 }
 
+.measurements-heading:hover,
+.upload-heading:hover {
+    color: #22264B;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px 1px #22264B;
+}
+
+.measurements-heading:focus,
+.upload-heading:focus {
+    outline: none;
+    box-shadow: 1px 1px 4px 1px #22264B;
+}
+
 .measurements-heading.active,
 .upload-heading.active {
     transition: 1s ease;
@@ -64,10 +64,6 @@
 
 .upload-heading {
     top: 450px;
-}
-
-.list-wrapper {
-    min-height: 500px;
 }
 
 .list-row {
