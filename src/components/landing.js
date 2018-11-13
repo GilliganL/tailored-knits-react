@@ -32,7 +32,7 @@ export function Landing(props) {
                 <h2>Connect via Ravelry</h2>
                 <p>Use your Ravelry account to create your Tailored Knits account.</p>
             </section>
-            <section className='account'>
+            <section className='account-section'>
                 <LoginForm />
                 <SignupForm />
             </section>

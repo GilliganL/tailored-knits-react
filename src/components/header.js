@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { login } from '../actions/auth';
 import { headerActive } from '../actions/tailored-knits';
 import Nav from './nav';
 
 import './header.css';
 
 export class Header extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         active: '',
-    //         headerClass: ''
-    //     }
-    // }
 
     onClick() {
-        // const headerClass = this.state.active ? '' : 'active';
         this.props.dispatch(headerActive())
+    }
+
+    login() {
+        const username = ;
+        //how to hide password? Env variable?
+        const password = ;
+        this.props.dispatch(login(username, password))
     }
 
     render() {
@@ -26,7 +26,7 @@ export class Header extends React.Component {
             content = <div>
                 <h1>Tailored Knits</h1>
                 <p>Modify sweater patterns for a personalized fit with the help of Tailored Knits.</p>
-                <button id='demo-button'>View Demo</button>
+                <button id='demo-button' onClick={() => this.login()}>View Demo</button>
             </div>
         } else {
             content = (
