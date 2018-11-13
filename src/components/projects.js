@@ -32,7 +32,7 @@ export class Projects extends React.Component {
                 return  (
                     <div key={index} className={'project-card ' + style}>
                         <div className='image'>
-                            <img src={project.images[0]} alt={`${project.name} knit sweater`} alt />
+                            <img src={project.images[0]} alt={`${project.name} knit sweater`} />
                         </div>
                         <Link to={`/projects/${project._id}`}>
                             <h2>{project.name}</h2>

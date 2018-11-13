@@ -78,8 +78,8 @@ export class ProjectDetail extends React.Component {
         if (this.props.project && this.props.activeTab === 'stitches') {
             display = (
                 <section className='stitches-section'>
-                    <Stitches content={this.props.project} type='Project' />
-                    <Stitches content={this.props.pattern} type='Pattern' />
+                    <Stitches content={this.props.project} type='Project' style={this.props.style} />
+                    <Stitches content={this.props.pattern} type='Pattern' style={this.props.style} />
                 </section>
 
             )
@@ -88,9 +88,9 @@ export class ProjectDetail extends React.Component {
         } else if (this.props.project && this.props.activeTab === 'measurements') {
             display = (
                 <section className='measurements-section'>
-                    <Measurements form='patternForm' type='Pattern' content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />
-                    <Measurements form='projectForm' type='Project' content={this.props.project} initialValues={this.props.project} id={this.props.match.params.projectId} />
-                    <Measurements form='userForm' type='User' content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
+                    <Measurements form='patternForm' type='Pattern' style={this.props.style} content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />
+                    <Measurements form='projectForm' type='Project' style={this.props.style} content={this.props.project} initialValues={this.props.project} id={this.props.match.params.projectId} />
+                    <Measurements form='userForm' type='User' style={this.props.style} content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
                 </section>
             )
             measurementsClass = 'active';
@@ -126,13 +126,11 @@ export class ProjectDetail extends React.Component {
 }
 
 const mapStateToProps = state => {
-    let image;
-    if (state.projectsReducer.image) {
-        image = state.projectsReducer.image
-    }
+    const image = state.projectsReducer.image ? state.projectsReducer.image : '';
+    const style = state.projectsReducer.project.pattern ? state.projectsReducer.project.pattern.style : '';
     const notes = state.projectsReducer.project.notes;
     const pattern = state.projectsReducer.project.pattern;
-    const images = state.projectsReducer.project.images;
+    const images = state.projectsReducer.project.images; 
     return {
         project: state.projectsReducer.project,
         pattern,
@@ -140,7 +138,8 @@ const mapStateToProps = state => {
         image,
         activeTab: state.projectsReducer.activeTab,
         notes,
-        croppedFile: state.projectsReducer.croppedFile
+        croppedFile: state.projectsReducer.croppedFile,
+        style
     }
 }
 

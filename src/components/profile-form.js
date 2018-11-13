@@ -1,8 +1,11 @@
 import React from 'react';
 import { reduxForm, Field, focus } from 'redux-form';
 import { connect } from 'react-redux';
-import { email, required, nonEmpty } from '../validators';
+import { email, required, nonEmpty, isTrimmed, matches, length } from '../validators';
 import { updateUser, setEditing } from '../actions/users';
+
+const passwordLength = length({min: 8, max: 72});
+const matchesPassword = matches('password')
 
 export class ProfileForm extends React.Component {
 
@@ -52,6 +55,18 @@ export class ProfileForm extends React.Component {
                             <li className='form-row'>
                                 <label htmlFor='email'>Email</label>
                                 <Field type='email' id='email' name='email' component='input' validate={[required, nonEmpty, email]} />
+                            </li>
+                            <li className='form-row'>
+                                <label htmlFor='passwordCurrent'>Current Password</label>
+                                <Field type='password' id='passwordCurrent' name='passwordCurrent' component='input' />
+                            </li>
+                            <li className='form-row'>
+                                <label htmlFor='password'>New Password</label>
+                                <Field type='password' id='password' name='password' component='input' validate={[required, nonEmpty, isTrimmed, passwordLength]} />
+                            </li>
+                            <li className='form-row'>
+                                <label htmlFor='passwordConfirm'>Confirm Password</label>
+                                <Field type='password' id='passwordConfirm' name='passwordConfirm' component='input' validate={[required, nonEmpty, matchesPassword]} />
                             </li>
                             {formError}
                             <li className='form-row'>

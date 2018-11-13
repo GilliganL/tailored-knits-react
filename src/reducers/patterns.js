@@ -14,8 +14,6 @@ const initialState = {
     error: null
 };
 
-//add IS for measurements, pattern specs 
-
 export default function reducer(state = initialState, action) {
     if (action.type === PATTERNS_REQUEST) {
         return Object.assign({}, state, {

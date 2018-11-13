@@ -25,6 +25,7 @@ button {
     min-width: 150px;
     min-height: 40px;
     padding: 5px;
+    margin-top: 5px;
     background: #B56969;
     color: #FAFAFA;
     font-size: 18px;
@@ -36,7 +37,6 @@ button {
 }
 
 button:hover {
-    color: #22264B;
     box-shadow: 1px 1px 4px 1px #22264B;
 }
 

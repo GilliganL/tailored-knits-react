@@ -44,7 +44,6 @@
 
 .measurements-heading:hover,
 .upload-heading:hover {
-    color: #22264B;
     cursor: pointer;
     box-shadow: 1px 1px 4px 1px #22264B;
 }
@@ -67,6 +66,8 @@
 }
 
 .list-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 90%;
     min-height: 25px;
     border-bottom: 1px dotted gray;
@@ -74,23 +75,28 @@
     padding: 3px;
 }
 
-.label,
-.value {
-    display: inline-block;
-    margin: 0;
+.form-input {
+    display: contents
 }
 
-.label {
-    width: 60%;
+.label,
+label,
+.value,
+input {
+    display: inline-block;
+    margin: 0;
+    width: 100%;
+}
+
+.label,
+label {
     padding-right: 5px;
 }
 
-.value {
-   width: 40%;
- }
-
 .list-row.button-row {
     text-align: center;
+    display: initial;
+    border: none;
 }
 
 #delete-button {
@@ -105,9 +111,9 @@
 .upload-section {
     position: fixed;
     top: 10%;
-    left: 20%;
+    left: 25%;
     height: 450px;
-    width: 60%;
+    width: 50%;
     padding-bottom: 40px;
     background: #22264B;
     border-radius: 10px;

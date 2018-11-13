@@ -263,7 +263,6 @@ export class Measurements extends React.Component {
 const mapStateToProps = state => {
 
     return {
-        style: state.projectsReducer.project.pattern.style,
         editProject: state.projectsReducer.editProject,
         editPattern: state.projectsReducer.editPattern,
         editUser: state.projectsReducer.editUser,

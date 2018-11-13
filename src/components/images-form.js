@@ -14,7 +14,9 @@ class ImagesForm extends PureComponent {
     labelClass: '',
     crop: {
       x: 10,
-      y: 10
+      y: 10,
+      height: 20,
+      width: 20
     }
   };
 

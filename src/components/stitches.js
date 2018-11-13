@@ -27,24 +27,35 @@ export default class Stitches extends React.Component {
             hips: 'Hips',
             upperArm: 'Upper Arm',
             length: 'Length',
-            wrist: 'Wrist',
-            armhole: 'Armhole',
-            raglanDepth: 'Raglan Depth',
-            yokeDepth: 'Yoke Depth'
+            wrist: 'Wrist'
         };
+
+        if (this.props.style === 'Set In' || this.props.type === 'User') {
+            measureKeys.armhole = 'Armhole';
+        }
+
+        if ((this.props.style === 'Raglan' || this.props.style === 'Yoke') && this.props.type !== 'User') {
+            measureKeys.raglanDepth = 'Raglan Depth';
+        }
+
+        if (this.props.style === 'Yoke' && this.props.type !== 'User') {
+            measureKeys.yokeDepth = 'Yoke Depth';
+        }
 
         let stitchesList;
 
         stitchesList = Object.keys(measureKeys).map((key, index) => {
             let listItem;
-            if (this.props.content[key]) {
-                listItem = (
-                    <li key={index} className='list-row'>
-                        <label className='label stitches-label'>{measureKeys[key]}:</label>
-                        <p className='value'>{this.calculateGauge(key)}</p>
-                    </li>
-                )
-            }
+            let itemValue;
+            if (key) {
+                itemValue = this.calculateGauge(key);
+            } 
+            listItem = (
+                <li key={index} className='list-row'>
+                    <label className='label stitches-label'>{measureKeys[key]}:</label>
+                    <p className='value'>{itemValue || ''}</p>
+                </li>
+            )
             return listItem;
         })
 
