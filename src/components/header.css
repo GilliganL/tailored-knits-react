@@ -4,7 +4,6 @@ header {
 
 .landing-header {
     display: flex;
-
     background: #22264B;
     color: #FAFAFA;
     height: 500px;
@@ -27,6 +26,8 @@ header {
     justify-content: flex-end;
     padding: 20px 50px;
     height: 100%;
+    width: 100%;
+    margin-right: 2.5em;
 }
 
 #main-title {
@@ -45,18 +46,21 @@ header {
 .link-list {
     position: absolute;
     top: 7px;
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    justify-content: center;
 }
 
 .link-list, 
 .link-list > li {
     list-style: none;
-    display: inline-block;
 }
 
 .landing-link {
     color: #FAFAFA;
     font-size: 16px;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 nav {

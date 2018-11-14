@@ -26,7 +26,8 @@ export function Landing(props) {
                 <h2 className='landing-title'>Pattern Specifications</h2>
                 <p>Tailored Knit takes the gauge, stitch pattern, ease, and shape of the sweater
                     pattern into account when making adjustments so it will fit you better and maintain
-            the overall look wihtout losing the special details. </p>
+                    the overall look wihtout losing the special details. </p>
+            <img className='landing-image' id='measurements-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/designing-image.jpg' alt='Taking notes on your knit project' />
             </section>
             <section id='modifications'>
                 <h2 className='landing-title'>Modifications</h2>
