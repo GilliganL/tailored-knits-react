@@ -2,7 +2,6 @@ import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
-
 export const PATTERNS_REQUEST = 'PATTERNS_REQUEST';
 export const patternsRequest = () => ({
     type: PATTERNS_REQUEST

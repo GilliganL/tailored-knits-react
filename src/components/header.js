@@ -14,9 +14,9 @@ export class Header extends React.Component {
     }
 
     login() {
-        const username = ;
+        const username = 'Kermit';
         //how to hide password? Env variable?
-        const password = ;
+        const password = 'Password2';
         this.props.dispatch(login(username, password))
     }
 
