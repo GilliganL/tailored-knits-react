@@ -15,10 +15,18 @@ body {
     letter-spacing: .6px;
 }
 
-input {
+input,
+label {
     border: none;
     border-radius: 5px;
     font-size: 18px;
+    max-width: 250px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+label {
+    max-width: 200px;
 }
 
 button {

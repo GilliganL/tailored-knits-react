@@ -7,7 +7,7 @@ import Landing from './landing';
 import Projects from './projects';
 import ProjectDetail from './project-detail';
 import Profile from './profile';
-import Footer from './footer';
+
 
 import './home.css';
 
@@ -51,7 +51,6 @@ export class Home extends React.Component {
                             <Route path='/projects/:projectId' component={ProjectDetail} />
                             <Route path='/' component={Landing} />
                         </Switch>
-                    {/* <Footer /> */}
                 </div>
             </Router>
         );

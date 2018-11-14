@@ -40,13 +40,19 @@ export const registerUser = user => dispatch => {
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
+                console.log(err)
                 return Promise.reject(
                     new SubmissionError({
                         [location]: message
                     })
                 );
             }
-            dispatch(usersError());
+         dispatch(usersError(err));
+            return Promise.reject(
+                new SubmissionError({
+                    _error: 'Error submitting message'
+                })
+            );
         });
 };
 
@@ -62,7 +68,22 @@ export const fetchUserById = (id) => (dispatch, getState) => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then((user) => dispatch(usersSuccess(user)))
-    .catch(err => dispatch(usersError(err)));
+    .catch(err => {
+        const {reason, message, location} = err;
+        if (reason === 'ValidationError') {
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+        dispatch(usersError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: 'Error submitting message'
+            })
+        );
+    });
 };
 
 export const updateUser = (id, values) => (dispatch, getState) => {
@@ -89,5 +110,10 @@ export const updateUser = (id, values) => (dispatch, getState) => {
             );
         }
         dispatch(usersError(err));
+        return Promise.reject(
+            new SubmissionError({
+                _error: 'Error submitting message'
+            })
+        );
     });
 };

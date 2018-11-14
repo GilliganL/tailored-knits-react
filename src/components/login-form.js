@@ -1,8 +1,8 @@
 import React from 'react';
 import { reduxForm, Field, focus } from 'redux-form';
-
 import { login } from '../actions/auth';
 import { required, nonEmpty } from '../validators';
+import Input from './input';
 import './login-form.css';
 
 export class Login extends React.Component {
@@ -13,7 +13,6 @@ export class Login extends React.Component {
     }
 
     render() {
-
         let formError = (
             <li className='form-row'>
                 <div className='formError' aria-live='assertive'>
@@ -21,6 +20,22 @@ export class Login extends React.Component {
                 </div>
             </li>
         )
+        let successMessage;
+        if (this.props.submitSucceeded) {
+            successMessage = (
+                <li className='form-row message message-succes'>
+                    Form submitted successfully1
+                </li>
+            );
+        }
+        let errorMessage;
+        if (this.props.error) {
+            errorMessage = (
+                <li className='form-row message message-error'>
+                    {this.props.error}
+                </li>
+            );
+        }
 
         return (
             <fieldset className='login-form-container'>
@@ -31,19 +46,34 @@ export class Login extends React.Component {
                     )}>
                     <ul className='form-wrapper' role='none'>
                         <li className='form-row'>
-                            <label htmlFor='username'>Username</label>
-                            <Field type='text' id='loginUsername' name='username' component='input' validate={[required, nonEmpty]} />
+                            <Field
+                                type='text'
+                                name='loginUsername'
+                                component={Input}
+                                label='Username'
+                                validate={[required, nonEmpty]} />
                         </li>
                         <li className='form-row'>
-                            <label htmlFor='password'>Password</label>
-                            <Field type='password' id='loginPassword' name='password' component='input' validate={[required, nonEmpty]} />
+                            <Field
+                                type='password'
+                                name='loginPassword'
+                                component={Input}
+                                label='Password'
+                                validate={[required, nonEmpty]} />
                         </li>
                         <li className='form-row hidden' id='login-error-row' hidden>
                             <p id='login-error'></p>
                         </li>
                         {formError}
+                        {successMessage}
+                        {errorMessage}
                         <li className='form-row'>
-                            <button type='submit' id='login-button'>Login</button>
+                            <button
+                                type='submit'
+                                id='login-button'
+                                disabled={this.props.pristine || this.props.submitting}>
+                                Login
+                            </button>
                         </li>
                     </ul>
                 </form>

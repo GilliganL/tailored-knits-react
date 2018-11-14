@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import { DEMO_PASSWORD } from '../config';
 import { login } from '../actions/auth';
 import { headerActive } from '../actions/tailored-knits';
 import Nav from './nav';
@@ -15,18 +17,27 @@ export class Header extends React.Component {
 
     login() {
         const username = 'Kermit';
-        //how to hide password? Env variable?
-        const password = 'Password2';
-        this.props.dispatch(login(username, password))
+        this.props.dispatch(login(username, DEMO_PASSWORD))
     }
 
     render() {
         let content;
+        let headerClass;
         if (!this.props.loggedIn) {
+            headerClass = 'landing-header'
             content = <div>
-                <h1>Tailored Knits</h1>
-                <p>Modify sweater patterns for a personalized fit with the help of Tailored Knits.</p>
-                <button id='demo-button' onClick={() => this.login()}>View Demo</button>
+                <img id='header-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/heading-image.jpg' alt='Three knit sweaters' />
+                <div className='main-content'>
+                    <ul className='link-list'>
+                        <li><Link className='landing-link' to={`/#measurements`}>Measurements</Link></li>
+                        <li><Link className='landing-link' to={`/#specifications`}>Specifications</Link></li>
+                        <li><Link className='landing-link' to={`/#modifications`}>Modifications</Link></li>
+                        <li><Link className='landing-link' to={`/#account`}>Account</Link></li>
+                    </ul>
+                    <h1 id='main-title'>Tailored Knits</h1>
+                    <p>Modify sweater patterns for a personalized fit with the help of Tailored Knits.</p>
+                    <button id='demo-button' onClick={() => this.login()}>View Demo</button>
+                </div>
             </div>
         } else {
             content = (
@@ -39,7 +50,7 @@ export class Header extends React.Component {
         }
 
         return (
-            <header className={this.props.active}>
+            <header className={this.props.active + headerClass}>
                 {content}
                 <Nav />
             </header>

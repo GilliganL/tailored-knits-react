@@ -1,0 +1,37 @@
+#main-landing {
+    margin: 0;
+    padding: 0;
+}
+
+.landing-container {
+    width: 100%;
+    max-width: 68em;
+    margin: 0 auto;
+    padding: 0 2.5em;
+}
+
+#measurements, 
+#specifications,
+#modifications
+#account {
+    height: 400px;
+    display: flex;
+}
+
+.landing-image {
+    height: 80%;
+    margin-right: -2.5em;
+    align-self: center;
+}
+
+.landing-title {
+    font-size: 24px;
+}
+
+#measurements > .landing-title {
+    padding-top: 10px;
+}
+
+#measurements > p {
+    padding-top: 15%;
+}

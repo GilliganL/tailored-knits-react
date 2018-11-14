@@ -2,6 +2,63 @@ header {
     grid-area: menu; 
 }
 
+.landing-header {
+    display: flex;
+
+    background: #22264B;
+    color: #FAFAFA;
+    height: 500px;
+}
+
+.landing-header > div {
+    display: contents;
+}
+
+#header-image {
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px 50px;
+    height: 100%;
+}
+
+#main-title {
+    font-size: 50px;
+    margin: 15px 0;
+    width: 70%;
+    text-align: left;
+}
+
+#demo-button {
+    height: 50px;
+    width: 75px;
+    align-self: flex-end;
+}
+
+.link-list {
+    position: absolute;
+    top: 7px;
+}
+
+.link-list, 
+.link-list > li {
+    list-style: none;
+    display: inline-block;
+}
+
+.landing-link {
+    color: #FAFAFA;
+    font-size: 16px;
+    padding: 0 5px;
+}
+
 nav {
     visibility: hidden;
     position: fixed;
