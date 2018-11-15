@@ -68,7 +68,9 @@ export default function reducer(state = initialState, action) {
             error: null
         });
     } else if (action.type === REMOVE_PROJECT) {
+        const projects = state.projects.filter(object => object.id !== action.id);
         return Object.assign({}, state, {
+            projects,
             message: action.message,
             loading: false,
             error: null

@@ -44,8 +44,9 @@ export const addProject = project => ({
 });
 
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
-export const removeProject = message => ({
+export const removeProject = (id, message) => ({
     type: REMOVE_PROJECT,
+    id,
     message
 });
 
