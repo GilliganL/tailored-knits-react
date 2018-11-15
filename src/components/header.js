@@ -50,7 +50,7 @@ export class Header extends React.Component {
         }
 
         return (
-            <header className={this.props.active + headerClass}>
+            <header className={this.props.active + ' ' + headerClass}>
                 {content}
                 <Nav />
             </header>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, focus } from 'redux-form';
+import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { login } from '../actions/auth';
 import { required, nonEmpty } from '../validators';
 import Input from './input';
@@ -9,21 +9,29 @@ export class Login extends React.Component {
 
     onSubmit(values) {
         return this.props
-            .dispatch(login(values.username, values.password))
+            .dispatch(login(values.loginUsername, values.loginPassword))
+            .catch(err => {
+                let { code, reason, message } = err;
+                message =
+                    code === 401
+                        ? 'Incorrect username or password'
+                        : 'Unable to login, please try again';
+                if (reason === 'ValidationError' || code === 401) {
+                    throw new SubmissionError({
+                        _error: message
+                    })
+                }
+                throw new SubmissionError({
+                    _error: 'Error submitting Login Form.'
+                })
+            });
     }
 
     render() {
-        let formError = (
-            <li className='form-row'>
-                <div className='formError' aria-live='assertive'>
-                    {this.props.error}
-                </div>
-            </li>
-        )
         let successMessage;
         if (this.props.submitSucceeded) {
             successMessage = (
-                <li className='form-row message message-succes'>
+                <li className='form-row message message-success'>
                     Form submitted successfully1
                 </li>
             );
@@ -64,7 +72,6 @@ export class Login extends React.Component {
                         <li className='form-row hidden' id='login-error-row' hidden>
                             <p id='login-error'></p>
                         </li>
-                        {formError}
                         {successMessage}
                         {errorMessage}
                         <li className='form-row'>

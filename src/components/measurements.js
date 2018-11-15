@@ -26,19 +26,16 @@ export class Measurements extends React.Component {
                 .then(() => this.props.dispatch(fetchProjectById(this.props.id)))
                 .then(() => this.setEditing(false, 'Project'))
                 .catch(err => {
-                    const { reason, message, location } = err;
+                    const { reason, message } = err;
+    
                     if (reason === 'ValidationError') {
-                        return Promise.reject(
-                            new SubmissionError({
-                                [location]: message
-                            })
-                        );
-                    }
-                    return Promise.reject(
-                        new SubmissionError({
-                            _error: 'Error submitting message'
+                        throw new SubmissionError({
+                            _error: message
                         })
-                    );
+                    }
+                    throw new SubmissionError({
+                        _error: 'Error submitting Signup Form.'
+                    })
                 });
         }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field, focus } from 'redux-form';
+import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import { email, required, nonEmpty, isTrimmed, matches, length } from '../validators';
 import { updateUser, setEditing } from '../actions/users';
@@ -23,9 +23,22 @@ export class ProfileForm extends React.Component {
     }
 
     onSubmit(values) {
+        console.log(values)
         return this.props
             .dispatch(updateUser(this.props.id, values))
             .then(() => this.props.dispatch(setEditing(false)))
+            .catch(err => {
+                const { reason, message } = err;
+
+                if (reason === 'ValidationError') {
+                    throw new SubmissionError({
+                        _error: message
+                    })
+                }
+                throw new SubmissionError({
+                    _error: 'Error submitting Profile Edit Form.'
+                })
+            });
     }
 
     render() {
@@ -62,11 +75,11 @@ export class ProfileForm extends React.Component {
                             </li>
                             <li className='form-row'>
                                 <label htmlFor='password'>New Password</label>
-                                <Field type='password' id='password' name='password' component='input' validate={[required, nonEmpty, isTrimmed, passwordLength]} />
+                                <Field type='password' id='password' name='password' component='input' validate={[nonEmpty, isTrimmed, passwordLength]} />
                             </li>
                             <li className='form-row'>
                                 <label htmlFor='passwordConfirm'>Confirm Password</label>
-                                <Field type='password' id='passwordConfirm' name='passwordConfirm' component='input' validate={[required, nonEmpty, matchesPassword]} />
+                                <Field type='password' id='passwordConfirm' name='passwordConfirm' component='input' validate={[nonEmpty, matchesPassword]} />
                             </li>
                             {formError}
                             <li className='form-row'>

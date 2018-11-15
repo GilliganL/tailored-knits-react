@@ -1,5 +1,5 @@
-import {SubmissionError} from 'redux-form';
-import { API_BASE_URL} from '../config';
+import { SubmissionError } from 'redux-form';
+import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
 export const USERS_REQUEST = 'USERS_REQUEST';
@@ -38,21 +38,8 @@ export const registerUser = user => dispatch => {
         .then(res => res.json())
         .then(user => dispatch(usersSuccess(user)))
         .catch(err => {
-            const {reason, message, location} = err;
-            if (reason === 'ValidationError') {
-                console.log(err)
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-         dispatch(usersError(err));
-            return Promise.reject(
-                new SubmissionError({
-                    _error: 'Error submitting message'
-                })
-            );
+            dispatch(usersError(err.message || 'Error submitting Signup Form.'))
+            throw err
         });
 };
 
@@ -65,25 +52,13 @@ export const fetchUserById = (id) => (dispatch, getState) => {
             Authorization: `Bearer ${authToken}`
         }
     })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .then((user) => dispatch(usersSuccess(user)))
-    .catch(err => {
-        const {reason, message, location} = err;
-        if (reason === 'ValidationError') {
-            return Promise.reject(
-                new SubmissionError({
-                    [location]: message
-                })
-            );
-        }
-        dispatch(usersError(err));
-        return Promise.reject(
-            new SubmissionError({
-                _error: 'Error submitting message'
-            })
-        );
-    });
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((user) => dispatch(usersSuccess(user)))
+        .catch(err => {
+            this.props.dispatch(usersError(err.message || 'Error submitting Signup Form.'))
+            throw err
+        });
 };
 
 export const updateUser = (id, values) => (dispatch, getState) => {
@@ -97,23 +72,11 @@ export const updateUser = (id, values) => (dispatch, getState) => {
         },
         body: JSON.stringify(values)
     })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .then(user => dispatch(usersSuccess(user)))
-    .catch(err => {
-        const {reason, message, location} = err;
-        if (reason === 'ValidationError') {
-            return Promise.reject(
-                new SubmissionError({
-                    [location]: message
-                })
-            );
-        }
-        dispatch(usersError(err));
-        return Promise.reject(
-            new SubmissionError({
-                _error: 'Error submitting message'
-            })
-        );
-    });
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(user => dispatch(usersSuccess(user)))
+        .catch(err => {
+            this.props.dispatch(usersError(err.message || 'Error submitting Signup Form.'))
+            throw err
+        });
 };

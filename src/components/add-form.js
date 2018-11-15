@@ -7,7 +7,6 @@ import { createPattern } from '../actions/patterns';
 import Input from './input';
 import './add-form.css';
 
-
 export class AddForm extends React.Component {
 
     onSubmit(values) {
@@ -21,37 +20,36 @@ export class AddForm extends React.Component {
                 .then((values) => this.props.dispatch(createProject(values)))
                 .then((res) => this.props.history.push(`/projects/${res.project._id}`))
                 .catch(err => {
-                    const { reason, message, location } = err;
+                    const { reason, message } = err;
                     if (reason === 'ValidationError') {
-
-                        return Promise.reject(
-                            new SubmissionError({
-                                [location]: message
-                            })
-                        );
-                    }
-                    return Promise.reject(
-                        new SubmissionError({
-                            _error: 'Error submitting message'
+                        throw new SubmissionError({
+                            _error: message
                         })
-                    );
+                    }
+                    throw new SubmissionError({
+                        _error: 'Error submitting add project f orm.'
+                    })
                 });
         }
     }
 
     render() {
-
-        let formError;
-        if (this.props.error) {
-            formError = (
-                <li className='form-row'>
-                    <div className='formError' aria-live='assertive'>
-                        {this.props.error}
-                    </div>
+        let successMessage;
+        if (this.props.submitSucceeded) {
+            successMessage = (
+                <li className=' form-row message message-success'>
+                    Form submitted successfully!
                 </li>
             );
         }
-
+        let errorMessage;
+        if (this.props.error) {
+            errorMessage = (
+                <li className='message message-error'>
+                    {this.props.error}
+                </li>
+            );
+        }
         if (!this.props.editing) {
             return (
                 <button className='add-button' onClick={() => this.props.setEditing(true)}>Add Project</button>
@@ -104,7 +102,8 @@ export class AddForm extends React.Component {
                                 value='Yoke'
                                 validate={[required, nonEmpty]} />
                         </li>
-                        {formError}
+                        {errorMessage}
+                        {successMessage}
                         <li className='form-row'>
                             <button
                                 type='submit'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
-import { registerUser, usersError } from '../actions/users';
+import { registerUser } from '../actions/users';
 import { login } from '../actions/auth'
 import { required, nonEmpty, length, isTrimmed, matches, email } from '../validators';
 import Input from './input';
@@ -14,41 +14,32 @@ export class Signup extends React.Component {
     onSubmit(values) {
         return this.props
             .dispatch(registerUser(values))
-            .then(res => {
-                console.log(res)
-            this.props.dispatch(login(values.username, values.password))
-            })
+            .then(() => this.props.dispatch(login(values.username, values.password)))
             .catch(err => {
-                console.log(err)
-                this.props.dispatch(usersError(err))
-                return Promise.reject(
-                    new SubmissionError({
-                        err
+                const { reason, message } = err;
+
+                if (reason === 'ValidationError') {
+                    throw new SubmissionError({
+                        _error: message
                     })
-                );
+                }
+                throw new SubmissionError({
+                    _error: 'Error submitting Signup Form.'
+                })
             });
     }
 
     render() {
-        let formError = (
-            <li className='form-row'>
-                <div className='formError' aria-live='assertive'>
-                    {this.props.error}
-                </div>
-            </li>
-        )
         let successMessage;
         if (this.props.submitSucceeded) {
-            console.log(this.props.submitSucceeded)
             successMessage = (
-                <li className=' form-row message message-succes'>
+                <li className=' form-row message message-success'>
                     Form submitted successfully!
                 </li>
             );
         }
         let errorMessage;
         if (this.props.error) {
-            console.log(this.props.error)
             errorMessage = (
                 <li className='message message-error'>
                     {this.props.error}
@@ -59,9 +50,7 @@ export class Signup extends React.Component {
             <fieldset className='signup-form-container'>
                 <legend>Sign Up</legend>
                 <form id='sign-up-form'
-                    onSubmit={this.props.handleSubmit(values =>
-                        this.onSubmit(values)
-                    )}>
+                    onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                     <ul className='form-wrapper' role='none'>
                         <li className='form-row'>
                             <Field
@@ -75,6 +64,7 @@ export class Signup extends React.Component {
                         <li className='form-row'>
                             <Field
                                 type='text'
+                                id='lastName'
                                 name='lastName'
                                 component={Input}
                                 label='Last Name'
@@ -83,6 +73,7 @@ export class Signup extends React.Component {
                         <li className='form-row'>
                             <Field
                                 type='text'
+                                id='username'
                                 name='username'
                                 component={Input}
                                 label='Username'
@@ -112,7 +103,6 @@ export class Signup extends React.Component {
                                 label='Confirm Password'
                                 validate={[required, nonEmpty, matchesPassword]} />
                         </li>
-                        {formError}
                         {successMessage}
                         {errorMessage}
                         <li className='form-row'>
@@ -127,5 +117,8 @@ export class Signup extends React.Component {
 
 export default reduxForm({
     form: 'signup',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('signup', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) => {
+        console.log(errors)
+        return dispatch(focus('signup', Object.keys(errors)[0]))
+    }
 })(Signup);

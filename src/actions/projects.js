@@ -1,4 +1,3 @@
-import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
@@ -103,7 +102,10 @@ export const fetchProjects = (username) => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then(projects => dispatch(projectsSuccess(projects)))
-        .catch(err => dispatch(projectsError(err)))
+        .catch(err => {
+            this.props.dispatch(projectsError(err.message || 'Error getting projects.'))
+            throw err
+        });
 };
 
 export const fetchProjectById = id => (dispatch, getState) => {
@@ -119,7 +121,10 @@ export const fetchProjectById = id => (dispatch, getState) => {
         .then(res => res.json())
         .then((project) => dispatch(projectSuccess(project)))
         .then((project) => dispatch(imagesSuccess(project.images)))
-        .catch(err => dispatch(projectsError(err)))
+        .catch(err => {
+            this.props.dispatch(projectsError(err.message || 'Error getting project.'))
+            throw err
+        });
 };
 
 export const createProject = values => (dispatch, getState) => {
@@ -139,15 +144,8 @@ export const createProject = values => (dispatch, getState) => {
         .then(res => res.json())
         .then(project => dispatch(addProject(project)))
         .catch(err => {
-            const { reason, message, location } = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-            dispatch(projectsError(err))
+            this.props.dispatch(projectsError(err.message || 'Error creating project.'))
+            throw err
         });
 }
 
@@ -166,15 +164,8 @@ export const updateProject = (id, values) => (dispatch, getState) => {
         .then(res => res.json())
         .then(() => dispatch(updateSuccess()))
         .catch(err => {
-            const { reason, message, location } = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-            dispatch(projectsError(err))
+            this.props.dispatch(projectsError(err.message || 'Error updating project.'))
+            throw err
         });
 }
 
@@ -190,7 +181,10 @@ export const deleteProject = id => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((res) => dispatch(removeProject(res.message)))
-        .catch(err => dispatch(projectsError(err)))
+        .catch(err => {
+            this.props.dispatch(projectsError(err.message || 'Error deleting project.'))
+            throw err
+        });
 };
 
 export const handleImage = file => (dispatch, getState) => {
@@ -199,7 +193,7 @@ export const handleImage = file => (dispatch, getState) => {
     if (validFileTypes.find(i => i === fileType) === undefined) {
         let err = {
             reason: 'ValidationError',
-            message: 'Please choose a JPEG, PNG or GIF file',
+            message: 'Please choose a JPEG, PNG or GIF file.',
             location: 'Image upload'
         }
         throw err;
@@ -208,7 +202,7 @@ export const handleImage = file => (dispatch, getState) => {
     if (file == null) {
         let err = {
             reason: 'ValidationError',
-            message: 'No file selected',
+            message: 'No file selected.',
             location: 'Image upload'
         }
         throw err;
@@ -219,14 +213,8 @@ export const handleImage = file => (dispatch, getState) => {
         .then((response) => uploadFile(response))
         .then((url) => dispatch(imagesSuccess(url)))
         .catch(err => {
-            const { reason, message, location } = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
+            this.props.dispatch(projectsError(err.message || 'Error handling image.'))
+            throw err
         });
 }
 

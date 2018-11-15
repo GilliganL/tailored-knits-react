@@ -1,4 +1,3 @@
-import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
@@ -50,15 +49,8 @@ export const createPattern = (name, style) => (dispatch, getState) => {
         .then(res => res.json())
         .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
-            const { reason, message, location } = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-            dispatch(patternsError(err))
+            this.props.dispatch(patternsError(err.message || 'Error creating pattern.'))
+            throw err
         });
 }
 
@@ -74,7 +66,10 @@ export const fetchPatternById = id => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((pattern) => dispatch(patternSuccess(pattern)))
-        .catch(err => dispatch(patternsError(err)))
+        .catch(err => {
+            this.props.dispatch(patternsError(err.message || 'Error getting pattern.'))
+            throw err
+        });
 };
 
 export const updatePattern = (id, values) => (dispatch, getState) => {
@@ -92,14 +87,7 @@ export const updatePattern = (id, values) => (dispatch, getState) => {
         .then(res => res.json())
         .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
-            const { reason, message, location } = err;
-            if (reason === 'ValidationError') {
-                return Promise.reject(
-                    new SubmissionError({
-                        [location]: message
-                    })
-                );
-            }
-            dispatch(patternsError(err))
+            this.props.dispatch(patternsError(err.message || 'Error updating pattern.'))
+            throw err
         });
 }
