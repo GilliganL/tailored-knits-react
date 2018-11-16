@@ -1,6 +1,6 @@
 
 .images-section {
-    grid-area: images;
+
     margin: 0;
 }
 
@@ -15,16 +15,47 @@
 }
 
 .images-form-container {
-    width: 80%;
+    /* width: 80%; */
     margin: 0 auto;
     border-radius: 10px;
 }
 
 .images-form-container {
-    max-width: 200px;
+    /* max-width: 200px; */
 }
 
 #upload {
-    width: 200px;
+    /* width: 200px; */
 }
 
+@media only screen and (min-width: 770px) {
+
+    .images-section {
+        grid-area: images;
+        margin: 0;
+    }
+    
+    .project-image,
+    .images-form-container,
+    .image-form {
+        max-height: 250px;
+    }
+    
+    .project-image {
+        border-radius: 10px;
+    }
+    
+    .images-form-container {
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+    
+    .images-form-container {
+        max-width: 200px;
+    }
+    
+    #upload {
+        width: 200px;
+    }
+}

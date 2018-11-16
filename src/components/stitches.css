@@ -1,26 +1,36 @@
-.project-stitches,
-.pattern-stitches {
-    display: contents
-}
-
-.project-stitches .stitches-list {
-    grid-area: label;
-}
-
-.pattern-stitches .stitches-list {
-    grid-area: value;
-}
-
-.stitches-list {
-    width: 90%;
-    padding: 0;
-}
-
 .stitches-title {
-    width: 100%;
     font-size: 18px;
     font-weight: 500;
-    padding-left: 10px;
-    margin: 40px 0 20px 0;
-    text-align: left;
+
+}
+
+@media only screen and (min-width: 770px) {
+    .project-stitches,
+    .pattern-stitches {
+        display: contents
+    }
+    
+    .project-stitches .stitches-list {
+        grid-area: label;
+    }
+    
+    .pattern-stitches .stitches-list {
+        grid-area: value;
+    }
+    
+    .stitches-list {
+        width: 90%;
+        padding: 0;
+    }
+    
+    .stitches-title {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+        padding-left: 10px;
+        margin: 40px 0 20px 0;
+        text-align: left;
+    }
+
+
 }

@@ -1,29 +1,25 @@
 #main-landing {
-    margin: 0;
-    padding: 0;
+;
 }
 
 .landing-container {
-    width: 100%;
-    max-width: 68em;
-    margin: 0 auto;
-    padding: 0 2.5em;
-    display: flex;
-    flex-wrap: wrap;
+
 }
 
 #measurements, 
 #specifications,
 #modifications
 #account {
-    height: 400px;
-    display: flex;
+
+}
+
+img {
+    max-width: 100%;
 }
 
 .landing-image {
-    height: 80%;
-    margin-right: -2.5em;
-    align-self: center;
+ 
+
 }
 
 .landing-title {
@@ -31,45 +27,118 @@
 }
 
 #measurements > .landing-title {
-    padding-top: 10px;
+
 }
 
 #measurements > div {
-    padding: 15% 30px 0 10px;
-    text-align: left;
+
 
 }
 
 #specifications,
 #modifications {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 30px 20px;
-    max-height: 250px;
+
 }
 
 #specifications > p,
 #modifications > p {
-    text-align: left;
+
 }
 
 .account-image {
-    height: 300px;
-    margin-top: 100px;
+
 }
 
 #account {
-    width: 60%;
+
 }
 
 .login-form-container, 
 .signup-form-container {
-    padding: 10px 0;
+ 
 }
 
 .login-form-container > legend, 
 .signup-form-container > legend {
     font-size: 20px;
     font-weight: 600;
+}
+
+@media only screen and (min-width: 770px) {
+    #main-landing {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .landing-container {
+        width: 100%;
+        max-width: 68em;
+        margin: 0 auto;
+        padding: 0 2.5em;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    #measurements, 
+    #specifications,
+    #modifications
+    #account {
+        height: 400px;
+        display: flex;
+    }
+    
+    .landing-image {
+        height: 80%;
+        margin-right: -2.5em;
+        align-self: center;
+    }
+    
+    .landing-title {
+ 
+    }
+    
+    #measurements > .landing-title {
+        padding-top: 10px;
+    }
+    
+    #measurements > div {
+        padding: 15% 30px 0 10px;
+        text-align: left;
+    
+    }
+    
+    #specifications,
+    #modifications {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        padding: 30px 20px;
+        max-height: 250px;
+    }
+    
+    #specifications > p,
+    #modifications > p {
+        text-align: left;
+    }
+    
+    .account-image {
+        height: 300px;
+        margin-top: 100px;
+    }
+    
+    #account {
+        width: 60%;
+    }
+    
+    .login-form-container, 
+    .signup-form-container {
+        padding: 10px 0;
+    }
+    
+    .login-form-container > legend, 
+    .signup-form-container > legend {
+   
+    }
 }

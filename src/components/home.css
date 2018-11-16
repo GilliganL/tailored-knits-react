@@ -57,14 +57,23 @@ button:focus {
     display: none;
 }
 
-@media (min-width: 768px) { 
-body {
-   
+h1 {
+    
 }
 
-header,
-footer {
-  
+h2 {
+
 }
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+
+@media only screen and (min-width: 770px) {
 
 }

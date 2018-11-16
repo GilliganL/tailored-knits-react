@@ -1,40 +1,24 @@
 #main-detail {
-    display: grid;
-    grid-template-columns: minmax(200px, 300px) repeat(2, minmax(200px, 1fr)) 75px;
-    grid-template-rows: 100px repeat(2, fit-content(80%));
-    grid-template-areas: "images  title title menu"
-                         "images label value sidebar1"
-                         "images notes notes sidebar2";
-    justify-items: center;
-    margin: 10px;
+
 }
 
 .page-title {
-    grid-area: title;
+  
 }
 
 #delete-button {
-    visibility: hidden;
-    position: absolute;
+
+    /* position: absolute;
     height: 20px;
     width: 100px;
     bottom: 0;
-    left: 0;
+    left: 0; */
 }
 
 .measurements-heading,
 .upload-heading,
 .info-heading {   
-    position: fixed;
-    margin: 0;
-    padding-top: 20px;
-    top: 140px;
-    right: -75px;
-    height: 90px;
-    width: 175px;
-    -ms-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
+ 
     border-radius: 10px;
     background: #B56969;
     color: #FAFAFA;
@@ -61,74 +45,63 @@
 .upload-heading.active,
 .info-heading.active {
     transition: 1s ease;
-    width: 180px;
-    height: 100px;
+
 }
 
 .upload-heading {
-    top: 325px;
+
 }
 
 .info-heading {
-    top: 510px;
+
 }
 
 .list-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 90%;
-    min-height: 25px;
+
     border-bottom: 1px dotted gray;
-    text-align: left;
-    padding: 3px;
-    margin: 0 auto;
+
 }
 
 .form-input {
-    display: contents
+
 }
 
 .label,
 label,
 .value,
 input {
-    display: inline-block;
-    margin: 0;
-    width: 100%;
+
 }
 
 .label,
 label {
-    padding-right: 5px;
+ 
 }
 
 .list-row.button-row {
-    text-align: center;
-    display: initial;
-    border: none;
+
 }
 
 #delete-button {
-    width: 50%;
-    margin: 0 auto;
+
 }
 
 .stitches-section {
-    display: contents;
+
 }
 
 .info-section {
-    grid-area: 2 / 2 / 3 / 4;
+
 }
 
 .info-section > h2 {
-    margin: 10px 0;
+
     font-size: 20px;
     font-weight: 600;
 }
 
 h3 {
-    margin: 5px 0;
+
     font-size: 18px;
     font-weight: 600;
 }
@@ -187,4 +160,144 @@ h3 {
 
 .Reactcrop__image {
     max-width: initial;
+}
+
+@media only screen and (min-width: 770px) {
+    #main-detail {
+        display: grid;
+        grid-template-columns: minmax(200px, 300px) repeat(2, minmax(200px, 1fr)) 75px;
+        grid-template-rows: 100px repeat(2, fit-content(80%));
+        grid-template-areas: "images  title title menu"
+                             "images label value sidebar1"
+                             "images notes notes sidebar2";
+        justify-items: center;
+        margin: 10px;
+    }
+    
+    .page-title {
+        grid-area: title;
+    }
+    
+    #delete-button {
+        visibility: hidden;
+        position: absolute;
+        height: 20px;
+        width: 100px;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .measurements-heading,
+    .upload-heading,
+    .info-heading {   
+        position: fixed;
+        margin: 0;
+        padding-top: 20px;
+        top: 140px;
+        right: -75px;
+        height: 90px;
+        width: 175px;
+        -ms-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+
+        
+    }
+    
+    .upload-heading {
+        top: 325px;
+    }
+    
+    .info-heading {
+        top: 510px;
+    }
+    
+    .list-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+        min-height: 25px;
+    
+        text-align: left;
+        padding: 3px;
+        margin: 0 auto;
+    }
+    
+    .form-input {
+        display: contents
+    }
+    
+    .label,
+    label,
+    .value,
+    input {
+        display: inline-block;
+        margin: 0;
+        width: 100%;
+    }
+    
+    .label,
+    label {
+        padding-right: 5px;
+    }
+    
+    .list-row.button-row {
+        text-align: center;
+        display: initial;
+        border: none;
+    }
+    
+    #delete-button {
+        width: 50%;
+        margin: 0 auto;
+    }
+    
+    .stitches-section {
+        display: contents;
+    }
+    
+    .info-section {
+        grid-area: 2 / 2 / 3 / 4;
+    }
+    
+    .info-section > h2 {
+        margin: 10px 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    
+    h3 {
+        margin: 5px 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    
+    .info-section > p {
+        text-align: left;
+        width: 90%;
+        line-height: 1.6em;
+    }
+    
+    .info-name {
+        font-weight: 600;
+    }
+
+    .upload-section {
+        position: fixed;
+        top: 10%;
+        left: 25%;
+        height: 450px;
+        width: 50%;
+        padding-bottom: 40px;
+        background: #22264B;
+        border-radius: 10px;
+        z-index: 1000;
+        color: #FAFAFA;
+        opacity: 1;
+        animation-name: fadeInOpacity;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+        animation-duration: 1s;
+    }
+
 }

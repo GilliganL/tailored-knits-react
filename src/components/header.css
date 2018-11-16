@@ -1,66 +1,33 @@
-header {
-    grid-area: menu; 
-}
+header {}
 
 .landing-header {
-    display: flex;
     background: #22264B;
     color: #FAFAFA;
-    height: 500px;
 }
 
-.landing-header > div {
-    display: contents;
-}
+.landing-header>div {}
 
 #header-image {
-    height: 100%;
-    top: 0;
-    left: 0;
     z-index: 0;
 }
 
-.main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px 50px;
-    height: 100%;
-    width: 100%;
-    margin-right: 2.5em;
-}
+.main-content {}
 
 #main-title {
     font-size: 50px;
-    margin: 15px 0;
-    width: 70%;
-    text-align: left;
 }
 
-#demo-button {
-    height: 50px;
-    width: 75px;
-    align-self: flex-end;
-}
+#demo-button {}
 
-.link-list {
-    position: absolute;
-    top: 7px;
-    width: 100%;
-    max-width: 720px;
-    display: flex;
-    justify-content: center;
-}
+.link-list {}
 
-.link-list, 
-.link-list > li {
+.link-list,
+.link-list>li {
     list-style: none;
 }
 
 .landing-link {
     color: #FAFAFA;
-    font-size: 16px;
-    padding: 0 10px;
 }
 
 nav {
@@ -135,4 +102,59 @@ header.active nav {
 #bar-3.active {
     -webkit-transform: rotate(45deg) translate(-7px, -7px);
     transform: rotate(45deg) translate(-7px, -7px);
+}
+
+@media only screen and (min-width: 770px) {
+    header {
+        grid-area: menu;
+    }
+    .landing-header {
+        display: flex;
+        height: 500px;
+    }
+    .landing-header>div {
+        display: contents;
+    }
+    #header-image {
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+    }
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 20px 50px;
+        height: 100%;
+        width: 100%;
+        margin-right: 2.5em;
+    }
+    #main-title {
+        font-size: 50px;
+        margin: 15px 0;
+        width: 70%;
+        text-align: left;
+    }
+    #demo-button {
+        height: 50px;
+        width: 75px;
+        align-self: flex-end;
+    }
+    .link-list {
+        position: absolute;
+        top: 7px;
+        width: 100%;
+        max-width: 720px;
+        display: flex;
+        justify-content: center;
+    }
+    .link-list,
+    .link-list>li {
+        list-style: none;
+    }
+    .landing-link {
+        font-size: 16px;
+        padding: 0 10px;
+    }
 }
