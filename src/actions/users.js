@@ -1,4 +1,3 @@
-import { SubmissionError } from 'redux-form';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
 
@@ -56,7 +55,7 @@ export const fetchUserById = (id) => (dispatch, getState) => {
         .then(res => res.json())
         .then((user) => dispatch(usersSuccess(user)))
         .catch(err => {
-            this.props.dispatch(usersError(err.message || 'Error submitting Signup Form.'))
+            dispatch(usersError(err.message || 'Error fetching user.'))
             throw err
         });
 };
@@ -76,7 +75,7 @@ export const updateUser = (id, values) => (dispatch, getState) => {
         .then(res => res.json())
         .then(user => dispatch(usersSuccess(user)))
         .catch(err => {
-            this.props.dispatch(usersError(err.message || 'Error submitting Signup Form.'))
+            dispatch(usersError(err.message || 'Error updating user.'))
             throw err
         });
 };

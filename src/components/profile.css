@@ -1,3 +1,38 @@
-.profile-section {
-    border: 2px solid black;
+.main-profile {
+    margin: 0;
+    padding: 20px 0 20px 0;
 }
+
+
+.profile-container {
+    width: 100%;
+    max-width: 68em;
+    margin: 0 auto;
+    padding: 0 2.5em;
+}
+
+.profile-title {
+    font-size: 30px;
+    margin: 20px 0;
+    font-weight: 700;
+}
+
+.profile-list {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.list-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 15px 0;
+}
+
+.profile-list > li {
+    border: none;
+}
+
+.profile-list > li > .label {
+    max-width: none;
+}
+

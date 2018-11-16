@@ -1,11 +1,9 @@
 import React from 'react';
 import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
-import { email, required, nonEmpty, isTrimmed, matches, length } from '../validators';
+import { email, required, nonEmpty } from '../validators';
 import { updateUser, setEditing } from '../actions/users';
 
-const passwordLength = length({min: 8, max: 72});
-const matchesPassword = matches('password')
 
 export class ProfileForm extends React.Component {
 
@@ -23,7 +21,24 @@ export class ProfileForm extends React.Component {
     }
 
     onSubmit(values) {
-        console.log(values)
+        if(values.password && ((values.password && !values.passwordConfirm) || (values.password && values.passwordConfirm && values.password !== values.passwordConfirm))) {
+            throw new SubmissionError({
+                _error: 'Password and Confirm Password do not match.'
+            })
+        }
+
+        if(values.password && (values.password.length < 8 || values.password.length > 72)) {
+            throw new SubmissionError({
+                _error: 'Password must be between 8 and 72 characters long.'
+            })
+        }
+
+        if(values.password && values.password !== values.password.trim()) {
+            throw new SubmissionError({
+                _error: 'Password must not begin or end with a space.'
+            })
+        }
+
         return this.props
             .dispatch(updateUser(this.props.id, values))
             .then(() => this.props.dispatch(setEditing(false)))
@@ -53,7 +68,7 @@ export class ProfileForm extends React.Component {
         return (
             <section className='profile-section'>
                 <fieldset className='edit-profile-container'>
-                    <legend>Edit Your Profile</legend>
+                    <legend className='list-title'>Edit Your Profile</legend>
                     <form id='sign-up-form'
                         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                         <ul className='form-wrapper' role='none'>
@@ -75,11 +90,11 @@ export class ProfileForm extends React.Component {
                             </li>
                             <li className='form-row'>
                                 <label htmlFor='password'>New Password</label>
-                                <Field type='password' id='password' name='password' component='input' validate={[nonEmpty, isTrimmed, passwordLength]} />
+                                <Field type='password' id='password' name='password' component='input'/>
                             </li>
                             <li className='form-row'>
                                 <label htmlFor='passwordConfirm'>Confirm Password</label>
-                                <Field type='password' id='passwordConfirm' name='passwordConfirm' component='input' validate={[nonEmpty, matchesPassword]} />
+                                <Field type='password' id='passwordConfirm' name='passwordConfirm' component='input' />
                             </li>
                             {formError}
                             <li className='form-row'>

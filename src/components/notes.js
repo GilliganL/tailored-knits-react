@@ -34,7 +34,6 @@ export class Notes extends React.Component {
     }
 
     render() {
-        console.log(this.props.initialValues)
         let formError;
         if (this.props.error) {
             formError = (

@@ -103,7 +103,7 @@ export const fetchProjects = (username) => (dispatch, getState) => {
         .then(res => res.json())
         .then(projects => dispatch(projectsSuccess(projects)))
         .catch(err => {
-            this.props.dispatch(projectsError(err.message || 'Error getting projects.'))
+            dispatch(projectsError(err.message || 'Error getting projects.'))
             throw err
         });
 };
@@ -122,7 +122,7 @@ export const fetchProjectById = id => (dispatch, getState) => {
         .then((project) => dispatch(projectSuccess(project)))
         .then((project) => dispatch(imagesSuccess(project.images)))
         .catch(err => {
-            this.props.dispatch(projectsError(err.message || 'Error getting project.'))
+            dispatch(projectsError(err.message || 'Error getting project.'))
             throw err
         });
 };
@@ -144,7 +144,7 @@ export const createProject = values => (dispatch, getState) => {
         .then(res => res.json())
         .then(project => dispatch(addProject(project)))
         .catch(err => {
-            this.props.dispatch(projectsError(err.message || 'Error creating project.'))
+            dispatch(projectsError(err.message || 'Error creating project.'))
             throw err
         });
 }
@@ -164,7 +164,7 @@ export const updateProject = (id, values) => (dispatch, getState) => {
         .then(res => res.json())
         .then(() => dispatch(updateSuccess()))
         .catch(err => {
-            this.props.dispatch(projectsError(err.message || 'Error updating project.'))
+            dispatch(projectsError(err.message || 'Error updating project.'))
             throw err
         });
 }
@@ -182,7 +182,7 @@ export const deleteProject = id => (dispatch, getState) => {
         .then(res => res.json())
         .then((res) => dispatch(removeProject(res.message)))
         .catch(err => {
-            this.props.dispatch(projectsError(err.message || 'Error deleting project.'))
+            dispatch(projectsError(err.message || 'Error deleting project.'))
             throw err
         });
 };
@@ -213,7 +213,7 @@ export const handleImage = file => (dispatch, getState) => {
         .then((response) => uploadFile(response))
         .then((url) => dispatch(imagesSuccess(url)))
         .catch(err => {
-            this.props.dispatch(projectsError(err.message || 'Error handling image.'))
+            dispatch(projectsError(err.message || 'Error handling image.'))
             throw err
         });
 }

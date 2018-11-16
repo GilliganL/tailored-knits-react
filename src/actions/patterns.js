@@ -49,7 +49,7 @@ export const createPattern = (name, style) => (dispatch, getState) => {
         .then(res => res.json())
         .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
-            this.props.dispatch(patternsError(err.message || 'Error creating pattern.'))
+            dispatch(patternsError(err.message || 'Error creating pattern.'))
             throw err
         });
 }
@@ -67,7 +67,7 @@ export const fetchPatternById = id => (dispatch, getState) => {
         .then(res => res.json())
         .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
-            this.props.dispatch(patternsError(err.message || 'Error getting pattern.'))
+            dispatch(patternsError(err.message || 'Error getting pattern.'))
             throw err
         });
 };
@@ -87,7 +87,7 @@ export const updatePattern = (id, values) => (dispatch, getState) => {
         .then(res => res.json())
         .then((pattern) => dispatch(patternSuccess(pattern)))
         .catch(err => {
-            this.props.dispatch(patternsError(err.message || 'Error updating pattern.'))
+            dispatch(patternsError(err.message || 'Error updating pattern.'))
             throw err
         });
 }

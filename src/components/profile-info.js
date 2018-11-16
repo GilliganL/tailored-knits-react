@@ -17,17 +17,32 @@ export class ProfileInfo extends React.Component {
         if (!this.props.editing) {
             return (
                 <section className='profile-section'>
-                    <h3>Your Profile</h3>
-                    <h3>{this.props.username}</h3>
-                    <p>{this.props.name}</p>
-                    <p>{this.props.user.email}</p>
-                    <button onClick={() => this.setEditing(true)}>Edit Profile</button>
+                    <ul className='profile-list'>
+                        <h3 className='list-title'>Your Profile</h3>
+                        <li className='list-row'>
+                            <label className='label'>Username</label>
+                            <p className='value'>{this.props.username}</p>
+                        </li>
+                        <li className='list-row'>
+                            <label className='label'>Name</label>
+                            <p className='value'>{this.props.name}</p>
+                        </li>
+                        <li className='list-row'>
+                            <label className='label'>Email</label>
+                            <p className='value'>{this.props.user.email}</p>
+                        </li>
+                        <li className='list-row button-row'>
+                            <button id='edit-profile-button' onClick={() => this.setEditing(true)}>Edit Profile</button>
+                        </li>
+                    </ul>
                 </section>
             )
         }
 
         return (
-            <ProfileForm />
+            <section className='profile-section'>
+                <ProfileForm />
+            </section>
         );
     }
 }

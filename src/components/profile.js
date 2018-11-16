@@ -9,12 +9,14 @@ import './profile.css';
 export class Profile extends React.Component {
 
     render() {
-      
+
         return (
-            <div>
-                <h1>Profile</h1>
-                <ProfileInfo />
-            </div>
+            <main className='main-profile' role='main'>
+                <div className='profile-container'>
+                    <h1 className='profile-title'>Profile</h1>
+                    <ProfileInfo />
+                </div>
+            </main>
         );
     }
 }
