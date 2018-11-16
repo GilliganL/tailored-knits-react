@@ -2,3 +2,7 @@ label,
 input {
     margin: 5px;
 }
+
+.form-row > p {
+    margin: 5px 0;
+}

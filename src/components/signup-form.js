@@ -88,6 +88,7 @@ export class Signup extends React.Component {
                                 validate={[required, nonEmpty, email]} />
                         </li>
                         <li className='form-row'>
+                            <p>Password must be 8 to 72 characters,<br /> 1 uppercase &amp; lowercase letters, &amp; 1 number</p>
                             <Field
                                 type='password'
                                 name='password'

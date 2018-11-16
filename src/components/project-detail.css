@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: minmax(200px, 300px) repeat(2, minmax(200px, 1fr)) 75px;
     grid-template-rows: 100px repeat(2, fit-content(80%));
-    grid-template-areas: "title  title title menu"
+    grid-template-areas: "images  title title menu"
                          "images label value sidebar1"
                          "images notes notes sidebar2";
     justify-items: center;
@@ -23,14 +23,15 @@
 }
 
 .measurements-heading,
-.upload-heading {   
+.upload-heading,
+.info-heading {   
     position: fixed;
     margin: 0;
     padding-top: 20px;
-    top: 225px;
+    top: 140px;
     right: -75px;
-    height: 75px;
-    width: 200px;
+    height: 90px;
+    width: 175px;
     -ms-transform: rotate(90deg);
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
@@ -43,26 +44,33 @@
 }
 
 .measurements-heading:hover,
-.upload-heading:hover {
+.upload-heading:hover,
+.info-heading:hover {
     cursor: pointer;
     box-shadow: 1px 1px 4px 1px #22264B;
 }
 
 .measurements-heading:focus,
-.upload-heading:focus {
+.upload-heading:focus,
+.info-heading:focus {
     outline: none;
     box-shadow: 1px 1px 4px 1px #22264B;
 }
 
 .measurements-heading.active,
-.upload-heading.active {
+.upload-heading.active,
+.info-heading.active {
     transition: 1s ease;
-    width: 220px;
-    height: 75px;
+    width: 180px;
+    height: 100px;
 }
 
 .upload-heading {
-    top: 450px;
+    top: 325px;
+}
+
+.info-heading {
+    top: 510px;
 }
 
 .list-row {
@@ -107,6 +115,32 @@ label {
 
 .stitches-section {
     display: contents;
+}
+
+.info-section {
+    grid-area: 2 / 2 / 3 / 4;
+}
+
+.info-section > h2 {
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+h3 {
+    margin: 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.info-section > p {
+    text-align: left;
+    width: 90%;
+    line-height: 1.6em;
+}
+
+.info-name {
+    font-weight: 600;
 }
 
 .upload-section {

@@ -62,6 +62,7 @@ export class Measurements extends React.Component {
         }
 
         if (this.props.type === 'User') {
+            delete values.password;
             return this.props
                 .dispatch(updateUser(values._id, values))
                 .then(() => this.props.dispatch(fetchProjectById(this.props.id)))

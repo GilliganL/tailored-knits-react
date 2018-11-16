@@ -22,29 +22,29 @@ export class ProjectDetail extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProjectById(this.props.match.params.projectId));
         this.props.dispatch(activeTab('info'));
-    //     if (this.props.project) {
-    //         let valuesArray;
-    //         let possibleValues = ['chest', 'waist', 'hips', 'length', 'armhole', 'yokeDepth', 'raglanDepth', 'upperArm', 'wrist']
-    //         for (let i = 0; i < possibleValues.length; i++) {
-    //             let field = possibleValues[i];
-    //             console.log(field)
-    //             console.log(this.props.project)
-    //             for (field in this.props.project) {
+        //     if (this.props.project) {
+        //         let valuesArray;
+        //         let possibleValues = ['chest', 'waist', 'hips', 'length', 'armhole', 'yokeDepth', 'raglanDepth', 'upperArm', 'wrist']
+        //         for (let i = 0; i < possibleValues.length; i++) {
+        //             let field = possibleValues[i];
+        //             console.log(field)
+        //             console.log(this.props.project)
+        //             for (field in this.props.project) {
 
-    //                 console.log(this.props.project[field])
-    //                 let x = (this.props.project[field]) ? valuesArray.push(this.props.project[field]) : '';
-    //             }
-    //             for (field in this.props.pattern) {
-    //                 let y = (this.props.pattern[field]) ? valuesArray.push(this.props.pattern[field]) : '';
-    //             }
-    //         }
-    //         console.log(valuesArray)
-    //         if (!valuesArray) {
-    //             this.props.dispatch(activeTab('info'));
-    //         } else {
-    //             this.props.dispatch(activeTab('stitches'));
-    //         }
-    //     }
+        //                 console.log(this.props.project[field])
+        //                 let x = (this.props.project[field]) ? valuesArray.push(this.props.project[field]) : '';
+        //             }
+        //             for (field in this.props.pattern) {
+        //                 let y = (this.props.pattern[field]) ? valuesArray.push(this.props.pattern[field]) : '';
+        //             }
+        //         }
+        //         console.log(valuesArray)
+        //         if (!valuesArray) {
+        //             this.props.dispatch(activeTab('info'));
+        //         } else {
+        //             this.props.dispatch(activeTab('stitches'));
+        //         }
+        //     }
     }
 
     showTab(display) {
@@ -98,6 +98,7 @@ export class ProjectDetail extends React.Component {
         let display;
         let measurementsClass;
         let uploadClass;
+        let notesClass;
         let infoClass = 'active';
         if (this.props.project && this.props.activeTab === 'stitches') {
             display = (
@@ -130,6 +131,7 @@ export class ProjectDetail extends React.Component {
             measurementsClass = '';
             uploadClass = 'active';
             infoClass = '';
+            notesClass='hidden';
         } else if (this.props.project && this.props.activeTab === 'info') {
             display = (
                 <section className='info-section'>
@@ -137,20 +139,20 @@ export class ProjectDetail extends React.Component {
                     <p>Tailored Knits calculates your stitch counts for you! To get started
 					please click on 'Measurements' and enter Project or Pattern measurements.
 					You can also enter your measurements!</p>
-                    <p>For Pattern Measurements enter the original pattern measurements. In Project
+                    <p>In Pattern Measurements enter the original pattern measurements. In Project
 					Measurements enter the modified final measurements that you want for your project.
 					Click on the Measurements tab again to close it and you will see your stitch counts!</p>
                     <h3>How to take measurements</h3>
-                    <p> Chest: Measure around the fullest or widest part of the bust or chest<br />
-                        Waist: Measure your natural waist<br />
-                        Hips: Measure around the widest point of your hips<br />
-                        Length: You can use this field for any length measurement, most commonly used
+                    <p><span className='info-name'>Chest:</span> Measure around the fullest or widest part of the bust or chest<br />
+                        <span className='info-name'>Waist:</span> Measure your natural waist<br />
+                        <span className='info-name'>Hips:</span> Measure around the widest point of your hips<br />
+                        <span className='info-name'>Length:</span> You can use this field for any length measurement, most commonly used
 					    for under arm to the hem at the hips<br />
-                        Upper Arm: Measure around the largest part of your upper arm<br />
-                        Wrist: Measure around your wrist<br />
-                        Arm Hole: Measure from the top center of your shoulder above your armpit to the center of your armpit<br />
-                        Yoke Depth: This measurement is the width of the Yoke on yoke style sweaters<br />
-                        Raglan Depth: The length of the seam between the body and the sleeve where the raglan increases or decreases
+                        <span className='info-name'>Upper Arm:</span> Measure around the largest part of your upper arm<br />
+                        <span className='info-name'>Wrist:</span> Measure around your wrist<br />
+                        <span className='info-name'>Arm Hole:</span> Measure from the top center of your shoulder above your armpit to the center of your armpit<br />
+                        <span className='info-name'>Yoke Depth:</span> This measurement is the width of the Yoke on yoke style sweaters<br />
+                        <span className='info-name'>Raglan Depth:</span> The length of the seam between the body and the sleeve where the raglan increases or decreases
                         happen. Raglan depth is also used after the yoke depth has completed but before the bottom of the armhole on
 					some sweaters. </p>
                     <h3>Which size of the pattern do I choose?</h3>
@@ -175,12 +177,12 @@ export class ProjectDetail extends React.Component {
         return (
             <main role='main' id='main-detail'>
                 <h1 className='page-title'>{this.props.project.name}</h1>
-                <button className={'tablinks info-heading' + infoClass} onClick={() => this.showTab('info')}><h2>Info</h2></button>
+                <button className={'tablinks info-heading ' + infoClass} onClick={() => this.showTab('info')}><h2>Info</h2></button>
                 <button className={'tablinks measurements-heading ' + measurementsClass} onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
                 <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
                 <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
-                <Notes content={this.props.notes} initialValues={notes} id={this.props.match.params.projectId} />
+                <Notes class={notesClass} content={this.props.notes} initialValues={notes} id={this.props.match.params.projectId} />
                 <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>
             </main>
         )

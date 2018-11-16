@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import { DEMO_PASSWORD } from '../config';
 import { login } from '../actions/auth';
 import { headerActive } from '../actions/tailored-knits';
@@ -29,10 +28,10 @@ export class Header extends React.Component {
                 <img id='header-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/heading-image.jpg' alt='Three knit sweaters' />
                 <div className='main-content'>
                     <ul className='link-list'>
-                        <li><Link className='landing-link' to={`/#measurements`}>Measurements</Link></li>
-                        <li><Link className='landing-link' to={`/#specifications`}>Specifications</Link></li>
-                        <li><Link className='landing-link' to={`/#modifications`}>Modifications</Link></li>
-                        <li><Link className='landing-link' to={`/#account`}>Account</Link></li>
+                        <li><a className='landing-link' href={`/#measurements`}>Measurements</a></li>
+                        <li><a className='landing-link' href={`/#specifications`}>Specifications</a></li>
+                        <li><a className='landing-link' href={`/#modifications`}>Modifications</a></li>
+                        <li><a className='landing-link' href={`/#account`}>Account</a></li>
                     </ul>
                     <h1 id='main-title'>Tailored Knits</h1>
                     <p>Modify sweater patterns for a personalized fit with the help of Tailored Knits.</p>

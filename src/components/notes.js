@@ -72,7 +72,7 @@ export class Notes extends React.Component {
         }
 
         return (
-            <section className='notes-section'>
+            <section className={'notes-section ' + this.props.class}>
                 <h3 className='notes-heading'>Notes</h3>
                 {content}
             </section>

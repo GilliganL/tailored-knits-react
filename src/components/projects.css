@@ -21,7 +21,7 @@ header p {
 main > h1 {
     font-size: 30px;
     margin: 25px 0;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 * + .card-container {
