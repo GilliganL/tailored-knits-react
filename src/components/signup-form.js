@@ -4,7 +4,6 @@ import { registerUser } from '../actions/users';
 import { login } from '../actions/auth'
 import { required, nonEmpty, length, isTrimmed, matches, email } from '../validators';
 import Input from './input';
-import './signup-form.css';
 
 const passwordLength = length({ min: 8, max: 72 });
 const matchesPassword = matches('password')
@@ -48,7 +47,7 @@ export class Signup extends React.Component {
         }
         return (
             <fieldset className='signup-form-container'>
-                <legend>Sign Up</legend>
+                <legend><h3>Sign Up</h3></legend>
                 <form id='sign-up-form'
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
                     <ul className='form-wrapper' role='none'>
@@ -87,8 +86,10 @@ export class Signup extends React.Component {
                                 label='Email'
                                 validate={[required, nonEmpty, email]} />
                         </li>
-                        <li className='form-row'>
+                        <li className='form-row password-row'>
                             <p>Password must be 8 to 72 characters,<br /> 1 uppercase &amp; lowercase letters, &amp; 1 number</p>
+                        </li>
+                        <li className='form-row'>
                             <Field
                                 type='password'
                                 name='password'
@@ -96,7 +97,7 @@ export class Signup extends React.Component {
                                 label='Password'
                                 validate={[required, nonEmpty, isTrimmed, passwordLength]} />
                         </li>
-                        <li className='form-row'>
+                        <li className='form-row button-row'>
                             <Field
                                 type='password'
                                 name='passwordConfirm'

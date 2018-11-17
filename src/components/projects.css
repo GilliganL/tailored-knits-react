@@ -163,12 +163,8 @@ span.image::after {
 	margin: 0;
 }
 
-p {
-	margin: 0 0 2em 0;
-}
 
-
-@media only screen and (min-width: 770px) {
+@media only screen and (min-width: 750px) {
 	#main-projects {
 		margin: 0;
 		padding: 20px 0 20px 0;

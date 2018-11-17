@@ -62,9 +62,7 @@
 
 }
 
-.form-input {
 
-}
 
 .label,
 label,
@@ -100,11 +98,6 @@ label {
     font-weight: 600;
 }
 
-h3 {
-
-    font-size: 18px;
-    font-weight: 600;
-}
 
 .info-section > p {
     text-align: left;

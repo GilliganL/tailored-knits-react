@@ -79,7 +79,7 @@ export class AddForm extends React.Component {
                                 validate={[required, nonEmpty]} />
                         </li>
                         <li className='form-row radio'>
-                            <label>Style</label>
+                            <label className='radio-label'>Style</label>
                             <Field
                                 type='radio'
                                 label='Raglan'

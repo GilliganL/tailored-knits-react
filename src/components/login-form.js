@@ -3,7 +3,6 @@ import { reduxForm, Field, focus, SubmissionError } from 'redux-form';
 import { login } from '../actions/auth';
 import { required, nonEmpty } from '../validators';
 import Input from './input';
-import './login-form.css';
 
 export class Login extends React.Component {
 
@@ -47,7 +46,7 @@ export class Login extends React.Component {
 
         return (
             <fieldset className='login-form-container'>
-                <legend>Login</legend>
+                <legend><h3>Login</h3></legend>
                 <form id='login'
                     onSubmit={this.props.handleSubmit(values =>
                         this.onSubmit(values)
@@ -74,7 +73,7 @@ export class Login extends React.Component {
                         </li>
                         {successMessage}
                         {errorMessage}
-                        <li className='form-row'>
+                        <li className='form-row button-row'>
                             <button
                                 type='submit'
                                 id='login-button'

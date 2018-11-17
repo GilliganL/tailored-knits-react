@@ -1,4 +1,9 @@
+nav ul {
+  margin-top: 20px;
+}
+
 nav li {
+  display: initial;
   height: 50px;
   width: 100%;
   padding-left: 10px;

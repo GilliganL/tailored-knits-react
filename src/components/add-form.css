@@ -1,10 +1,11 @@
 .add-form {
-
+    padding: 20px 5px;
 }
 
 .add-form > fieldset {
     border: 2px solid #22264B;
     border-radius: 10px;
+    padding-bottom: 10px;
 }
 
 .add-form > fieldset > legend {
@@ -27,19 +28,32 @@ label {
     color: #FAFAFA;
 }
 
-.form-row.radio {
+#add-project-form > .form-wrapper > .form-row > .form-input > label,
+#add-project-form > .form-wrapper > .form-row > label {
+    font-weight: 600;
+}
 
+#add-project-form > .form-wrapper > .form-row.radio > .form-input {
+    display: flex;
+}
+
+#add-project-form > .form-wrapper > .form-row.radio > .form-input > label,
+#add-project-form > .form-wrapper > .form-row.radio > .form-input > input {
+    width: 50%;
+    font-weight: 500;
 }
 
 @media only screen and (min-width: 770px) {
     .add-form {
         margin: 25px 0;
+        padding: 0;
     }
     
     .add-form > fieldset {
         padding: 10px;
         width: 50%;
         margin: 0 auto;
+        padding: 0;
     }
     
     .add-form > fieldset > legend {

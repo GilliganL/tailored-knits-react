@@ -1,25 +1,24 @@
-header {}
-
 .landing-header {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 15px;
     background: #22264B;
     color: #FAFAFA;
+    padding-top: 0;
 }
 
-.landing-header>div {}
+.landing-header>div {
+    display: contents;
+}
 
 #header-image {
-    z-index: 0;
+    display: none;
 }
 
-.main-content {}
-
-#main-title {
-    font-size: 50px;
+.link-list {
+    margin-bottom: 20px;
 }
-
-#demo-button {}
-
-.link-list {}
 
 .link-list,
 .link-list>li {
@@ -28,6 +27,7 @@ header {}
 
 .landing-link {
     color: #FAFAFA;
+    width: 100%;
 }
 
 nav {
@@ -104,19 +104,40 @@ header.active nav {
     transform: rotate(45deg) translate(-7px, -7px);
 }
 
+@media only screen and (min-width: 500px) {
+    .link-list {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+    .link-list,
+    .link-list>li {
+        list-style: none;
+    }
+    .landing-link {
+        font-size: 16px;
+        padding: 0 10px;
+    }
+}
+
 @media only screen and (min-width: 770px) {
     header {
         grid-area: menu;
     }
     .landing-header {
         display: flex;
+        flex-direction: initial;
+        justify-content: flex-end;
         height: 500px;
     }
     .landing-header>div {
         display: contents;
     }
     #header-image {
-        height: 100%;
+        display: initial;
+        position: absolute;
+        height: 500px;
         top: 0;
         left: 0;
         z-index: 0;
@@ -127,8 +148,7 @@ header.active nav {
         justify-content: space-around;
         padding: 20px 50px;
         height: 100%;
-        width: 100%;
-        margin-right: 2.5em;
+        width: calc(100% - 400px);
     }
     #main-title {
         font-size: 50px;
@@ -145,9 +165,10 @@ header.active nav {
         position: absolute;
         top: 7px;
         width: 100%;
-        max-width: 720px;
+        max-width: 525px;
         display: flex;
         justify-content: center;
+        align-self: flex-end;
     }
     .link-list,
     .link-list>li {
@@ -156,5 +177,6 @@ header.active nav {
     .landing-link {
         font-size: 16px;
         padding: 0 10px;
+        width: 100px;
     }
 }
