@@ -1,7 +1,46 @@
 
-.images-section {
+.images-section.slider {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
-    margin: 0;
+.slider-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.slide {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 999;
+    color: #22264B;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #E8EDF3;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform ease-in .1s;
+}
+
+.right.arrow {
+    right: 25px;
+}
+
+.left.arrow {
+    left: 25px;
 }
 
 .project-image,
@@ -30,7 +69,8 @@
 
 @media only screen and (min-width: 770px) {
 
-    .images-section {
+    .images-section.slider {
+        position: initial;
         grid-area: images;
         margin: 0;
     }

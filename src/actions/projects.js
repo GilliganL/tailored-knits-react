@@ -73,21 +73,28 @@ export const saveImage = (croppedImage, croppedFile) => ({
     croppedFile
 });
 
-export const CLEAR_IMAGE = 'CLEAR_IMAGE'
+export const CLEAR_IMAGE = 'CLEAR_IMAGE';
 export const clearImage = () => ({
     type: CLEAR_IMAGE
 });
 
-export const ACTIVE_TAB = 'ACTIVE_TAB'
+export const ACTIVE_TAB = 'ACTIVE_TAB';
 export const activeTab = display => ({
     type: ACTIVE_TAB,
     display
 });
 
-export const EDIT_NOTES = 'EDIT_NOTES'
+export const EDIT_NOTES = 'EDIT_NOTES';
 export const editNotes = editingNotes => ({
     type: EDIT_NOTES,
     editingNotes
+});
+
+export const IMAGE_SLIDE = 'IMAGE_SLIDE';
+export const imageSlide = (currentIndex, translateValue) => ({
+    type: IMAGE_SLIDE,
+    currentIndex,
+    translateValue
 });
 
 export const fetchProjects = (username) => (dispatch, getState) => {

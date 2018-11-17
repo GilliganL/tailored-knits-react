@@ -1,13 +1,8 @@
-#main-detail {
+#main-detail {}
 
-}
-
-.page-title {
-  
-}
+.page-title {}
 
 #delete-button {
-
     /* position: absolute;
     height: 20px;
     width: 100px;
@@ -17,14 +12,12 @@
 
 .measurements-heading,
 .upload-heading,
-.info-heading {   
- 
+.info-heading {
     border-radius: 10px;
     background: #B56969;
     color: #FAFAFA;
     border: none;
     transition: 0.2s ease;
-    
 }
 
 .measurements-heading:hover,
@@ -45,61 +38,38 @@
 .upload-heading.active,
 .info-heading.active {
     transition: 1s ease;
-
 }
 
-.upload-heading {
+.upload-heading {}
 
-}
-
-.info-heading {
-
-}
+.info-heading {}
 
 .list-row {
-
     border-bottom: 1px dotted gray;
-
 }
-
-
 
 .label,
 label,
 .value,
-input {
-
-}
+input {}
 
 .label,
-label {
- 
-}
+label {}
 
-.list-row.button-row {
+.list-row.button-row {}
 
-}
+#delete-button {}
 
-#delete-button {
+.stitches-section {}
 
-}
+.info-section {}
 
-.stitches-section {
-
-}
-
-.info-section {
-
-}
-
-.info-section > h2 {
-
+.info-section>h2 {
     font-size: 20px;
     font-weight: 600;
 }
 
-
-.info-section > p {
+.info-section>p {
     text-align: left;
     width: 90%;
     line-height: 1.6em;
@@ -120,28 +90,28 @@ label {
     z-index: 1000;
     color: #FAFAFA;
     opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 1s;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
 }
 
 @keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOutOpacity {
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .crop {
@@ -160,17 +130,13 @@ label {
         display: grid;
         grid-template-columns: minmax(200px, 300px) repeat(2, minmax(200px, 1fr)) 75px;
         grid-template-rows: 100px repeat(2, fit-content(80%));
-        grid-template-areas: "images  title title menu"
-                             "images label value sidebar1"
-                             "images notes notes sidebar2";
+        grid-template-areas: "images  title title menu" "images label value sidebar1" "images notes notes sidebar2";
         justify-items: center;
         margin: 10px;
     }
-    
     .page-title {
         grid-area: title;
     }
-    
     #delete-button {
         visibility: hidden;
         position: absolute;
@@ -179,10 +145,9 @@ label {
         bottom: 0;
         left: 0;
     }
-    
     .measurements-heading,
     .upload-heading,
-    .info-heading {   
+    .info-heading {
         position: fixed;
         margin: 0;
         padding-top: 20px;
@@ -193,33 +158,25 @@ label {
         -ms-transform: rotate(90deg);
         -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
-
-        
     }
-    
     .upload-heading {
         top: 325px;
     }
-    
     .info-heading {
         top: 510px;
     }
-    
     .list-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         width: 90%;
         min-height: 25px;
-    
         text-align: left;
         padding: 3px;
         margin: 0 auto;
     }
-    
     .form-input {
         display: contents
     }
-    
     .label,
     label,
     .value,
@@ -228,53 +185,43 @@ label {
         margin: 0;
         width: 100%;
     }
-    
     .label,
     label {
         padding-right: 5px;
     }
-    
     .list-row.button-row {
         text-align: center;
         display: initial;
         border: none;
     }
-    
     #delete-button {
         width: 50%;
         margin: 0 auto;
     }
-    
     .stitches-section {
         display: contents;
     }
-    
     .info-section {
         grid-area: 2 / 2 / 3 / 4;
     }
-    
-    .info-section > h2 {
+    .info-section>h2 {
         margin: 10px 0;
         font-size: 20px;
         font-weight: 600;
     }
-    
     h3 {
         margin: 5px 0;
         font-size: 18px;
         font-weight: 600;
     }
-    
-    .info-section > p {
+    .info-section>p {
         text-align: left;
         width: 90%;
         line-height: 1.6em;
     }
-    
     .info-name {
         font-weight: 600;
     }
-
     .upload-section {
         grid-area: 2 / 2 / 3 / 4;
         top: 10%;
@@ -292,5 +239,4 @@ label {
         animation-timing-function: ease-in;
         animation-duration: 1s;
     }
-
 }

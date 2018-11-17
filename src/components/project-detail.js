@@ -22,29 +22,6 @@ export class ProjectDetail extends React.Component {
     componentDidMount() {
         this.props.dispatch(fetchProjectById(this.props.match.params.projectId));
         this.props.dispatch(activeTab('info'));
-        //     if (this.props.project) {
-        //         let valuesArray;
-        //         let possibleValues = ['chest', 'waist', 'hips', 'length', 'armhole', 'yokeDepth', 'raglanDepth', 'upperArm', 'wrist']
-        //         for (let i = 0; i < possibleValues.length; i++) {
-        //             let field = possibleValues[i];
-        //             console.log(field)
-        //             console.log(this.props.project)
-        //             for (field in this.props.project) {
-
-        //                 console.log(this.props.project[field])
-        //                 let x = (this.props.project[field]) ? valuesArray.push(this.props.project[field]) : '';
-        //             }
-        //             for (field in this.props.pattern) {
-        //                 let y = (this.props.pattern[field]) ? valuesArray.push(this.props.pattern[field]) : '';
-        //             }
-        //         }
-        //         console.log(valuesArray)
-        //         if (!valuesArray) {
-        //             this.props.dispatch(activeTab('info'));
-        //         } else {
-        //             this.props.dispatch(activeTab('stitches'));
-        //         }
-        //     }
     }
 
     showTab(display) {
@@ -180,7 +157,7 @@ export class ProjectDetail extends React.Component {
                 <button className={'tablinks info-heading ' + infoClass} onClick={() => this.showTab('info')}><h2>Info</h2></button>
                 <button className={'tablinks measurements-heading ' + measurementsClass} onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
                 <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
-                <ProjectImages images={this.props.images} image={this.props.image} id={this.props.match.params.projectId} />
+                <ProjectImages image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
                 <Notes class={notesClass} content={this.props.notes} initialValues={notes} id={this.props.match.params.projectId} />
                 <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>
@@ -194,11 +171,11 @@ const mapStateToProps = state => {
     const style = state.projectsReducer.project.pattern ? state.projectsReducer.project.pattern.style : '';
     const notes = state.projectsReducer.project.notes;
     const pattern = state.projectsReducer.project.pattern;
-    const images = state.projectsReducer.project.images;
+    // const images = state.projectsReducer.project.images;
     return {
         project: state.projectsReducer.project,
         pattern,
-        images,
+        // images,
         image,
         activeTab: state.projectsReducer.activeTab,
         notes,

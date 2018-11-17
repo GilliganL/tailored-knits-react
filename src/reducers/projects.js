@@ -13,7 +13,8 @@ import {
     SAVE_IMAGE,
     CLEAR_IMAGE,
     ACTIVE_TAB,
-    EDIT_NOTES
+    EDIT_NOTES,
+    IMAGE_SLIDE
 } from '../actions/projects';
 
 const initialState = {
@@ -30,7 +31,9 @@ const initialState = {
     croppedImage: '',
     croppedFile: '',
     activeTab: 'stitches',
-    editingNotes: false
+    editingNotes: false,
+    currentIndex: 0,
+    translateValue: 0
 };
 
 export default function reducer(state = initialState, action) {
@@ -114,6 +117,11 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === EDIT_NOTES) {
         return Object.assign({}, state, {
             editingNotes: action.editingNotes
+        });
+    } else if (action.type === IMAGE_SLIDE) {
+        return Object.assign({}, state, {
+            currentIndex: action.currentIndex,
+            translateValue: action.translateValue
         });
     }
     return state;
