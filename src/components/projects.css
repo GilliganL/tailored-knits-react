@@ -17,11 +17,17 @@ main>h1 {
     margin-bottom: 15px;
     padding: 0;
     min-width: 250px;
-    min-height: 200px;
+	min-height: 200px;
+	-webkit-transition: transform 0.5s ease, opacity 0.5s ease;
+	-moz-transition: transform 0.5s ease, opacity 0.5s ease;
+	-o-transition: transform 0.5s ease, opacity 0.5s ease;
     transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .card-container .project-card>.image {
+	-webkit-transition: transform 0.5s ease;
+	-moz-transition: transform 0.5s ease;
+	-o-transition: transform 0.5s ease;
     transition: transform 0.5s ease;
     position: relative;
     display: block;
@@ -32,6 +38,10 @@ main>h1 {
 }
 
 .card-container .project-card:hover>.image {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
     transform: scale(1.1);
 }
 
@@ -44,7 +54,10 @@ main>h1 {
 }
 
 .card-container .project-card>.image:before {
-    pointer-events: none;
+	pointer-events: none;
+	-webkit-transition: background-color 0.5s ease, opacity 0.5s ease;
+	-moz-transition: background-color 0.5s ease, opacity 0.5s ease;
+	-o-transition: background-color 0.5s ease, opacity 0.5s ease;
     transition: background-color 0.5s ease, opacity 0.5s ease;
     content: '';
     display: block;
@@ -69,7 +82,10 @@ main>h1 {
 }
 
 span.image::after {
-    pointer-events: none;
+	pointer-events: none;
+	-webkit-transition: opacity 0.5s ease;
+	-moz-transition: opacity 0.5s ease;
+	-o-transition: opacity 0.5s ease;
     transition: opacity 0.5s ease;
     content: '';
     display: block;
@@ -92,10 +108,22 @@ span.image::after {
 
 .card-container .project-card>a {
     display: -webkit-flex;
-    display: flex flex-direction: column;
-    -webkit-align-items: center;
-    align-items: center;
-    justify-content: center;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-o-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-o-justify-content: center;
+	justify-content: center;
+	-webkit-transition: background-color 0.5s ease, transform 0.5s ease;
+	-moz-transition: background-color 0.5s ease, transform 0.5s ease;
+	-o-transition: background-color 0.5s ease, transform 0.5s ease;
     transition: background-color 0.5s ease, transform 0.5s ease;
     position: absolute;
     top: 0;
@@ -113,11 +141,18 @@ span.image::after {
 
 .card-container .project-card>a h2 {
     margin: 0;
-    margin-top: 0.35em;
+	margin-top: 0.35em;
+	-webkit-text-transform: uppercase;
+	-moz-text-transform: uppercase;
+	-ms-text-transform: uppercase;
+	-o-text-transform: uppercase;
     text-transform: uppercase;
     line-height: 1.5;
     font-weight: 700;
-    font-size: 20px;
+	font-size: 20px;
+	-webkit-transition: max-height 0.5s ease, opacity 0.5s ease;
+	-moz-transition: max-height 0.5s ease, opacity 0.5s ease;
+	-o-transition: max-height 0.5s ease, opacity 0.5s ease;
     transition: max-height 0.5s ease, opacity 0.5s ease;
     width: 100%;
     min-height: 20px;
@@ -163,7 +198,11 @@ span.image::after {
     .card-container {
         position: relative;
         display: -webkit-flex;
-        display: flex flex-wrap: wrap;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -moz-flex-wrap: wrap;
+        -o-flex-wrap: wrap;
+        flex-wrap: wrap;
         justify-content: center;
         margin: -2.5em 0 0 -2.5em;
         padding: 0;

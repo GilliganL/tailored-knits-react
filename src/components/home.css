@@ -87,7 +87,11 @@ li {
 }
 
 ul {
-    display: -webkit-flex; display: flex
+    display: -webkit-flex; 
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -o-flex-direction: column;
     flex-direction: column;
     -webkit-align-items: flex-start;
     align-items: flex-start;

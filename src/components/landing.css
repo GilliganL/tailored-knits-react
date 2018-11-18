@@ -9,87 +9,84 @@ img {
 
 @media only screen and (min-width: 770px) {
     #main-landing {
-        display: -webkit-flex; display: flex
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -o-flex-direction: column;
         flex-direction: column;
         margin: 0;
         padding: 0;
     }
-    
     .landing-container {
         width: 100%;
         max-width: 68em;
         margin: 0 auto;
         padding: 0 2.5em;
-        display: -webkit-flex; display: flex
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -moz-flex-wrap: wrap;
+        -o-flex-wrap: wrap;
         flex-wrap: wrap;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -o-justify-content: center;
         justify-content: center;
     }
-    
-    #measurements, 
+    #measurements,
     #specifications,
-    #modifications
-    #account {
+    #modifications #account {
         height: 400px;
-        display: -webkit-flex; display: flex
+        display: -webkit-flex;
+        display: flex;
     }
-    
     .landing-image {
         height: 80%;
         margin-right: -2.5em;
         -webkit-align-self: center;
         align-self: center;
     }
-    
-    #measurements > .landing-title {
+    #measurements>.landing-title {
         padding-top: 10px;
     }
-    
-    #measurements > div {
+    #measurements>div {
         padding: 15% 30px 0 10px;
         text-align: left;
-    
     }
-    
     #specifications,
     #modifications {
         width: 50%;
-        display: -webkit-flex; display: flex
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -o-flex-direction: column;
         flex-direction: column;
         padding: 30px 20px;
         max-height: 250px;
     }
-    
-    #specifications > p,
-    #modifications > p {
+    #specifications>p,
+    #modifications>p {
         text-align: left;
     }
-    
     .account-image {
         height: 300px;
         margin: 0 auto;
     }
-    
     #account {
-        display: -webkit-flex; display: flex
-    
+        display: -webkit-flex;
+        display: flex;
     }
-    
-    .login-form-container, 
+    .login-form-container,
     .signup-form-container {
         padding: 10px 0;
     }
-    
-    .login-form-container > legend, 
-    .signup-form-container > legend {
-   
-    }
-
     .form-row.password-row {
         height: fit-content;
         padding-bottom: 0;
     }
-
-    .form-row.password-row > p {
+    .form-row.password-row>p {
         margin-bottom: 0;
     }
 }

@@ -1,6 +1,9 @@
 .landing-header {
-    display: -webkit-flex; 
-    display: flex
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column-reverse;
+    -moz-flex-direction: column-reverse; 
+    -o-flex-direction: column-reverse; 
     flex-direction: column-reverse;
     -webkit-align-items: center;
     align-items: center;
@@ -40,7 +43,14 @@ nav {
     height: 100%;
     top: 0;
     right: 0;
+    -webkit-transform: translateX(300px);
+    -moz-transform: translateX(300px);
+    -ms-transform: translateX(300px);
+    -o-transform: translateX(300px);
     transform: translateX(300px);
+    -webkit-transition: transform 0.4s ease, visibility 0.4s;
+    -moz-transition: transform 0.4s ease, visibility 0.4s;
+    -o-transition: transform 0.4s ease, visibility 0.4s;
     transition: transform 0.4s ease, visibility 0.4s;
     background-color: #fafafa;
     z-index: 1000;
@@ -48,6 +58,10 @@ nav {
 
 header.active nav {
     visibility: visible;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
     transform: translateX(0);
 }
 
@@ -60,6 +74,9 @@ header.active nav {
     width: 50px;
     padding: 7.5px;
     cursor: pointer;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
     transition: 0.4s;
     border-radius: 0 0 0 10px;
     z-index: 1000;
@@ -76,6 +93,9 @@ header.active nav {
     height: 5px;
     background-color: #22264B;
     margin: 5px 0;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -o-transition: 0.4s;
     transition: 0.4s;
     border-radius: 5px;
 }
@@ -83,6 +103,9 @@ header.active nav {
 #menu-container:hover #bar-2 {
     width: 25px;
     margin: 0 5px;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
     transition: 0.3s;
 }
 
@@ -94,6 +117,9 @@ header.active nav {
 
 #bar-1.active {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    -moz-transform: rotate(-45deg) translate(-9px, 6px);
+    -ms-transform: rotate(-45deg) translate(-9px, 6px);
+    -o-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
 }
 
@@ -103,15 +129,24 @@ header.active nav {
 
 #bar-3.active {
     -webkit-transform: rotate(45deg) translate(-7px, -7px);
+    -moz-transform: rotate(45deg) translate(-7px, -7px);
+    -ms-transform: rotate(45deg) translate(-7px, -7px);
+    -o-transform: rotate(45deg) translate(-7px, -7px);
     transform: rotate(45deg) translate(-7px, -7px);
 }
 
 @media only screen and (min-width: 500px) {
     .link-list {
         width: 100%;
-        display: -webkit-flex; 
-        display: flex
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -o-justify-content: center;
         justify-content: center;
+        -webkit-flex-direction: row;
+         -moz-flex-direction: row;
+        -o-flex-direction: row; 
         flex-direction: row;
     }
     .link-list,
@@ -129,9 +164,15 @@ header.active nav {
         grid-area: menu;
     }
     .landing-header {
-        display: -webkit-flex; 
-        display: flex
+        display: -webkit-flex;
+        display: flex; 
+        -webkit-flex-direction: initial;
+        -moz-flex-direction: initial;
+        -o-flex-direction: initial;
         flex-direction: initial;
+        -webkit-justify-content: flex-end;
+        -moz-justify-content: flex-end;
+        -o-justify-content: flex-end;
         justify-content: flex-end;
         height: 500px;
     }
@@ -147,9 +188,15 @@ header.active nav {
         z-index: 0;
     }
     .main-content {
-        display: -webkit-flex; 
-        display: flex
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -o-flex-direction: column;
         flex-direction: column;
+        -webkit-justify-content: flex-end;
+        -moz-justify-content: flex-end;
+        -o-justify-content: flex-end;
         justify-content: space-around;
         padding: 20px 50px;
         height: 100%;
@@ -172,8 +219,11 @@ header.active nav {
         top: 7px;
         width: 100%;
         max-width: 525px;
-        display: -webkit-flex; 
-        display: flex
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -o-justify-content: center;
         justify-content: center;
         -webkit-align-self: flex-end;
         align-self: flex-end;

@@ -12,17 +12,20 @@
 .measurements-list {
     padding: 10px;
 }
+
 .measurements-list>.list-row {
-    display: -webkit-flex; display: flex
+    display: -webkit-flex;
+    display: flex
 }
 
 .measurements-list>.list-row>.label {
     width: calc(100% - 100px);
 }
 
-.measurements-list > .button-row {
+.measurements-list>.button-row {
     border: none;
 }
+
 select {
     width: 100%;
     height: 40px;
@@ -41,8 +44,7 @@ input {
         display: grid;
         grid-template-rows: 50px 1fr;
         grid-template-columns: repeat(3, 1fr);
-        grid-template-areas: "title title title"
-                             "pattern project user";
+        grid-template-areas: "title title title" "pattern project user";
         width: 100%;
     }
     .measurements-section>h2 {
@@ -69,7 +71,7 @@ input {
         padding-right: 5px;
         font-size: 15px;
     }
-    .measurements-form-list>.form-row>.form-input>input  {
+    .measurements-form-list>.form-row>.form-input>input {
         font-size: 15px;
     }
     .measurements-form-list>.form-row>.form-input>select {

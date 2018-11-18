@@ -27,12 +27,21 @@
     height: 50px;
     width: 50px;
     display: -webkit-flex;
-    display: flex -webkit-align-items: center;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -o-align-items: center;
     align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -o-justify-content: center;
     justify-content: center;
     background: #E8EDF3;
     border-radius: 50%;
     cursor: pointer;
+    -webkit-transition: transform ease-in .1s;
+    -moz-transition: transform ease-in .1s;
+    -o-transition: transform ease-in .1s;
     transition: transform ease-in .1s;
 }
 
@@ -55,17 +64,8 @@
 }
 
 .images-form-container {
-    /* width: 80%; */
     margin: 0 auto;
     border-radius: 10px;
-}
-
-.images-form-container {
-    /* max-width: 200px; */
-}
-
-#upload {
-    /* width: 200px; */
 }
 
 @media only screen and (min-width: 770px) {
