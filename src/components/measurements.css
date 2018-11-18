@@ -13,7 +13,7 @@
     padding: 10px;
 }
 .measurements-list>.list-row {
-    display: flex;
+    display: -webkit-flex; display: flex
 }
 
 .measurements-list>.list-row>.label {

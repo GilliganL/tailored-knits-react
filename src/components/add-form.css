@@ -22,8 +22,6 @@ label {
 }
 
 .add-button:hover {
-    /* min-width: 160px;
-    min-height: 45px; */
     font-size: 20px;
     color: #FAFAFA;
 }
@@ -34,7 +32,8 @@ label {
 }
 
 #add-project-form > .form-wrapper > .form-row.radio > .form-input {
-    display: flex;
+    display: -webkit-flex; 
+    display: flex
 }
 
 #add-project-form > .form-wrapper > .form-row.radio > .form-input > label,
@@ -56,21 +55,11 @@ label {
         padding: 0;
     }
     
-    .add-form > fieldset > legend {
-  
-    }
-    
-    label {
-    
-    }
-    
-    .add-button {
-   
-    }
-    
     .form-row.radio {
-        display: flex;
+        display: -webkit-flex; 
+        display: flex
         justify-content: space-around;
+        -webkit-align-items: center;
         align-items: center;
     }
 }

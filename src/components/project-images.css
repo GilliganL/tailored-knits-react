@@ -26,7 +26,8 @@
     color: #22264B;
     height: 50px;
     width: 50px;
-    display: flex;
+    display: -webkit-flex;
+    display: flex -webkit-align-items: center;
     align-items: center;
     justify-content: center;
     background: #E8EDF3;

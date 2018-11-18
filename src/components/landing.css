@@ -9,7 +9,7 @@ img {
 
 @media only screen and (min-width: 770px) {
     #main-landing {
-        display: flex;
+        display: -webkit-flex; display: flex
         flex-direction: column;
         margin: 0;
         padding: 0;
@@ -20,7 +20,7 @@ img {
         max-width: 68em;
         margin: 0 auto;
         padding: 0 2.5em;
-        display: flex;
+        display: -webkit-flex; display: flex
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -30,12 +30,13 @@ img {
     #modifications
     #account {
         height: 400px;
-        display: flex;
+        display: -webkit-flex; display: flex
     }
     
     .landing-image {
         height: 80%;
         margin-right: -2.5em;
+        -webkit-align-self: center;
         align-self: center;
     }
     
@@ -52,7 +53,7 @@ img {
     #specifications,
     #modifications {
         width: 50%;
-        display: flex;
+        display: -webkit-flex; display: flex
         flex-direction: column;
         padding: 30px 20px;
         max-height: 250px;
@@ -69,7 +70,7 @@ img {
     }
     
     #account {
-        display: flex;
+        display: -webkit-flex; display: flex
     
     }
     

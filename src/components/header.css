@@ -1,6 +1,8 @@
 .landing-header {
-    display: flex;
+    display: -webkit-flex; 
+    display: flex
     flex-direction: column-reverse;
+    -webkit-align-items: center;
     align-items: center;
     padding: 15px;
     background: #22264B;
@@ -107,7 +109,8 @@ header.active nav {
 @media only screen and (min-width: 500px) {
     .link-list {
         width: 100%;
-        display: flex;
+        display: -webkit-flex; 
+        display: flex
         justify-content: center;
         flex-direction: row;
     }
@@ -126,7 +129,8 @@ header.active nav {
         grid-area: menu;
     }
     .landing-header {
-        display: flex;
+        display: -webkit-flex; 
+        display: flex
         flex-direction: initial;
         justify-content: flex-end;
         height: 500px;
@@ -143,7 +147,8 @@ header.active nav {
         z-index: 0;
     }
     .main-content {
-        display: flex;
+        display: -webkit-flex; 
+        display: flex
         flex-direction: column;
         justify-content: space-around;
         padding: 20px 50px;
@@ -159,6 +164,7 @@ header.active nav {
     #demo-button {
         height: 50px;
         width: 75px;
+        -webkit-align-self: flex-end;
         align-self: flex-end;
     }
     .link-list {
@@ -166,8 +172,10 @@ header.active nav {
         top: 7px;
         width: 100%;
         max-width: 525px;
-        display: flex;
+        display: -webkit-flex; 
+        display: flex
         justify-content: center;
+        -webkit-align-self: flex-end;
         align-self: flex-end;
     }
     .link-list,

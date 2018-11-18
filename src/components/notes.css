@@ -58,7 +58,7 @@
         transition: 0.4s;
     }
     .notes-form {
-        display: flex;
+        display: -webkit-flex; display: flex
         flex-direction: column;
     }
     .notes-form label {
@@ -71,6 +71,7 @@
         margin: 10px 0;
         padding: 10px;
         border: none;
+        -webkit-align-self: center;
         align-self: center;
     }
     .notes-from>.form-input {

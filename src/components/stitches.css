@@ -1,6 +1,6 @@
 .stitches-section {
-    display: flex;
-    flex-wrap: wrap;
+    display: -webkit-flex;
+    display: flex flex-wrap: wrap;
     padding: 10px 0;
 }
 
@@ -20,12 +20,15 @@
     padding: 10px 0;
 }
 
-.stitches-list > .list-row {
-    display: flex;
+.stitches-list>.list-row {
+    display: -webkit-flex;
+    display: flex
 }
-.stitches-list > .list-row > .label {
+
+.stitches-list>.list-row>.label {
     width: calc(100% - 10px);
 }
+
 @media only screen and (min-width: 770px) {
     .project-stitches,
     .pattern-stitches {
