@@ -3,6 +3,7 @@
     border: 2px solid #22264B;
     border-radius: 10px;
     margin: 10px;
+    min-height: 200px;
 }
 
 .notes-content>p {
@@ -27,7 +28,6 @@
 
 .notes-form textarea {
     width: 96%;
-    min-height: 200px;
     border-radius: 10px;
     margin: 10px 0;
     padding: 10px;
@@ -70,7 +70,6 @@
     }
     .notes-form textarea {
         width: 96%;
-        min-height: 200px;
         border-radius: 10px;
         margin: 10px 0;
         padding: 10px;
@@ -80,6 +79,7 @@
     }
     .notes-from>.form-input {
         min-height: 200px;
+        flex-direction: column;
     }
     #notes-button,
     #update-notes-button {

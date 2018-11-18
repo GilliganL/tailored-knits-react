@@ -49,7 +49,7 @@ export class ProjectDetail extends React.Component {
                     const imageObject = {
                         images: [...this.props.images, res.image]
                     }
-                    return this.props.dispatch(updateProject(this.props.match.params.projectId, imageObject))
+                    this.props.dispatch(updateProject(this.props.match.params.projectId, imageObject))
                 })
                 .then(() => this.props.dispatch(clearImage()))
                 .then(() => this.props.dispatch(fetchProjectById(this.props.match.params.projectId)))
@@ -177,10 +177,12 @@ const mapStateToProps = state => {
     const image = state.projectsReducer.image ? state.projectsReducer.image : '';
     const style = state.projectsReducer.project.pattern ? state.projectsReducer.project.pattern.style : '';
     const pattern = state.projectsReducer.project.pattern;
+    const images = state.projectsReducer.project.images;
     return {
         project: state.projectsReducer.project,
         pattern,
         image,
+        images,
         activeTab: state.projectsReducer.activeTab,
         notes: state.projectsReducer.project.notes,
         croppedFile: state.projectsReducer.croppedFile,
