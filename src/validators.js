@@ -32,7 +32,6 @@ export const email = value =>
 export const number = value => value && isNaN(value) ? 'Must be a number' : undefined;
 
 export const fileType = file => {
-    console.log(file)
     if (file === null) {
         return 'No file selected'
     }
