@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.5.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "jwt-decode": "^2.2.0",
-    "react": "^16.5.2",
+    "react": "^16.6.3",
     "react-dom": "^16.5.2",
     "react-image-crop": "^6.0.4",
     "react-redux": "^5.0.7",
