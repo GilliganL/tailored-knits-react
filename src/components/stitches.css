@@ -1,36 +1,55 @@
-.stitches-title {
-    font-size: 18px;
-    font-weight: 500;
-
+.stitches-section {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
 }
 
+.stitches-section>h2 {
+    font-weight: 600;
+    width: 100%;
+}
+
+.stitches-div {
+    width: 50%;
+    padding: 5px;
+}
+
+.stitches-title {
+    font-weight: 600;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.stitches-list > .list-row {
+    display: flex;
+}
+.stitches-list > .list-row > .label {
+    width: calc(100% - 10px);
+}
 @media only screen and (min-width: 770px) {
     .project-stitches,
     .pattern-stitches {
         display: contents
     }
-    
     .project-stitches .stitches-list {
         grid-area: label;
     }
-    
     .pattern-stitches .stitches-list {
         grid-area: value;
     }
-    
     .stitches-list {
         width: 90%;
         padding: 0;
     }
-    
+    .stitches-section>h2 {
+        grid-area: 2/2/3/4;
+    }
     .stitches-title {
         width: 100%;
         font-size: 18px;
         font-weight: 500;
         padding-left: 10px;
         margin: 40px 0 20px 0;
-        text-align: left;
+        text-align: center;
     }
-
-
 }

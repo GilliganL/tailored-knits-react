@@ -62,7 +62,7 @@ export default class Stitches extends React.Component {
         return (
             <div className={this.props.type.toLowerCase() + `-stitches stitches-div`}>
                 <ul className='list-wrapper stitches-list'>
-                    <h2 className='stitches-title'>{this.props.type} Stitches</h2>
+                    <h3 className='stitches-title'>{this.props.type}</h3>
                     {stitchesList}
                 </ul>
             </div >

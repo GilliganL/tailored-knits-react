@@ -48,7 +48,7 @@ export class Notes extends React.Component {
         let content;
         if (!this.props.editing) {
             content = (
-                <div>
+                <div className='notes-content'>
                     <p>{this.props.content}</p>
                     <button type='button' id='notes-button' onClick={() => this.setEditing(true)}>
                         Edit

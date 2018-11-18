@@ -251,7 +251,7 @@ export class Measurements extends React.Component {
 
         return (
             <div className={this.props.type.toLowerCase() + `-measurements measurements-div`}>
-                <h2 className='measurements-title'>{this.props.type} Measurements</h2>
+                <h3 className='measurements-title'>{this.props.type}</h3>
                 {displayContent}
             </div >
         )

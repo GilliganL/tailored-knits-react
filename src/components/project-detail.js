@@ -76,10 +76,12 @@ export class ProjectDetail extends React.Component {
         let measurementsClass;
         let uploadClass;
         let notesClass;
+        let infoButton;
         let infoClass = 'active';
         if (this.props.project && this.props.activeTab === 'stitches') {
             display = (
                 <section className='stitches-section'>
+                    <h2>Stitches</h2>
                     <Stitches content={this.props.project} type='Project' style={this.props.style} />
                     <Stitches content={this.props.pattern} type='Pattern' style={this.props.style} />
                 </section>
@@ -88,9 +90,11 @@ export class ProjectDetail extends React.Component {
             measurementsClass = '';
             uploadClass = '';
             infoClass = '';
+            infoButton = 'Info'
         } else if (this.props.project && this.props.activeTab === 'measurements') {
             display = (
                 <section className='measurements-section'>
+                    <h2>Measurements</h2>
                     <Measurements form='patternForm' type='Pattern' style={this.props.style} content={this.props.project.pattern} initialValues={this.props.pattern} id={this.props.match.params.projectId} />
                     <Measurements form='projectForm' type='Project' style={this.props.style} content={this.props.project} initialValues={this.props.project} id={this.props.match.params.projectId} />
                     <Measurements form='userForm' type='User' style={this.props.style} content={this.props.project.user} initialValues={this.props.project.user} id={this.props.match.params.projectId} />
@@ -99,6 +103,7 @@ export class ProjectDetail extends React.Component {
             measurementsClass = 'active';
             uploadClass = '';
             infoClass = '';
+            infoButton = 'Stitches';
         } else if (this.props.project && this.props.activeTab === 'upload') {
             display = (
                 <section className='upload-section'>
@@ -108,7 +113,8 @@ export class ProjectDetail extends React.Component {
             measurementsClass = '';
             uploadClass = 'active';
             infoClass = '';
-            notesClass='hidden';
+            notesClass = 'hidden';
+            infoButton = 'Stitches';
         } else if (this.props.project && this.props.activeTab === 'info') {
             display = (
                 <section className='info-section'>
@@ -143,6 +149,7 @@ export class ProjectDetail extends React.Component {
             measurementsClass = '';
             uploadClass = '';
             infoClass = 'active';
+            infoButton = 'Stitches';
         }
 
         let notes;
@@ -154,13 +161,13 @@ export class ProjectDetail extends React.Component {
         return (
             <main role='main' id='main-detail'>
                 <h1 className='page-title'>{this.props.project.name}</h1>
-                <button className={'tablinks info-heading ' + infoClass} onClick={() => this.showTab('info')}><h2>Info</h2></button>
+                <button className={'tablinks info-heading ' + infoClass} onClick={() => this.showTab('info')}><h2>{infoButton}</h2></button>
                 <button className={'tablinks measurements-heading ' + measurementsClass} onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
                 <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
                 <ProjectImages image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
                 <Notes class={notesClass} content={this.props.notes} initialValues={notes} id={this.props.match.params.projectId} />
-                <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete</button>
+                <button id='delete-button' type='button' onClick={() => this.onClick()}>Delete Project</button>
             </main>
         )
     }
@@ -169,16 +176,13 @@ export class ProjectDetail extends React.Component {
 const mapStateToProps = state => {
     const image = state.projectsReducer.image ? state.projectsReducer.image : '';
     const style = state.projectsReducer.project.pattern ? state.projectsReducer.project.pattern.style : '';
-    const notes = state.projectsReducer.project.notes;
     const pattern = state.projectsReducer.project.pattern;
-    // const images = state.projectsReducer.project.images;
     return {
         project: state.projectsReducer.project,
         pattern,
-        // images,
         image,
         activeTab: state.projectsReducer.activeTab,
-        notes,
+        notes: state.projectsReducer.project.notes,
         croppedFile: state.projectsReducer.croppedFile,
         style
     }

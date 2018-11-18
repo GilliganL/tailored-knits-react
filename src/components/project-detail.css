@@ -1,68 +1,51 @@
-#main-detail {}
-
-.page-title {}
-
-#delete-button {
-    /* position: absolute;
-    height: 20px;
-    width: 100px;
-    bottom: 0;
-    left: 0; */
+.page-title {
+    margin: 30px 0;
 }
 
-.measurements-heading,
-.upload-heading,
-.info-heading {
+#delete-button {
+    width: 80%;
+    height: 40px;
+    margin: 20px 0;
+}
+
+.tablinks {
     border-radius: 10px;
     background: #B56969;
     color: #FAFAFA;
     border: none;
     transition: 0.2s ease;
+    height: 40px;
+    width: 80%;
+    margin: 5px 0;
 }
 
-.measurements-heading:hover,
-.upload-heading:hover,
-.info-heading:hover {
+.tablinks>h2 {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0;
+}
+
+.tablinks:hover {
     cursor: pointer;
     box-shadow: 1px 1px 4px 1px #22264B;
 }
 
-.measurements-heading:focus,
-.upload-heading:focus,
-.info-heading:focus {
+.tablinks:focus {
     outline: none;
     box-shadow: 1px 1px 4px 1px #22264B;
 }
 
-.measurements-heading.active,
-.upload-heading.active,
-.info-heading.active {
+.tablinks.active {
     transition: 1s ease;
 }
-
-.upload-heading {}
-
-.info-heading {}
 
 .list-row {
     border-bottom: 1px dotted gray;
 }
 
-.label,
-label,
-.value,
-input {}
-
-.label,
-label {}
-
-.list-row.button-row {}
-
-#delete-button {}
-
-.stitches-section {}
-
-.info-section {}
+.info-section {
+    padding: 10px;
+}
 
 .info-section>h2 {
     font-size: 20px;
@@ -145,9 +128,7 @@ label {}
         bottom: 0;
         left: 0;
     }
-    .measurements-heading,
-    .upload-heading,
-    .info-heading {
+    .tablinks {
         position: fixed;
         margin: 0;
         padding-top: 20px;
@@ -168,13 +149,14 @@ label {}
     .list-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-template-areas: "label value";
         width: 90%;
         min-height: 25px;
         text-align: left;
         padding: 3px;
         margin: 0 auto;
     }
-    .form-input {
+    .measurements-form-list>.form-row>.form-input {
         display: contents
     }
     .label,
@@ -187,7 +169,12 @@ label {}
     }
     .label,
     label {
+        grid-area: label;
         padding-right: 5px;
+        font-size: 15px;
+    }
+    .measurements-form-list>.form-row>.form-input>input {
+        grid-area: value;
     }
     .list-row.button-row {
         text-align: center;
