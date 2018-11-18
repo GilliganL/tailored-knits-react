@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { imageSlide } from '../actions/projects';
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './project-images.css';
 
 export class ProjectImages extends React.Component {
@@ -61,10 +59,10 @@ export class ProjectImages extends React.Component {
                     {images}
                 </div>
                 <div className='left arrow' onClick={() => this.goToPrevSlide()}>
-                    <FontAwesomeIcon icon={faAngleLeft} />
+                <i className="fas fa-angle-left"></i>
                 </div>
                 <div className='right arrow' onClick={() => this.goToNextSlide()}>
-                    <FontAwesomeIcon icon={faAngleRight} />
+                <i className="fas fa-angle-right"></i>
                 </div>
             </section>
         )

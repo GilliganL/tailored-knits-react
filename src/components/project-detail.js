@@ -161,9 +161,9 @@ export class ProjectDetail extends React.Component {
         return (
             <main role='main' id='main-detail'>
                 <h1 className='page-title'>{this.props.project.name}</h1>
-                <button className={'tablinks info-heading ' + infoClass} onClick={() => this.showTab('info')}><h2>{infoButton}</h2></button>
-                <button className={'tablinks measurements-heading ' + measurementsClass} onClick={() => this.showTab('measurements')}><h2>Measurements</h2></button>
-                <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')}><h2>Upload Image</h2></button>
+                <button className={'tablinks info-heading ' + infoClass} onClick={() => this.showTab('info')} aria-live='assertive'><h2>{infoButton}</h2></button>
+                <button className={'tablinks measurements-heading ' + measurementsClass} onClick={() => this.showTab('measurements')} aria-live='assertive'><h2>Measurements</h2></button>
+                <button className={'tablinks upload-heading ' + uploadClass} onClick={() => this.showTab('upload')} aria-live='assertive'><h2>Upload Image</h2></button>
                 <ProjectImages image={this.props.image} id={this.props.match.params.projectId} />
                 {display}
                 <Notes class={notesClass} content={this.props.notes} initialValues={notes} id={this.props.match.params.projectId} />

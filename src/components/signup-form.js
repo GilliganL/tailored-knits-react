@@ -108,7 +108,7 @@ export class Signup extends React.Component {
                         {successMessage}
                         {errorMessage}
                         <li className='form-row'>
-                            <button type='submit' id='sign-up-button'>Sign Up</button>
+                            <button type='submit' id='sign-up-button' aria-live='assertive'>Sign Up</button>
                         </li>
                     </ul>
                 </form>
