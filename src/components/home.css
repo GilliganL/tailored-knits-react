@@ -75,8 +75,6 @@ h3 {
     font-weight: 600;
 }
 
-h4 {}
-
 p {
     padding: 10px;
 }
@@ -87,7 +85,7 @@ li {
 }
 
 ul {
-    display: -webkit-flex; 
+    display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
     -moz-flex-direction: column;
@@ -122,12 +120,10 @@ footer {
 }
 
 @media only screen and (min-width: 770px) {
-    ul {
-       
-    }
     li,
     .form-input {
-        display: -webkit-flex; display: flex
+        display: -webkit-flex;
+        display: flex;
         margin: 5px 0;
         height: 40px;
     }

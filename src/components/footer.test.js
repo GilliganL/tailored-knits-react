@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { shallow } from 'enzyme';
-import AddForm from './add-form';
+import Footer from './footer';
 
-describe('<AddForm />', () => {
+describe('<Footer />', () => {
 	it('Renders without crashing', () => {
-		shallow(<AddForm />);
+		shallow(<Footer />);
 	});
 });

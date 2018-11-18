@@ -62,7 +62,7 @@
     }
     .notes-form {
         display: -webkit-flex; 
-        display: flex
+        display: flex;
         flex-direction: column;
     }
     .notes-form label {

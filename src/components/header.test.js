@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { shallow } from 'enzyme';
-import AddForm from './add-form';
+import Header from './header';
 
-describe('<AddForm />', () => {
+describe('<Header />', () => {
 	it('Renders without crashing', () => {
-		shallow(<AddForm />);
+		shallow(<Header />);
 	});
 });

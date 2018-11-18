@@ -57,7 +57,7 @@ label {
     
     .form-row.radio {
         display: -webkit-flex; 
-        display: flex
+        display: flex;
         -webkit-justify-content: space-around;
         -moz-justify-content: space-around;
         justify-content: space-around;

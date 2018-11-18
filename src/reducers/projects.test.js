@@ -28,15 +28,12 @@ describe('projectsReducer', () => {
     const projects1 = [project1, project2];
     const image1 = 'image 1';
     const image2 = 'image 2';
-    const image3 = 'image 3';
-    const images = [image1, image2];
     const message = 'a message';
     const errorMessage = 'error message';
     const editType1 = 'editPattern';
     const croppedImage = { image: 'cropped image' };
     const croppedFile = { file: 'cropped File' };
     const activeTab1 = 'label';
-    const activeTab2 = 'measurments';
 
     it('Should set initial state when nothing is passed in', () => {
         const state = projectsReducer(undefined, { type: '_UNKNOWN' });
@@ -54,7 +51,9 @@ describe('projectsReducer', () => {
             croppedImage: '',
             croppedFile: '',
             activeTab: 'stitches',
-            editingNotes: false
+            editingNotes: false,
+            currentIndex: 0,
+            translateValue: 0
         });
     });
 
@@ -83,7 +82,9 @@ describe('projectsReducer', () => {
                 croppedImage: '',
                 croppedFile: '',
                 activeTab: 'stitches',
-                editingNotes: false
+                editingNotes: false,
+                currentIndex: 0,
+                translateValue: 0
             });
         });
     });
