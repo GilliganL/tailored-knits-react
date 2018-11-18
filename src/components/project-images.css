@@ -72,7 +72,7 @@
         position: initial;
         grid-area: images;
         margin: 0;
-        overflow: unset;
+        overflow: initial;
         white-space: normal;
     }
     .slider-wrapper {
