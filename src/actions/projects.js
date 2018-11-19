@@ -127,7 +127,6 @@ export const fetchProjectById = id => (dispatch, getState) => {
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((project) => dispatch(projectSuccess(project)))
-        .then((project) => dispatch(imagesSuccess(project.images)))
         .catch(err => {
             dispatch(projectsError(err.message || 'Error getting project.'))
             throw err
@@ -195,6 +194,7 @@ export const deleteProject = id => (dispatch, getState) => {
 };
 
 export const handleImage = file => (dispatch, getState) => {
+    dispatch(imagesRequest());
     const fileType = file.type;
     const validFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
     if (validFileTypes.find(i => i === fileType) === undefined) {
@@ -217,10 +217,14 @@ export const handleImage = file => (dispatch, getState) => {
     const authToken = getState().authReducer.authToken;
 
     return getSignedRequest(file, authToken)
-        .then((response) => uploadFile(response))
-        .then((url) => dispatch(imagesSuccess(url)))
+        .then((response) => {
+            console.log(response)
+            uploadFile(response)})
+        .then((url) => {
+            console.log(url)
+            dispatch(imagesSuccess(url))})
         .catch(err => {
-            dispatch(projectsError(err.message || 'Error handling image.'))
+            dispatch(imagesError(err.message || 'Error handling image.'))
             throw err
         });
 }
@@ -239,6 +243,7 @@ export const getSignedRequest = (file, authToken) => {
                         signedRequest: response.signedRequest,
                         url: response.url
                     }
+                    console.log(responseObject)
                     resolve(responseObject);
                 } else {
                     let err = {
@@ -255,6 +260,7 @@ export const getSignedRequest = (file, authToken) => {
 }
 
 export const uploadFile = (requestObject) => {
+    console.log(requestObject)
     const {
         file,
         signedRequest,
