@@ -46,10 +46,18 @@ export class ProjectDetail extends React.Component {
         if (this.props.croppedFile) {
             return this.props.dispatch(handleImage(this.props.croppedFile))
                 .then((res) => {
-                    const imageObject = {
+                    let imageObject
+                    console.log(this.props.images[0])
+                    if (this.props.images[0] === 'https://s3-us-west-1.amazonaws.com/tailored-knits-repository/default-image.jpg') {
+                        imageObject = {
+                            images: [res.image]
+                        }
+                    } else {
+                    imageObject = {
                         images: [...this.props.images, res.image]
                     }
-                    this.props.dispatch(updateProject(this.props.match.params.projectId, imageObject))
+                }
+                    return this.props.dispatch(updateProject(this.props.match.params.projectId, imageObject))
                 })
                 .then(() => this.props.dispatch(clearImage()))
                 .then(() => this.props.dispatch(fetchProjectById(this.props.match.params.projectId)))

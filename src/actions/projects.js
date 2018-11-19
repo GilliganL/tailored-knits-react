@@ -241,7 +241,6 @@ export const getSignedRequest = (file, authToken) => {
                         signedRequest: response.signedRequest,
                         url: response.url
                     }
-                    console.log(responseObject)
                     resolve(responseObject);
                 } else {
                     let err = {
@@ -258,7 +257,6 @@ export const getSignedRequest = (file, authToken) => {
 }
 
 export const uploadFile = (requestObject) => {
-    console.log(requestObject)
     const {
         file,
         signedRequest,
