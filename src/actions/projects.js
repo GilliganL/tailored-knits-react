@@ -219,10 +219,10 @@ export const handleImage = file => (dispatch, getState) => {
     return getSignedRequest(file, authToken)
         .then((response) => {
             console.log(response)
-            uploadFile(response)})
+           return uploadFile(response)})
         .then((url) => {
             console.log(url)
-            dispatch(imagesSuccess(url))})
+           return dispatch(imagesSuccess(url))})
         .catch(err => {
             dispatch(imagesError(err.message || 'Error handling image.'))
             throw err
