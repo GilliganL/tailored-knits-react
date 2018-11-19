@@ -15,8 +15,8 @@ class ImagesForm extends PureComponent {
     crop: {
       x: 10,
       y: 10,
-      height: 20,
-      width: 20
+      height: 50,
+      width: 50
     }
   };
 
@@ -29,7 +29,9 @@ class ImagesForm extends PureComponent {
       src: null,
       crop: {
         x: 10,
-        y: 10
+        y: 10,
+        height: 50,
+        width: 50
       }
     });
   }
