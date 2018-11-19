@@ -25,11 +25,12 @@ export class ProjectDetail extends React.Component {
     }
 
     showTab(display) {
-        if ((this.props.activeTab === display) || (this.props.activeTab !== 'info' && display === 'info')) {
+        if (this.props.activeTab === display) {
             this.props.dispatch(activeTab('stitches'));
+        } else if (this.props.activeTab !== 'info' && display === 'info') {
+            this.props.dispatch(activeTab('info'))
         } else {
             this.props.dispatch(activeTab(display));
-
         }
     }
 
@@ -46,17 +47,16 @@ export class ProjectDetail extends React.Component {
         if (this.props.croppedFile) {
             return this.props.dispatch(handleImage(this.props.croppedFile))
                 .then((res) => {
-                    let imageObject
-                    console.log(this.props.images[0])
+                    let imageObject;
                     if (this.props.images[0] === 'https://s3-us-west-1.amazonaws.com/tailored-knits-repository/default-image.jpg') {
                         imageObject = {
                             images: [res.image]
                         }
                     } else {
-                    imageObject = {
-                        images: [...this.props.images, res.image]
+                        imageObject = {
+                            images: [...this.props.images, res.image]
+                        }
                     }
-                }
                     return this.props.dispatch(updateProject(this.props.match.params.projectId, imageObject))
                 })
                 .then(() => this.props.dispatch(clearImage()))
@@ -111,7 +111,7 @@ export class ProjectDetail extends React.Component {
             measurementsClass = 'active';
             uploadClass = '';
             infoClass = '';
-            infoButton = 'Stitches';
+            infoButton = 'Info';
         } else if (this.props.project && this.props.activeTab === 'upload') {
             if (this.props.loading) {
                 display = (
@@ -130,7 +130,7 @@ export class ProjectDetail extends React.Component {
             uploadClass = 'active';
             infoClass = '';
             notesClass = 'hidden';
-            infoButton = 'Stitches';
+            infoButton = 'Info';
         } else if (this.props.project && this.props.activeTab === 'info') {
             display = (
                 <section className='info-section'>
