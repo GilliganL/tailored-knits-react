@@ -53,7 +53,7 @@ nav {
     -o-transition: transform 0.4s ease, visibility 0.4s;
     transition: transform 0.4s ease, visibility 0.4s;
     background-color: #fafafa;
-    z-index: 1000;
+    z-index: 1500;
 }
 
 header.active nav {

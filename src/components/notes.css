@@ -46,6 +46,7 @@
         margin: 30px 0;
         width: 90%;
         padding: 10px;
+        height: fit-content;
     }
     .notes-heading {
         margin-top: 0;
@@ -63,7 +64,17 @@
     .notes-form {
         display: -webkit-flex; 
         display: flex;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -o-flex-direction: column;
         flex-direction: column;
+        -webkit-justify-content: space-around;
+        -moz-justify-content: space-around;
+        -o-justify-content: space-around;
+        justify-content: space-around;
+    }
+    .notes-form>.form-input {
+        display: contents;
     }
     .notes-form label {
         display: none;
@@ -76,6 +87,7 @@
         border: none;
         -webkit-align-self: center;
         align-self: center;
+        min-height: 150px;
     }
     .notes-from>.form-input {
         min-height: 200px;

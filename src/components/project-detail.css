@@ -133,6 +133,12 @@
     max-width: initial;
 }
 
+#gauge-note {
+    font-weight: 700;
+    font-size: 18px;
+    color: #B56969;
+}
+
 @media only screen and (min-width: 770px) {
     #main-detail {
         display: grid;
@@ -247,5 +253,8 @@
         width: 80%;
         padding-bottom: 40px;
         border-radius: 10px;
+    }
+    .crop {
+        min-height: 450px;
     }
 }

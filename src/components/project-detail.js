@@ -25,7 +25,7 @@ export class ProjectDetail extends React.Component {
     }
 
     showTab(display) {
-        if (this.props.activeTab === display) {
+        if ((this.props.activeTab === display) || (this.props.activeTab !== 'info' && display === 'info')) {
             this.props.dispatch(activeTab('stitches'));
         } else {
             this.props.dispatch(activeTab(display));
@@ -105,11 +105,19 @@ export class ProjectDetail extends React.Component {
             infoClass = '';
             infoButton = 'Stitches';
         } else if (this.props.project && this.props.activeTab === 'upload') {
-            display = (
-                <section className='upload-section'>
-                    <ImagesForm saveFile={(e) => this.onClickImage(e)} />
-                </section>
-            )
+            if (this.props.loading) {
+                display = (
+                    <section className='upload-section'>
+                        <h2 className="message message-default">Loading board...</h2>
+                    </section>
+                );
+            } else {
+                display = (
+                    <section className='upload-section'>
+                        <ImagesForm saveFile={(e) => this.onClickImage(e)} />
+                    </section>
+                )
+            }
             measurementsClass = '';
             uploadClass = 'active';
             infoClass = '';
@@ -126,6 +134,7 @@ export class ProjectDetail extends React.Component {
 					Measurements enter the modified final measurements that you want for your project.
 					Click on the Measurements tab again to close it and you will see your stitch counts!</p>
                     <h3>How to take measurements</h3>
+                    <p id='gauge-note'>Please note, gauge numbers are required to populate stitch counts.</p>
                     <p><span className='info-name'>Chest:</span> Measure around the fullest or widest part of the bust or chest<br />
                         <span className='info-name'>Waist:</span> Measure your natural waist<br />
                         <span className='info-name'>Hips:</span> Measure around the widest point of your hips<br />

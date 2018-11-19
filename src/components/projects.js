@@ -14,10 +14,7 @@ export class Projects extends React.Component {
     }
 
     pluralize(username) {
-        if (this.props.projects.length > 1) {
             return username.endsWith('s') ? username + '\'' : username + '\'s';
-        }
-        return username;
     }
 
     setEditing(editing) {
