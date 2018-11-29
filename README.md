@@ -13,15 +13,9 @@ React, Redux, Thunk, Redux-Form, Enzyme, Node, Express, MongoDB, AWS S3, Mongoos
 
 ## Screenshots
 ![Landing Page](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Landing.png)
-
 ![Login & Signup](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Login.png)
-
 ![Projects Page](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Projects.png)
-
 ![Project Detail View](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Project-detail.png)
-
 ![Stitch Counts](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Stitches.png)
-
 ![Measurements](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Measurements.png)
-
 ![Upload Images](https://s3-us-west-1.amazonaws.com/tailored-knits-repository/project-images/Upload.png)
