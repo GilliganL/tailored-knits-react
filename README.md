@@ -3,7 +3,7 @@
 Lynsey Powell
 
 ## Inspiration
-I am an avid (maybe obsessed) knitter. I love modifying, customizing, and creating sweaters for myself and friends. Creating a well-fitting garment requires attention to details and keeping track of you project. In the knitting online space there is currently not a site that can be used for modifying patterns. I wanted to demonstrate the use of React and create something I will use.  
+I am an avid (maybe obsessed) knitter. I love modifying, customizing, and creating sweaters for myself, friends, and family. Creating a well-fitting garment requires keeping track of measurement and fabric details, adjusting as you go. In the knitting online space there is currently not a site that can be used for modifying patterns and tracking these details. I wanted to demonstrate the use of React and create a tool I can use and share with the knitting community.
 
 ## Demo
 Visit [Tailored Knits](https://tailored-knits.herokuapp.com/).
