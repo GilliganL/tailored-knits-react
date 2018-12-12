@@ -8,6 +8,8 @@ I am an avid (maybe obsessed) knitter. I love modifying, customizing, and creati
 ## Demo
 Visit [Tailored Knits](https://tailored-knits.herokuapp.com/).
 
+[Backend repository](https://github.com/GilliganL/tailored-knits-api2).
+
 ## Technologies
 React, Redux, Thunk, Redux-Form, Enzyme, Node, Express, MongoDB, AWS S3, Mongoose, Passport, JWT, Heroku, Travis, mLab, REST APIs, Mocha, Chai, Javascript, JQuery, CSS, HTML
 
