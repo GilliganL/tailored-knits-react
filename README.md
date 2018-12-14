@@ -607,7 +607,7 @@ For example, this:
 
 ```css
 .App {
-  display: flex;
+  display: -webkit-flex; display: flex
   flex-direction: row;
   align-items: center;
 }
@@ -619,7 +619,7 @@ becomes this:
 .App {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: -webkit-flex; display: flex
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
