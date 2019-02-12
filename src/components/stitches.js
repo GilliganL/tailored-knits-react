@@ -49,7 +49,7 @@ export default class Stitches extends React.Component {
             let itemValue;
             if (key) {
                 itemValue = this.calculateGauge(key);
-            } 
+            }
             listItem = (
                 <li key={index} className='list-row'>
                     <label className='label stitches-label'>{measureKeys[key]}:</label>
@@ -62,7 +62,9 @@ export default class Stitches extends React.Component {
         return (
             <div className={this.props.type.toLowerCase() + `-stitches stitches-div`}>
                 <ul className='list-wrapper stitches-list'>
-                    <h3 className='stitches-title'>{this.props.type}</h3>
+                    <li className='list-row'>
+                        <h3 className='stitches-title'>{this.props.type}</h3>
+                    </li>
                     {stitchesList}
                 </ul>
             </div >

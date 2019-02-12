@@ -110,7 +110,7 @@ class ImagesForm extends PureComponent {
       <div className="crop">
         <div className='file-container'>
           <input type="file" className='uploadPhoto' id='uploadPhoto' name='uploadPhoto' tabIndex='-1' accept='image/*' onChange={this.onSelectFile} />
-          <label role='button' className={this.state.labelClass} tabIndex='0' htmlFor='uploadPhoto' id='upload-label' aria-live='assertive'><span id='upload-span'>Upload a Photo</span></label>
+          <label className={this.state.labelClass} tabIndex='0' htmlFor='uploadPhoto' id='upload-label' aria-live='assertive'><span id='upload-span'>Upload a Photo</span></label>
         </div>
         {this.state.src && (
           <ReactCrop

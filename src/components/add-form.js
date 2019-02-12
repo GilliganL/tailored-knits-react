@@ -61,7 +61,7 @@ export class AddForm extends React.Component {
                 <legend>Add Project</legend>
                 <form id='add-project-form'
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <ul className='form-wrapper' role='none'>
+                    <ul className='form-wrapper'>
                         <li className='form-row'>
                             <Field
                                 type='text'

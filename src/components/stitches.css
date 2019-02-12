@@ -28,6 +28,10 @@
     display: -webkit-flex;
     display: flex
 }
+.stitches-list>.list-row:nth-child(1) {
+    align-items: center;
+    border: none;
+}
 
 .stitches-list>.list-row>.label {
     width: calc(100% - 10px);
@@ -47,6 +51,7 @@
     .stitches-list {
         width: 90%;
         padding: 0;
+        margin-top: 60px;
     }
     .stitches-section>h2 {
         grid-area: 2/2/3/4;

@@ -70,7 +70,7 @@ export class ProfileForm extends React.Component {
                 <legend className='list-title'><h3>Edit Your Profile</h3></legend>
                 <form id='sign-up-form'
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <ul className='form-wrapper' role='none'>
+                    <ul className='form-wrapper'>
                         <li className='form-row'>
                             <label htmlFor='firstName'>First Name</label>
                             <Field type='text' id='firstName' name='firstName' component='input' validate={[required, nonEmpty]} />

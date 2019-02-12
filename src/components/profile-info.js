@@ -18,7 +18,9 @@ export class ProfileInfo extends React.Component {
             return (
                 <section className='profile-section'>
                     <ul className='profile-list'>
-                        <h3 className='list-title'>Your Profile</h3>
+                        <li className='list-row'>
+                            <h2 className='list-title'>Your Profile</h2>
+                        </li>
                         <li className='list-row'>
                             <label className='label'>Username</label>
                             <p className='value'>{this.props.username}</p>
