@@ -51,7 +51,7 @@ export class Login extends React.Component {
                     onSubmit={this.props.handleSubmit(values =>
                         this.onSubmit(values)
                     )}>
-                    <ul className='form-wrapper' role='none'>
+                    <ul className='form-wrapper'>
                         <li className='form-row'>
                             <Field
                                 type='text'

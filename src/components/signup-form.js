@@ -50,7 +50,7 @@ export class Signup extends React.Component {
                 <legend><h3>Sign Up</h3></legend>
                 <form id='sign-up-form'
                     onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-                    <ul className='form-wrapper' role='none'>
+                    <ul className='form-wrapper'>
                         <li className='form-row'>
                             <Field
                                 type='text'
@@ -102,7 +102,7 @@ export class Signup extends React.Component {
                                 type='password'
                                 name='passwordConfirm'
                                 component={Input}
-                                label='Confirm Password'
+                                label='Confirm'
                                 validate={[required, nonEmpty, matchesPassword]} />
                         </li>
                         {successMessage}

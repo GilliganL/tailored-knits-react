@@ -10,7 +10,7 @@
 
 .tablinks {
     border-radius: 10px;
-    background: #B56969;
+    background: #22264B;
     color: #FAFAFA;
     border: none;
     -webkit-transition: 0.2s ease;
@@ -30,12 +30,12 @@
 
 .tablinks:hover {
     cursor: pointer;
-    box-shadow: 1px 1px 4px 1px #22264B;
+    box-shadow: 1px 1px 4px 1px #B56969;
 }
 
 .tablinks:focus {
     outline: none;
-    box-shadow: 1px 1px 4px 1px #22264B;
+    box-shadow: 1px 1px 4px 1px #B56969;
 }
 
 .tablinks.active {
@@ -136,7 +136,7 @@
 #gauge-note {
     font-weight: 700;
     font-size: 18px;
-    color: #B56969;
+    /* color: #B56969; */
 }
 
 @media only screen and (min-width: 770px) {

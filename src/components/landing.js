@@ -22,7 +22,7 @@ export function Landing(props) {
                         <p>Use your measurements, or those of the lucky person you are making a sweater for,
                     to make adjustments and modifications to an existing pattern for personalized fit.</p>
                     </div>
-                    <img className='landing-image' id='measurements-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/mens-sweater.jpg' alt='Model in a well fitting sweater' />
+                    <img className='landing-image' id='sweater-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/mens-sweater.jpg' alt='Model in a well fitting sweater' />
                 </section>
                 <section id='specifications'>
                     <h2 className='landing-title'>Pattern Specifications</h2>

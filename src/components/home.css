@@ -11,7 +11,7 @@
 }
 
 body {
-    background-color: #E8EDF3;
+    background-color: #FAFAFA;
     color: #22264B;
     font-family: 'Catamaran', sans-serif;
     letter-spacing: .6px;
@@ -19,12 +19,13 @@ body {
 
 input,
 label {
-    border: none;
-    border-radius: 5px;
     font-size: 18px;
     max-width: 250px;
     margin: 5px 0;
     text-align: left;
+}
+input {
+    border: 1px solid #22264B;
 }
 
 label {
@@ -36,7 +37,7 @@ button {
     min-height: 40px;
     padding: 5px;
     margin-top: 5px;
-    background: #B56969;
+    background: #22264B;
     color: #FAFAFA;
     font-size: 18px;
     font-weight: bold;

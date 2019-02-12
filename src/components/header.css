@@ -213,6 +213,11 @@ header.active nav {
         width: 75px;
         -webkit-align-self: flex-end;
         align-self: flex-end;
+        background: #FAFAFA;
+        color: #22264B;
+    }
+    #demo-button:hover {
+        box-shadow: 1px 1px 4px 1px #B56969;
     }
     .link-list {
         position: absolute;

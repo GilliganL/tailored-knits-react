@@ -181,7 +181,7 @@ export class Measurements extends React.Component {
                     <ul className='list-wrapper measurements-list'>
                         {contentList}
                         <li className='list-row button-row'>
-                            <button type='button' id='edit-button' onClick={() => this.setEditing(true, this.props.type)}>
+                            <button type='button' onClick={() => this.setEditing(true, this.props.type)}>
                                 Edit
                             </button>
                         </li>
