@@ -92,7 +92,7 @@ export class ProfileForm extends React.Component {
                             <Field type='password' id='password' name='password' component='input' />
                         </li>
                         <li className='form-row'>
-                            <label htmlFor='passwordConfirm'>Confirm Password</label>
+                            <label htmlFor='passwordConfirm'>Confirm</label>
                             <Field type='password' id='passwordConfirm' name='passwordConfirm' component='input' />
                         </li>
                         {formError}
