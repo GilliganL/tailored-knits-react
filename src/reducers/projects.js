@@ -119,6 +119,7 @@ export default function reducer(state = initialState, action) {
             editingNotes: action.editingNotes
         });
     } else if (action.type === IMAGE_SLIDE) {
+        console.log(`action is ${action}`)
         return Object.assign({}, state, {
             currentIndex: action.currentIndex,
             translateValue: action.translateValue
