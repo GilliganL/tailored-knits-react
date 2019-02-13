@@ -15,7 +15,6 @@ export class ProjectImages extends React.Component {
         }
         currentIndex = this.props.currentIndex + 1;
         translateValue = this.props.translateValue + -(this.slideWidth());
-        console.log(`Index is ${currentIndex} and Tvalue is ${translateValue}`)
         this.props.dispatch(imageSlide(currentIndex, translateValue));
     }
 
@@ -27,7 +26,6 @@ export class ProjectImages extends React.Component {
         }
         currentIndex = this.props.currentIndex - 1;
         translateValue = this.props.translateValue + this.slideWidth();
-        console.log(`Index is ${currentIndex} and Tvalue is ${translateValue}`)
         this.props.dispatch(imageSlide(currentIndex, translateValue));
     }
 
