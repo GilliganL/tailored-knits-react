@@ -48,11 +48,11 @@ nav {
     -ms-transform: translateX(300px);
     -o-transform: translateX(300px);
     transform: translateX(300px);
-    -webkit-transition: transform 0.4s ease, visibility 0.4s;
-    -moz-transition: transform 0.4s ease, visibility 0.4s;
-    -o-transition: transform 0.4s ease, visibility 0.4s;
-    transition: transform 0.4s ease, visibility 0.4s;
-    background-color: #fafafa;
+    -webkit-transition: transform 0.2s ease, visibility 0.2s;
+    -moz-transition: transform 0.2s ease, visibility 0.2s;
+    -o-transition: transform 0.2s ease, visibility 0.2s;
+    transition: transform 0.2s ease, visibility 0.2s;
+    background-color: #22264B;
     z-index: 1500;
 }
 
@@ -85,7 +85,8 @@ header.active nav {
 
 #menu-container.active {
     right: 300px;
-}
+    background-color: #22264B;
+}   
 
 #bar-1,
 #bar-2,
@@ -122,6 +123,7 @@ header.active nav {
     -ms-transform: rotate(-45deg) translate(-9px, 6px);
     -o-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
+    background-color: #FAFAFA;
 }
 
 #bar-2.active {
@@ -129,14 +131,35 @@ header.active nav {
 }
 
 #bar-3.active {
-    -webkit-transform: rotate(45deg) translate(-7px, -7px);
-    -moz-transform: rotate(45deg) translate(-7px, -7px);
-    -ms-transform: rotate(45deg) translate(-7px, -7px);
-    -o-transform: rotate(45deg) translate(-7px, -7px);
-    transform: rotate(45deg) translate(-7px, -7px);
+    -webkit-transform: rotate(45deg) translate(-8px, -6px);
+    -moz-transform: rotate(45deg) translate(-8px, -6px);
+    -ms-transform: rotate(45deg) translate(-8px, -6px);
+    -o-transform: rotate(45deg) translate(-8px, -6px);
+    transform: rotate(45deg) translate(-8px, -6px);
+    background-color: #FAFAFA;
+}
+#demo-button {
+    height: 50px;
+    width: 75px;
+    -webkit-align-self: flex-end;
+    align-self: flex-end;
+    background: #FAFAFA;
+    color: #22264B;
+}
+#demo-button:hover {
+    box-shadow: 1px 1px 4px 1px #B56969;
 }
 
-@media only screen and (min-width: 500px) {
+.main-content {
+    min-height: 300px;
+    padding-top: 25px;
+}
+
+.link-list {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
     .link-list {
         width: 100%;
         display: -webkit-flex;
@@ -154,13 +177,24 @@ header.active nav {
     .link-list>li {
         list-style: none;
     }
+    .landing-header {
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
     .landing-link {
         font-size: 16px;
         padding: 0 10px;
     }
+    #main-landing {
+        padding-top: 20px;
+    }
+    .main-content {
+        height: unset;
+        padding-top: 10px;
+    }
 }
 
-@media only screen and (min-width: 770px) {
+@media only screen and (min-width: 1000px) {
     header {
         grid-area: menu;
     }
@@ -209,17 +243,7 @@ header.active nav {
         width: 70%;
         text-align: left;
     }
-    #demo-button {
-        height: 50px;
-        width: 75px;
-        -webkit-align-self: flex-end;
-        align-self: flex-end;
-        background: #FAFAFA;
-        color: #22264B;
-    }
-    #demo-button:hover {
-        box-shadow: 1px 1px 4px 1px #B56969;
-    }
+
     .link-list {
         position: absolute;
         top: 7px;

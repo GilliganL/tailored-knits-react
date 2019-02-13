@@ -1,4 +1,5 @@
-img {
+.landing-image, 
+.account-image {
     max-width: 100%;
 }
 
@@ -7,7 +8,22 @@ img {
     margin: 10px 0;
 }
 
-@media only screen and (min-width: 770px) {
+@media only screen and (min-width: 768px) {
+    #account {
+        display: flex;
+        justify-content: center;
+    }
+    .login-form-container,
+    .signup-form-container {
+        width: 45%;
+    }
+    .landing-image, 
+    .account-image {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
     #main-landing {
         display: -webkit-flex;
         display: flex;
@@ -43,6 +59,7 @@ img {
     }
     .landing-image {
         height: 80%;
+        width: unset;
         margin-right: -2.5em;
         -webkit-align-self: center;
         align-self: center;
@@ -73,10 +90,10 @@ img {
     .account-image {
         height: 300px;
         margin: 0 auto;
+        width: unset;   
     }
     #account {
-        display: -webkit-flex;
-        display: flex;
+        width: 960px;
     }
     .login-form-container,
     .signup-form-container {
