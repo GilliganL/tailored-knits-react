@@ -25,7 +25,7 @@ export class Header extends React.Component {
         if (!this.props.loggedIn) {
             headerClass = 'landing-header'
             content = <div>
-                <img id='header-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/heading-image.jpg' alt='Three knit sweaters' />
+                <img id='header-image' src='./images/heading-image-min.jpg' alt='Three knit sweaters' />
                 <div className='main-content'>
                     <ul className='link-list'>
                         <li><a className='landing-link' href={`/#measurements`}>Measurements</a></li>

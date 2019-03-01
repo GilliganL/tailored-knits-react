@@ -22,7 +22,7 @@ export function Landing(props) {
                         <p>Use your measurements, or those of the lucky person you are making a sweater for,
                     to make adjustments and modifications to an existing pattern for personalized fit.</p>
                     </div>
-                    <img className='landing-image' id='sweater-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/mens-sweater.jpg' alt='Model in a well fitting sweater' />
+                    <img className='landing-image' id='sweater-image' src='./images/mens-sweater-min.jpg' alt='Model in a well fitting sweater' />
                 </section>
                 <section id='specifications'>
                     <h2 className='landing-title'>Pattern Specifications</h2>
@@ -35,7 +35,7 @@ export function Landing(props) {
                     <p>Easily add length and width to keep the intended ease even when you are between sizes.
                     Adjust ease. Add bust, waist, and hip shaping.</p>
                 </section>
-                <img className='account-image' id='measurements-image' src='https://s3-us-west-1.amazonaws.com/tailored-knits-repository/designing-image.jpg' alt='Taking notes on your knit project' />
+                <img className='account-image' id='measurements-image' src='./images/designing-image-min.jpg' alt='Taking notes on your knit project' />
                 <section id='account' className='account-section'>
                     <LoginForm />
                     <SignupForm />
