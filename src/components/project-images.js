@@ -56,10 +56,10 @@ export class ProjectImages extends React.Component {
                     {images}
                 </div>
                 <div className='left arrow' onClick={() => this.goToPrevSlide()}>
-                <i className="fas fa-angle-left"></i>
+                    <i className="fas fa-angle-left"></i>
                 </div>
                 <div className='right arrow' onClick={() => this.goToNextSlide()}>
-                <i className="fas fa-angle-right"></i>
+                    <i className="fas fa-angle-right"></i>
                 </div>
             </section>
         )
